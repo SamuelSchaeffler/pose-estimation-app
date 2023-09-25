@@ -14,19 +14,15 @@ class ImportedViewController: UIViewController {
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
 
-
-        // Die Breite der CollectionView sollte entsprechend der Anzahl der Fotos pro Reihe angepasst werden.
-        // Hier setzen wir 3 Fotos pro Reihe, daher sollte die Breite entsprechend berechnet werden.
         let screenWidth = UIScreen.main.bounds.width
         let itemWidth = (screenWidth - 4 * layout.minimumInteritemSpacing) / 3
-        layout.itemSize = CGSize(width: itemWidth, height: itemWidth) // Die Größe der Zellen festlegen
+        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
 
-        // Den Abstand zwischen den Zellen und dem Bildschirmrand einstellen
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .systemBackground // Hintergrundfarbe ändern
+        collectionView.backgroundColor = .systemBackground
 
         return collectionView
     }()
@@ -36,19 +32,15 @@ class ImportedViewController: UIViewController {
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
 
-
-        // Die Breite der CollectionView sollte entsprechend der Anzahl der Fotos pro Reihe angepasst werden.
-        // Hier setzen wir 3 Fotos pro Reihe, daher sollte die Breite entsprechend berechnet werden.
         let screenWidth = UIScreen.main.bounds.width
         let itemWidth = (screenWidth - 4 * layout.minimumInteritemSpacing) / 3
-        layout.itemSize = CGSize(width: itemWidth, height: itemWidth) // Die Größe der Zellen festlegen
+        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
 
-        // Den Abstand zwischen den Zellen und dem Bildschirmrand einstellen
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .systemBackground // Hintergrundfarbe ändern
+        collectionView.backgroundColor = .systemBackground
 
         return collectionView
     }()
@@ -108,7 +100,6 @@ extension ImportedViewController: UICollectionViewDataSource {
             
             if mediaURL.pathExtension.lowercased() == "mp4" || mediaURL.pathExtension.lowercased() == "mov" {
 
-                // Hier könntest du das Video-Thumbnail anzeigen oder ein Symbol für Videos verwenden
                 cell.imageView.image = UIImage(systemName: "viewfinder")
             } else {
                 
@@ -122,7 +113,6 @@ extension ImportedViewController: UICollectionViewDataSource {
 extension ImportedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Aktion, die ausgeführt wird, wenn ein Bild ausgewählt wird
-        // Hier können Sie beispielsweise das ausgewählte Bild in einer Detailansicht anzeigen
     }
 }
 
