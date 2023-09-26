@@ -39,4 +39,18 @@ class MediaModel: ObservableObject {
         }
         return urlArray
     }
+    
+    func getObjectIDs() -> [NSManagedObjectID] {
+        
+        let entityName = "Media"
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            return results.compactMap { ($0 as? NSManagedObject)?.objectID }
+        } catch {
+            print("Fehler beim Abrufen der ObjectIDs: \(error.localizedDescription)")
+            return []
+        }
+    }
 }

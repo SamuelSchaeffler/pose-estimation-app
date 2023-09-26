@@ -16,11 +16,16 @@
 		3B2B07BC2ABEFA4900E57528 /* MiscViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B07BB2ABEFA4900E57528 /* MiscViewController.swift */; };
 		3B2B07BE2ABF256600E57528 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B07BD2ABF256600E57528 /* PhotoPickerViewController.swift */; };
 		3B2B07C02ABF6CB100E57528 /* ImportedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B07BF2ABF6CB100E57528 /* ImportedViewController.swift */; };
+		3B3B6C042AC1AEB40073055F /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */; };
+		3B3B6C062AC1B0700073055F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3B6C052AC1B0700073055F /* VideoViewController.swift */; };
 		3B8F935D2AC04B1F0076CC25 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F935B2AC04B1F0076CC25 /* DataModel.xcdatamodeld */; };
 		3B8F935F2AC076790076CC25 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F935E2AC076790076CC25 /* Media.swift */; };
 		3B8F93612AC077AA0076CC25 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F93602AC077AA0076CC25 /* CoreDataManager.swift */; };
 		3B8F93632AC08AA40076CC25 /* MediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F93622AC08AA40076CC25 /* MediaModel.swift */; };
 		3B8F93652AC096B00076CC25 /* UIImageTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F93642AC096B00076CC25 /* UIImageTransformer.swift */; };
+		3BB827272AC2D32000BE7AC0 /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */; };
+		3BB8272B2AC2E80000BE7AC0 /* Trash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB8272A2AC2E80000BE7AC0 /* Trash.swift */; };
+		3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,11 +40,16 @@
 		3B2B07BB2ABEFA4900E57528 /* MiscViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscViewController.swift; sourceTree = "<group>"; };
 		3B2B07BD2ABF256600E57528 /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
 		3B2B07BF2ABF6CB100E57528 /* ImportedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedViewController.swift; sourceTree = "<group>"; };
+		3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		3B3B6C052AC1B0700073055F /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		3B8F935C2AC04B1F0076CC25 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		3B8F935E2AC076790076CC25 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		3B8F93602AC077AA0076CC25 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		3B8F93622AC08AA40076CC25 /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
 		3B8F93642AC096B00076CC25 /* UIImageTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageTransformer.swift; sourceTree = "<group>"; };
+		3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
+		3BB8272A2AC2E80000BE7AC0 /* Trash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trash.swift; sourceTree = "<group>"; };
+		3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +119,9 @@
 				3B2B07BF2ABF6CB100E57528 /* ImportedViewController.swift */,
 				3B2B07BB2ABEFA4900E57528 /* MiscViewController.swift */,
 				3B2B07BD2ABF256600E57528 /* PhotoPickerViewController.swift */,
+				3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */,
+				3B3B6C052AC1B0700073055F /* VideoViewController.swift */,
+				3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -125,8 +138,10 @@
 			children = (
 				3B8F935B2AC04B1F0076CC25 /* DataModel.xcdatamodeld */,
 				3B8F935E2AC076790076CC25 /* Media.swift */,
+				3BB8272A2AC2E80000BE7AC0 /* Trash.swift */,
 				3B8F93602AC077AA0076CC25 /* CoreDataManager.swift */,
 				3B8F93622AC08AA40076CC25 /* MediaModel.swift */,
+				3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */,
 				3B8F93642AC096B00076CC25 /* UIImageTransformer.swift */,
 			);
 			path = Models;
@@ -215,12 +230,17 @@
 				3B2B07B82ABEF94100E57528 /* TabBarViewController.swift in Sources */,
 				3B2B07BC2ABEFA4900E57528 /* MiscViewController.swift in Sources */,
 				3B2B07C02ABF6CB100E57528 /* ImportedViewController.swift in Sources */,
+				3BB827272AC2D32000BE7AC0 /* TrashViewController.swift in Sources */,
+				3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */,
 				3B8F935F2AC076790076CC25 /* Media.swift in Sources */,
+				3BB8272B2AC2E80000BE7AC0 /* Trash.swift in Sources */,
 				3B2B07A22ABDE08C00E57528 /* GalleryViewController.swift in Sources */,
+				3B3B6C062AC1B0700073055F /* VideoViewController.swift in Sources */,
 				3B2B079E2ABDE08C00E57528 /* AppDelegate.swift in Sources */,
 				3B8F93612AC077AA0076CC25 /* CoreDataManager.swift in Sources */,
 				3B2B07A02ABDE08C00E57528 /* SceneDelegate.swift in Sources */,
 				3B8F93652AC096B00076CC25 /* UIImageTransformer.swift in Sources */,
+				3B3B6C042AC1AEB40073055F /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,10 +387,17 @@
 				DEVELOPMENT_TEAM = 4QK396GH3A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Pose Estimation App/Info.plist";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Die Anwendung benötigt Medienzugriff";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSDesktopFolderUsageDescription = "";
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "";
+				INFOPLIST_KEY_NSDownloadsFolderUsageDescription = "";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -394,10 +421,17 @@
 				DEVELOPMENT_TEAM = 4QK396GH3A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Pose Estimation App/Info.plist";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Die Anwendung benötigt Medienzugriff";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSDesktopFolderUsageDescription = "";
+				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "";
+				INFOPLIST_KEY_NSDownloadsFolderUsageDescription = "";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

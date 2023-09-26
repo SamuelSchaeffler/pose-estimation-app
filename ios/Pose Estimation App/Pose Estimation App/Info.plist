@@ -4,22 +4,6 @@
 <dict>
 	<key></key>
 	<string></string>
-	<key>NSDesktopFolderUsageDescription</key>
-	<string></string>
-	<key>NSDownloadsFolderUsageDescription</key>
-	<string></string>
-	<key>NSDocumentsFolderUsageDescription</key>
-	<string></string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string></string>
-	<key>NSCameraUsageDescription</key>
-	<string></string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
-	<key>NSFileProviderDomainUsageDescription</key>
-	<string></string>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>Die Anwendung benötigt Medienzugriff</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

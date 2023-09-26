@@ -29,7 +29,8 @@ class PhotoPickerViewController: UIViewController, PHPickerViewControllerDelegat
         
         let pickerViewController = PHPickerViewController(configuration: configuration)
         pickerViewController.delegate = self
-        present(pickerViewController, animated: true)
+        present(pickerViewController, animated: false)
+        pickerViewController.modalPresentationStyle = .fullScreen
     }
         
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {

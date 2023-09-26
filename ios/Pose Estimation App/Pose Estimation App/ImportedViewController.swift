@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AVFoundation
+import CoreData
 
 class ImportedViewController: UIViewController {
 
@@ -47,6 +49,11 @@ class ImportedViewController: UIViewController {
     
     var mediaURL = [URL]()
     var mediaModel = MediaModel()
+    var objectIDs = [NSManagedObjectID]()
+    var photoVC = PhotoViewController()
+    var videoVC = VideoViewController()
+    var galleryVC = GalleryViewController()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,9 +61,14 @@ class ImportedViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateUIWithSelectedMedia), name: Notification.Name("SelectedPhotosUpdated"), object: nil)
         
         self.mediaURL = mediaModel.getMedia()
+        
         print("Importierte Medien: \(self.mediaURL.count)")
         
         view.backgroundColor = .systemBackground
+        
+        galleryVC.viewDidLoad()
+        photoVC.viewDidLoad()
+        videoVC.viewDidLoad()
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -77,16 +89,38 @@ class ImportedViewController: UIViewController {
             updateCollectionView(withMediaURL: mediaURL)
         }
     }
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
+
+
     func updateCollectionView(withMediaURL mediaURL: [URL]) {
         self.mediaURL = mediaModel.getMedia()
             self.collectionView.reloadData()
         print("Importierte Medien: \(self.mediaURL.count)")
         }
+
+    func generateThumbnail(for videoURL: URL) -> UIImage? {
+        let asset = AVAsset(url: videoURL)
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        
+        do {
+            let cgImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 2), actualTime: nil)
+            var image = UIImage(cgImage: cgImage)
+            
+            if let cgImage = image.cgImage {
+                image = UIImage(cgImage: cgImage, scale: image.scale, orientation: .right)
+            }
+            
+            return image
+        } catch {
+            print("Fehler beim Erstellen des Thumbnails: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
 }
 
 extension ImportedViewController: UICollectionViewDataSource {
@@ -100,12 +134,11 @@ extension ImportedViewController: UICollectionViewDataSource {
             
             if mediaURL.pathExtension.lowercased() == "mp4" || mediaURL.pathExtension.lowercased() == "mov" {
 
-                cell.imageView.image = UIImage(systemName: "viewfinder")
+                cell.imageView.image = generateThumbnail(for: mediaURL)
             } else {
                 
                 cell.imageView.image = UIImage(contentsOfFile: mediaURL.path)
             }
-            print(mediaURL.path)
             return cell
     }
 }
@@ -113,7 +146,26 @@ extension ImportedViewController: UICollectionViewDataSource {
 extension ImportedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Aktion, die ausgeführt wird, wenn ein Bild ausgewählt wird
+        let mediaURL = mediaURL[indexPath.item]
+        if mediaURL.pathExtension.lowercased() == "mp4" || mediaURL.pathExtension.lowercased() == "mov" {
+            let object = generateThumbnail(for: mediaURL)
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: Notification.Name("UpdateVideo"), object: object)
+                NotificationCenter.default.post(name: Notification.Name("UpdateURL"), object: mediaURL)
+                self.present(self.videoVC, animated: true, completion: nil)
+            }
+        } else {
+            let object = UIImage(contentsOfFile: mediaURL.path)
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: Notification.Name("UpdatePhoto"), object: object)
+                self.present(self.photoVC, animated: true, completion: nil)
+            }
+        }
+        self.objectIDs = mediaModel.getObjectIDs()
+        NotificationCenter.default.post(name: Notification.Name("UpdateObjectID"), object: objectIDs[indexPath.item])
     }
+    
+    
 }
 
 class ImageCollectionViewCell: UICollectionViewCell {

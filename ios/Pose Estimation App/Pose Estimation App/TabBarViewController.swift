@@ -16,6 +16,8 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         let vc2 = ImportedViewController()
         let vc3 = MiscViewController()
         
+        
+        
         //vc1.title = "Gallerie"
         vc2.title = "Importiert"
         vc3.title = "Sonstiges"
@@ -29,7 +31,6 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         let nav3 = UINavigationController(rootViewController: vc3)
         
         
-        
         nav1.tabBarItem = UITabBarItem(title: "Gallerie", image: UIImage(systemName: "photo.badge.plus")?.withRenderingMode(.alwaysOriginal), tag: 1)
         nav2.tabBarItem = UITabBarItem(title: "Importiert", image: UIImage(systemName: "photo.badge.checkmark")?.withRenderingMode(.alwaysOriginal), tag: 1)
         nav3.tabBarItem = UITabBarItem(title: "Sonstiges", image: UIImage(systemName: "gear"), tag: 1)
@@ -37,6 +38,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         nav1.navigationBar.prefersLargeTitles = true
         nav2.navigationBar.prefersLargeTitles = true
         nav3.navigationBar.prefersLargeTitles = true
+        
 
         setViewControllers([nav1, nav2, nav3], animated: true)
         
