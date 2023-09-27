@@ -16,12 +16,19 @@ class Media: NSManagedObject {
         return NSFetchRequest<Media>(entityName: "Media")
     }
 
-    @NSManaged public var duration: Int64
-    @NSManaged public var name: String?
-    @NSManaged public var photo: UIImage?
-    @NSManaged public var resotuion: String?
-    @NSManaged public var video: NSObject?
+    @NSManaged public var zeit: String?
     @NSManaged public var url: String?
+    @NSManaged public var rudiment: String?
+    @NSManaged public var kamerahersteller: String?
+    @NSManaged public var interpret: String?
+    @NSManaged public var hand: String?
+    @NSManaged public var grip: String?
+    @NSManaged public var bpm: String?
+    @NSManaged public var aufnahmedatum: String?
+    @NSManaged public var aufloesung: String?
+    @NSManaged public var grip_matched: String?
+    @NSManaged public var dauer: String?
+    @NSManaged public var bildwiederholrate: String?
 
 }
 

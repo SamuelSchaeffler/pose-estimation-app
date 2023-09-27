@@ -30,7 +30,18 @@ class TrashModel: ObservableObject {
         }
 
         trashObject.url = mediaObject.url
-        
+        trashObject.aufnahmedatum = mediaObject.aufnahmedatum
+        trashObject.zeit = mediaObject.zeit
+        trashObject.aufloesung = mediaObject.aufloesung
+        trashObject.kamerahersteller = mediaObject.kamerahersteller
+        trashObject.bpm = mediaObject.bpm
+        trashObject.rudiment = mediaObject.rudiment
+        trashObject.interpret = mediaObject.interpret
+        trashObject.hand = mediaObject.hand
+        trashObject.grip = mediaObject.grip
+        trashObject.grip_matched = mediaObject.grip_matched
+        trashObject.dauer = mediaObject.dauer
+        trashObject.bildwiederholrate = mediaObject.bildwiederholrate
         do {
             try managedObjectContext.save()
 
@@ -56,6 +67,18 @@ class TrashModel: ObservableObject {
         }
 
         mediaObject.url = trashObject.url
+        mediaObject.aufnahmedatum = trashObject.aufnahmedatum
+        mediaObject.zeit = trashObject.zeit
+        mediaObject.aufloesung = trashObject.aufloesung
+        mediaObject.kamerahersteller = trashObject.kamerahersteller
+        mediaObject.bpm = trashObject.bpm
+        mediaObject.rudiment = trashObject.rudiment
+        mediaObject.interpret = trashObject.interpret
+        mediaObject.hand = trashObject.hand
+        mediaObject.grip = trashObject.grip
+        mediaObject.grip_matched = trashObject.grip_matched
+        mediaObject.dauer = trashObject.dauer
+        mediaObject.bildwiederholrate = trashObject.bildwiederholrate
         
         do {
             try managedObjectContext.save()

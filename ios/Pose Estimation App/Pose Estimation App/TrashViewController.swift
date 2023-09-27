@@ -16,9 +16,7 @@ class TrashViewController: UIViewController {
         button.adjustsImageWhenHighlighted = false
         button.setTitle("Papierkorb leeren", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        let spacing: CGFloat = 10
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: 0)
-        button.backgroundColor = .red
+        button.backgroundColor = .systemRed
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(emptyTrash), for: .touchUpInside)
         let buttonWidth: CGFloat = UIScreen.main.bounds.size.width / 2

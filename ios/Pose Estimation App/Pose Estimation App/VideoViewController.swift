@@ -9,14 +9,17 @@ import UIKit
 import AVKit
 import CoreData
 
-class VideoViewController: UIViewController {
-
+class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     var image: UIImage?
     var url: URL?
     var objectID: NSManagedObjectID?
     
     var mediaModel = MediaModel()
     var trashModel = TrashModel()
+    
+    var MetadataArray1 = ["Aufnahmedatum:","Zeit:", "Auflösung:", "Dauer", "Bildwiederholrate", "Kamerahersteller:", "BPM:", "Rudiment:","Interpret:","Hand:","Grip:","Grip Matched:"]
+    var Metadata: [String] = []
 
     lazy var videoViewContainer: UIView = {
         let container = UIView()
@@ -28,7 +31,8 @@ class VideoViewController: UIViewController {
     lazy var videoView: UIImageView = {
         let videoView = UIImageView()
         videoView.image = image
-        videoView.contentMode = .scaleAspectFit
+        videoView.contentMode = .scaleAspectFill
+        videoView.clipsToBounds = true
         videoView.frame = CGRect(x: 0, y: 0, width: videoViewContainer.frame.width, height: videoViewContainer.frame.height)
         videoView.isUserInteractionEnabled = true
         return videoView
@@ -50,7 +54,7 @@ class VideoViewController: UIViewController {
         button.addTarget(self, action: #selector(deleteItem), for: .touchUpInside)
         let buttonWidth: CGFloat = UIScreen.main.bounds.size.width / 3
         let buttonHeight: CGFloat = 50
-        button.frame = CGRect(x: ((UIScreen.main.bounds.size.width) / 2) + 35, y: UIScreen.main.bounds.size.height - 150, width: buttonWidth, height: buttonHeight)
+        button.frame = CGRect(x: ((UIScreen.main.bounds.size.width - buttonWidth) / 2), y: UIScreen.main.bounds.size.height - 150, width: buttonWidth, height: buttonHeight)
         button.layer.cornerRadius = 25
         
         button.addTarget(self, action: #selector(buttonPressed), for: .touchDown)
@@ -60,7 +64,6 @@ class VideoViewController: UIViewController {
         
         return button
     }()
-
 
     lazy var playButton: UIButton = {
         let button = UIButton()
@@ -76,7 +79,24 @@ class VideoViewController: UIViewController {
         return button
     }()
 
-
+    lazy var videoTitle: UILabel = {
+        let title = UILabel()
+        title.text = "Titel"
+        title.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        title.textAlignment = .center
+        title.frame = CGRect(x: 0, y: (UIScreen.main.bounds.size.height / 2.5) + 10, width: view.frame.width, height: 40)
+        
+        return title
+    }()
+    
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI(_:)), name: Notification.Name("UpdateVideo"), object: nil)
@@ -89,24 +109,33 @@ class VideoViewController: UIViewController {
         videoViewContainer.addSubview(videoView)
         videoViewContainer.addSubview(playButton)
         view.addSubview(deleteButton)
+        view.addSubview(videoTitle)
+        view.addSubview(tableView)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = CGRect(x: 0, y: (UIScreen.main.bounds.size.height / 2.5) + 50, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - (UIScreen.main.bounds.size.height / 2.5) - 220)
     }
 
     @objc func updateUI(_ notification: Notification) {
         if let image = notification.object as? UIImage {
             self.videoView.image = image
-            print("updated image")
+            self.tableView.reloadData()
         }
     }
 
     @objc func updateURL(_ notification: Notification) {
         if let videourl = notification.object as? URL {
             url = videourl
+            self.videoTitle.text = String(videourl.lastPathComponent)
         }
     }
     
     @objc func updateObjectID(_ notification: Notification) {
         if let id = notification.object as? NSManagedObjectID {
             objectID = id
+            Metadata = mediaModel.getVideoMetadata(objectID: objectID!)
         }
     }
 
@@ -118,6 +147,28 @@ class VideoViewController: UIViewController {
         trashModel.moveObjectFromMediaToTrash(objectID: objectID!)
         self.dismiss(animated: true, completion: nil)
         NotificationCenter.default.post(name: Notification.Name("SelectedPhotosUpdated"), object: self.mediaModel.getMedia())
+    }
+    
+    @objc func editTablePressed(indexPath: IndexPath) {
+        let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie den neuen Text ein:", preferredStyle: .alert)
+
+        alertController.addTextField { textField in
+            textField.placeholder = "Neuer Text"
+        }
+
+        let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
+            guard let textField = alertController.textFields?.first else { return }
+            let newText = textField.text ?? ""
+            self?.Metadata[indexPath.row] = newText
+            self?.mediaModel.saveVideoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+            self?.tableView.reloadData()
+        }
+        let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
     }
 
     @objc func playVideo() {
@@ -138,5 +189,43 @@ class VideoViewController: UIViewController {
         UIView.animate(withDuration: 0.1) {
             sender.transform = .identity
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        editTablePressed(indexPath: indexPath)
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return max(MetadataArray1.count, Metadata.count)
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+       
+        var label1 = cell.viewWithTag(1) as? UILabel
+        var label2 = cell.viewWithTag(2) as? UILabel
+        
+        if label1 == nil {
+            label1 = UILabel(frame: CGRect(x: 10, y: 0, width: tableView.bounds.size.width / 2 - 15, height: cell.bounds.size.height))
+            label1?.tag = 1
+            label1?.numberOfLines = 0
+            label1?.adjustsFontSizeToFitWidth = true
+            label1?.minimumScaleFactor = 0.5
+            cell.contentView.addSubview(label1!)
+        }
+        
+        if label2 == nil {
+            label2 = UILabel(frame: CGRect(x: tableView.bounds.size.width / 2, y: 0, width: tableView.bounds.size.width / 2 - 10, height: cell.bounds.size.height))
+            label2?.tag = 2
+            label2?.numberOfLines = 0
+            label2?.textAlignment = .right
+            label2?.adjustsFontSizeToFitWidth = true
+            label2?.minimumScaleFactor = 0.5
+            cell.contentView.addSubview(label2!)
+        }
+        
+        label1?.text = (indexPath.row < MetadataArray1.count) ? MetadataArray1[indexPath.row] : ""
+        label2?.text = (indexPath.row < Metadata.count) ? Metadata[indexPath.row] : ""
+        
+        return cell
     }
 }

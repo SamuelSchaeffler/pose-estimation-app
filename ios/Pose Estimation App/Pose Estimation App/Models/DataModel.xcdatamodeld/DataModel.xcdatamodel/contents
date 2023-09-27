@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="22G91" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="Media" representedClassName="Media" syncable="YES">
-        <attribute name="duration" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="photo" optional="YES" attributeType="Transformable" valueTransformerName="UIImageTransformer" customClassName="UIImage"/>
-        <attribute name="resotuion" optional="YES" attributeType="String"/>
+        <attribute name="aufloesung" optional="YES" attributeType="String"/>
+        <attribute name="aufnahmedatum" optional="YES" attributeType="String"/>
+        <attribute name="bildwiederholrate" optional="YES" attributeType="String"/>
+        <attribute name="bpm" optional="YES" attributeType="String"/>
+        <attribute name="dauer" optional="YES" attributeType="String"/>
+        <attribute name="grip" optional="YES" attributeType="String"/>
+        <attribute name="grip_matched" optional="YES" attributeType="String"/>
+        <attribute name="hand" optional="YES" attributeType="String"/>
+        <attribute name="interpret" optional="YES" attributeType="String"/>
+        <attribute name="kamerahersteller" optional="YES" attributeType="String"/>
+        <attribute name="rudiment" optional="YES" attributeType="String"/>
         <attribute name="url" attributeType="String"/>
+        <attribute name="zeit" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Trash" representedClassName="Trash" syncable="YES">
-        <attribute name="duration" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="photo" optional="YES" attributeType="Transformable" valueTransformerName="UIImageTransformer" customClassName="UIImage"/>
-        <attribute name="resotuion" optional="YES" attributeType="String"/>
+        <attribute name="aufloesung" optional="YES" attributeType="String"/>
+        <attribute name="aufnahmedatum" optional="YES" attributeType="String"/>
+        <attribute name="bildwiederholrate" optional="YES" attributeType="String"/>
+        <attribute name="bpm" optional="YES" attributeType="String"/>
+        <attribute name="dauer" optional="YES" attributeType="String"/>
+        <attribute name="grip" optional="YES" attributeType="String"/>
+        <attribute name="grip_matched" optional="YES" attributeType="String"/>
+        <attribute name="hand" optional="YES" attributeType="String"/>
+        <attribute name="interpret" optional="YES" attributeType="String"/>
+        <attribute name="kamerahersteller" optional="YES" attributeType="String"/>
+        <attribute name="rudiment" optional="YES" attributeType="String"/>
         <attribute name="url" attributeType="String"/>
+        <attribute name="zeit" optional="YES" attributeType="String"/>
     </entity>
 </model>

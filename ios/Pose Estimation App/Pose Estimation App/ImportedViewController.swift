@@ -158,6 +158,7 @@ extension ImportedViewController: UICollectionViewDelegate {
             let object = UIImage(contentsOfFile: mediaURL.path)
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: Notification.Name("UpdatePhoto"), object: object)
+                NotificationCenter.default.post(name: Notification.Name("UpdateURL"), object: mediaURL)
                 self.present(self.photoVC, animated: true, completion: nil)
             }
         }

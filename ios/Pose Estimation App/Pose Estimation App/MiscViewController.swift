@@ -22,7 +22,7 @@ class MiscViewController: UIViewController {
         let spacing: CGFloat = 30
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: spacing)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: 0)
-        button.backgroundColor = .red
+        button.backgroundColor = .systemRed
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(openTrash), for: .touchUpInside)
         let buttonWidth: CGFloat = UIScreen.main.bounds.size.width - 120
