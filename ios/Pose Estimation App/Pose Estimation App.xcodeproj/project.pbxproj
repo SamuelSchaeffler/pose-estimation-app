@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3B2B079E2ABDE08C00E57528 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B079D2ABDE08C00E57528 /* AppDelegate.swift */; };
 		3B2B07A02ABDE08C00E57528 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B079F2ABDE08C00E57528 /* SceneDelegate.swift */; };
-		3B2B07A22ABDE08C00E57528 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B07A12ABDE08C00E57528 /* GalleryViewController.swift */; };
+		3B2B07A22ABDE08C00E57528 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B07A12ABDE08C00E57528 /* FilterViewController.swift */; };
 		3B2B07A72ABDE08D00E57528 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B2B07A62ABDE08D00E57528 /* Assets.xcassets */; };
 		3B2B07AA2ABDE08D00E57528 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B2B07A82ABDE08D00E57528 /* LaunchScreen.storyboard */; };
 		3B2B07B82ABEF94100E57528 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B07B72ABEF94100E57528 /* TabBarViewController.swift */; };
@@ -32,7 +32,7 @@
 		3B2B079A2ABDE08C00E57528 /* Pose Estimation App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pose Estimation App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2B079D2ABDE08C00E57528 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B2B079F2ABDE08C00E57528 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3B2B07A12ABDE08C00E57528 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		3B2B07A12ABDE08C00E57528 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		3B2B07A62ABDE08D00E57528 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B2B07A92ABDE08D00E57528 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B2B07AB2ABDE08D00E57528 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				3B2B07B62ABEF68900E57528 /* Managers */,
-				3B2B07B52ABEF67F00E57528 /* Models */,
+				3B2B07B52ABEF67F00E57528 /* DataModel */,
 				3B2B07B42ABEF66D00E57528 /* ViewModels */,
 				3B2B07B32ABEF65600E57528 /* Controllers */,
 				3B2B07B22ABEF64B00E57528 /* Views */,
@@ -115,7 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				3B2B07B72ABEF94100E57528 /* TabBarViewController.swift */,
-				3B2B07A12ABDE08C00E57528 /* GalleryViewController.swift */,
+				3B2B07A12ABDE08C00E57528 /* FilterViewController.swift */,
 				3B2B07BF2ABF6CB100E57528 /* ImportedViewController.swift */,
 				3B2B07BB2ABEFA4900E57528 /* MiscViewController.swift */,
 				3B2B07BD2ABF256600E57528 /* PhotoPickerViewController.swift */,
@@ -133,7 +133,7 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		3B2B07B52ABEF67F00E57528 /* Models */ = {
+		3B2B07B52ABEF67F00E57528 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
 				3B8F935B2AC04B1F0076CC25 /* DataModel.xcdatamodeld */,
@@ -144,7 +144,7 @@
 				3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */,
 				3B8F93642AC096B00076CC25 /* UIImageTransformer.swift */,
 			);
-			path = Models;
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 		3B2B07B62ABEF68900E57528 /* Managers */ = {
@@ -234,7 +234,7 @@
 				3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */,
 				3B8F935F2AC076790076CC25 /* Media.swift in Sources */,
 				3BB8272B2AC2E80000BE7AC0 /* Trash.swift in Sources */,
-				3B2B07A22ABDE08C00E57528 /* GalleryViewController.swift in Sources */,
+				3B2B07A22ABDE08C00E57528 /* FilterViewController.swift in Sources */,
 				3B3B6C062AC1B0700073055F /* VideoViewController.swift in Sources */,
 				3B2B079E2ABDE08C00E57528 /* AppDelegate.swift in Sources */,
 				3B8F93612AC077AA0076CC25 /* CoreDataManager.swift in Sources */,

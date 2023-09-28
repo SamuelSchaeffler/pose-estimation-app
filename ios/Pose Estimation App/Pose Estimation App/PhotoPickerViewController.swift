@@ -44,7 +44,8 @@ class PhotoPickerViewController: UIViewController, PHPickerViewControllerDelegat
     }
     
     func readMetadataFromPhotoAtPath(_ imagePath: String) -> [String] {
-        var array: [String] = []
+        var array: [String] = ["","","","","","",""]
+        array[6] = "true"
         if let imageURL = URL(string: imagePath), let imageSource = CGImageSourceCreateWithURL(imageURL as CFURL, nil) {
             if let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [String: Any] {
                 
@@ -60,42 +61,33 @@ class PhotoPickerViewController: UIViewController, PHPickerViewControllerDelegat
                     if let date = dateFormatter.date(from: dateTimeOriginal) {
                         dateFormatter.dateFormat = "dd.MM.yyyy"
                         let date1 = dateFormatter.string(from: date)
-                        array.append(String(date1))
+                        array[0] = (String(date1))
                         dateFormatter.dateFormat = "HH:mm"
                         let time = dateFormatter.string(from: date)
-                        array.append("\(time) Uhr")
+                        array[1] = ("\(time) Uhr")
                     }
-                } else {
-                    array.append("")
-                    array.append("")
                 }
 
                 // Auflösung
                 if let pixelWidth = imageProperties[kCGImagePropertyPixelWidth as String] as? Int,
                    let pixelHeight = imageProperties[kCGImagePropertyPixelHeight as String] as? Int {
                     
-                    array.append("\(pixelWidth) x \(pixelHeight)")
-                } else {
-                    array.append("")
+                    array[2] = ("\(pixelWidth) x \(pixelHeight)")
                 }
 
                 // Kamerahersteller
                 if let tiffProperties = imageProperties[kCGImagePropertyTIFFDictionary as String] as? [String: Any],
                    let make = tiffProperties[kCGImagePropertyTIFFMake as String] as? String {
-                    array.append("\(make)")
-                } else {
-                    array.append("")
+                    array[3] = ("\(make)")
                 }
             }
         }
-        array.append("")
-        array.append("")
         return array
     }
     
     func readMetadataFromVideoAtPath(_ videoPath: String) -> [String] {
-        var array: [String] = ["","","","","",""]
-        
+        var array: [String] = ["","","","","","",""]
+        array[6] = "false"
         let asset = AVAsset(url: URL(string: videoPath)!)
         
         // Überprüfe, ob das Asset gültig ist

@@ -29,7 +29,8 @@ class Trash: NSManagedObject {
     @NSManaged public var grip_matched: String?
     @NSManaged public var dauer: String?
     @NSManaged public var bildwiederholrate: String?
-
+    
+    @NSManaged public var isPhoto: String?
 }
 
 extension Trash : Identifiable {

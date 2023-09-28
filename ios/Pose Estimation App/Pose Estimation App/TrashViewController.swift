@@ -32,7 +32,6 @@ class TrashViewController: UIViewController {
         return button
     }()
 
-
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10

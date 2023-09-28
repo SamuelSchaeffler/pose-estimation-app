@@ -42,6 +42,7 @@ class TrashModel: ObservableObject {
         trashObject.grip_matched = mediaObject.grip_matched
         trashObject.dauer = mediaObject.dauer
         trashObject.bildwiederholrate = mediaObject.bildwiederholrate
+        trashObject.isPhoto = mediaObject.isPhoto
         do {
             try managedObjectContext.save()
 
@@ -79,6 +80,8 @@ class TrashModel: ObservableObject {
         mediaObject.grip_matched = trashObject.grip_matched
         mediaObject.dauer = trashObject.dauer
         mediaObject.bildwiederholrate = trashObject.bildwiederholrate
+        mediaObject.isPhoto = trashObject.isPhoto
+
         
         do {
             try managedObjectContext.save()
