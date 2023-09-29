@@ -25,7 +25,7 @@ class MediaModel: ObservableObject {
         media.zeit = array[1]
         media.aufloesung = array[2]
         media.kamerahersteller = array[3]
-        media.bpm = ""
+        media.bpm = 0
         media.rudiment = ""
         media.interpret = ""
         media.hand = ""
@@ -64,11 +64,11 @@ class MediaModel: ObservableObject {
         
         if filter[3] != "" {
             if filter[2] == "0" {
-                bpmPredicate = NSPredicate(format: "bpm >= %@", argumentArray: [String(filter[3])])
+                bpmPredicate = NSPredicate(format: "bpm <= %@", argumentArray: [Int64(filter[3])])
             } else if filter[2] == "1" {
-                bpmPredicate = NSPredicate(format: "bpm == %@", argumentArray: [String(filter[3])])
+                bpmPredicate = NSPredicate(format: "bpm == %@", argumentArray: [Int64(filter[3])])
             } else {
-                bpmPredicate = NSPredicate(format: "bpm <= %@", argumentArray: [String(filter[3])])
+                bpmPredicate = NSPredicate(format: "bpm >= %@", argumentArray: [Int64(filter[3])])
             }
         }
         
@@ -131,7 +131,13 @@ class MediaModel: ObservableObject {
         array.append((mediaObject?.zeit)!)
         array.append((mediaObject?.aufloesung)!)
         array.append((mediaObject?.kamerahersteller)!)
-        array.append((mediaObject?.bpm)!)
+        
+        if mediaObject?.bpm != 0 {
+            array.append(String(mediaObject!.bpm))
+        } else {
+            array.append("")
+        }
+        
         array.append((mediaObject?.rudiment)!)
         array.append((mediaObject?.interpret)!)
         array.append((mediaObject?.hand)!)
@@ -152,7 +158,13 @@ class MediaModel: ObservableObject {
         array.append((mediaObject?.dauer)!)
         array.append((mediaObject?.bildwiederholrate)!)
         array.append((mediaObject?.kamerahersteller)!)
-        array.append((mediaObject?.bpm)!)
+
+        if mediaObject?.bpm != 0 {
+            array.append(String(mediaObject!.bpm))
+        } else {
+            array.append("")
+        }
+        
         array.append((mediaObject?.rudiment)!)
         array.append((mediaObject?.interpret)!)
         array.append((mediaObject?.hand)!)
@@ -170,7 +182,11 @@ class MediaModel: ObservableObject {
         mediaObject!.zeit = array[1]
         mediaObject!.aufloesung = array[2]
         mediaObject!.kamerahersteller = array[3]
-        mediaObject!.bpm = array[4]
+        
+        if array[4] != "" {
+            mediaObject!.bpm = Int64(array[4])!
+        }
+        
         mediaObject!.rudiment = array[5]
         mediaObject!.interpret = array[6]
         mediaObject!.hand = array[7]
@@ -190,7 +206,11 @@ class MediaModel: ObservableObject {
         mediaObject!.dauer = array[3]
         mediaObject!.bildwiederholrate = array[4]
         mediaObject!.kamerahersteller = array[5]
-        mediaObject!.bpm = array[6]
+        
+        if array[6] != "" {
+            mediaObject!.bpm = Int64(array[6])!
+        }
+                                           
         mediaObject!.rudiment = array[7]
         mediaObject!.interpret = array[8]
         mediaObject!.hand = array[9]

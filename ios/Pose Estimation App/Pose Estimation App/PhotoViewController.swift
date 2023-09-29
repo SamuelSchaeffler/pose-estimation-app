@@ -176,25 +176,78 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @objc func editTablePressed(indexPath: IndexPath) {
-        let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie den neuen Text ein:", preferredStyle: .alert)
+        
+        if indexPath.row == 0 {
+            
+            let datePicker = UIDatePicker()
+            datePicker.datePickerMode = .date
+            datePicker.layer.frame = CGRect(x: ((UIScreen.main.bounds.size.width-150)/2) - 43, y: 34, width: 130, height: 50)
 
-        alertController.addTextField { textField in
-            textField.placeholder = "Neuer Text"
+            let alertController = UIAlertController(title: "Wählen Sie ein Datum", message: "                         ", preferredStyle: .alert)
+            alertController.view.addSubview(datePicker)
+            
+            let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel) { (action) in
+            }
+            let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+                let selectedDate = datePicker.date
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd.MM.yyyy"
+                let dateString = dateFormatter.string(from: selectedDate)
+                self.Metadata[indexPath.row] = dateString
+                self.mediaModel.savePhotoMetadata(objectID: self.objectID!, array: self.Metadata)
+                self.tableView.reloadData()
+            }
+            alertController.addAction(cancelAction)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+
+        } else if indexPath.row == 1 {
+
+            let datePicker = UIDatePicker()
+            datePicker.datePickerMode = .time
+            datePicker.layer.frame = CGRect(x: ((UIScreen.main.bounds.size.width-150)/2)-34, y: 34, width: 100, height: 50)
+
+            let alertController = UIAlertController(title: "Wählen Sie eine Zeit", message: "                         ", preferredStyle: .alert)
+            alertController.view.addSubview(datePicker)
+            
+            let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel) { (action) in
+            }
+            let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+                let selectedDate = datePicker.date
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "HH:mm"
+                let dateString = dateFormatter.string(from: selectedDate)
+                self.Metadata[indexPath.row] = dateString + " Uhr"
+                self.mediaModel.savePhotoMetadata(objectID: self.objectID!, array: self.Metadata)
+                self.tableView.reloadData()
+            }
+            alertController.addAction(cancelAction)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+            
+            
+            
+        } else {
+            let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie den neuen Text ein:", preferredStyle: .alert)
+            
+            alertController.addTextField { textField in
+                textField.placeholder = "Neuer Text"
+            }
+            
+            let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
+                guard let textField = alertController.textFields?.first else { return }
+                let newText = textField.text ?? ""
+                self?.Metadata[indexPath.row] = newText
+                self?.mediaModel.savePhotoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+                self?.tableView.reloadData()
+            }
+            let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+            
+            alertController.addAction(saveAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
         }
-
-        let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
-            guard let textField = alertController.textFields?.first else { return }
-            let newText = textField.text ?? ""
-            self?.Metadata[indexPath.row] = newText
-            self?.mediaModel.savePhotoMetadata(objectID: self!.objectID!, array: self!.Metadata)
-            self?.tableView.reloadData()
-        }
-        let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
-
-        alertController.addAction(saveAction)
-        alertController.addAction(cancelAction)
-
-        present(alertController, animated: true, completion: nil)
     }
     
     @objc func buttonPressed(sender: UIButton) {
