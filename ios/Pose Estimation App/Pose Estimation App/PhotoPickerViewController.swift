@@ -12,9 +12,7 @@ import AVFoundation
 import Foundation
 
 class PhotoPickerViewController: UIViewController, PHPickerViewControllerDelegate {
-    
-    let activityIndicator = UIActivityIndicatorView(style: .large)
-    
+        
     var importedVC = ImportedViewController()
     var mediaModel = MediaModel()
     
@@ -22,10 +20,6 @@ class PhotoPickerViewController: UIViewController, PHPickerViewControllerDelegat
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
-        activityIndicator.center = view.center
-        activityIndicator.color = .gray
-        view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -39,8 +33,8 @@ class PhotoPickerViewController: UIViewController, PHPickerViewControllerDelegat
         
         let pickerViewController = PHPickerViewController(configuration: configuration)
         pickerViewController.delegate = self
+        pickerViewController.modalPresentationStyle = .fullScreen
         present(pickerViewController, animated: false)
-        //pickerViewController.modalPresentationStyle = .fullScreen
     }
     
     func readMetadataFromPhotoAtPath(_ imagePath: String) -> [String] {
@@ -190,8 +184,7 @@ class PhotoPickerViewController: UIViewController, PHPickerViewControllerDelegat
             NotificationCenter.default.post(name: Notification.Name("SelectedPhotosUpdated"), object: self.mediaModel.getMedia())
             self.importedVC.collectionView.reloadData()
             
-            self.tabBarController?.selectedIndex = 1
-            
+            self.dismiss(animated: false, completion: nil)            
         }
         }
     }

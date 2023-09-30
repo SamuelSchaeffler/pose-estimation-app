@@ -25,19 +25,17 @@ class FilterViewController: UIViewController {
     
     let filterButton: UIButton = {
             let button = UIButton()
-            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold)
+            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .bold)
             let image = UIImage(systemName: "slider.horizontal.2.square", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
             button.setImage(image, for: .normal)
             button.adjustsImageWhenHighlighted = false
-            button.setTitle("Filter", for: .normal)
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
             button.backgroundColor = .systemBlue
             button.setTitleColor(.white, for: .normal)
             button.addTarget(self, action: #selector(closeFilter), for: .touchUpInside)
-            let buttonWidth: CGFloat = 90 //UIScreen.main.bounds.size.width / 2
-            let buttonHeight: CGFloat = 50
-            button.frame = CGRect(x: UIScreen.main.bounds.size.width - 107, y: UIScreen.main.bounds.size.height - 150, width: buttonWidth, height: buttonHeight)
-            button.layer.cornerRadius = 25
+            let buttonWidth: CGFloat = 55 //UIScreen.main.bounds.size.width / 2
+            let buttonHeight: CGFloat = 55
+            button.frame = CGRect(x: UIScreen.main.bounds.size.width - 93, y: UIScreen.main.bounds.size.height - 150, width: buttonWidth, height: buttonHeight)
+        button.layer.cornerRadius = 27.5
             
             button.addTarget(self, action: #selector(buttonPressed), for: .touchDown)
             button.addTarget(self, action: #selector(buttonReleased), for: .touchUpInside)
