@@ -21,7 +21,14 @@ class MediaModel: ObservableObject {
         let media = Media(context: self.context)
         
         media.url = url.absoluteString
-        media.aufnahmedatum = array[0]
+        
+        if array[0] != "" {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            let date = dateFormatter.date(from: array[0])
+            media.aufnahmedatum = date!
+        }
+        
         media.zeit = array[1]
         media.aufloesung = array[2]
         media.kamerahersteller = array[3]
@@ -41,6 +48,8 @@ class MediaModel: ObservableObject {
     func getMedia() -> [URL] {
         var urlArray: [URL] = []
         var filter = filterSettings
+        var dateFilter = dateFilterSettings
+        var bpmFilter = bpmFilterSettings
         
         let fetchRequest = Media.fetchRequest()
         
@@ -58,18 +67,18 @@ class MediaModel: ObservableObject {
             mediaPredicate = NSPredicate(format: "isPhoto == %@", argumentArray: ["false"])
         }
         
-        if filter[1] != "" {
-            datePredicate = NSPredicate(format: "aufnahmedatum == %@", argumentArray: [String(filter[1])])
+        if dateFilter[0] == "true" {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            let startDate = dateFormatter.date(from: dateFilter[1])
+            let endDate = dateFormatter.date(from: dateFilter[2])
+            datePredicate = NSPredicate(format: "aufnahmedatum >= %@ AND aufnahmedatum <= %@", startDate as! NSDate, endDate as! NSDate)
         }
         
-        if filter[3] != "" {
-            if filter[2] == "0" {
-                bpmPredicate = NSPredicate(format: "bpm <= %@", argumentArray: [Int64(filter[3])])
-            } else if filter[2] == "1" {
-                bpmPredicate = NSPredicate(format: "bpm == %@", argumentArray: [Int64(filter[3])])
-            } else {
-                bpmPredicate = NSPredicate(format: "bpm >= %@", argumentArray: [Int64(filter[3])])
-            }
+        if bpmFilter[0] == "true" {
+                let minBPM = Int64(bpmFilter[1])
+                let maxBPM = Int64(bpmFilter[2])
+            bpmPredicate = NSPredicate(format: "bpm >= %@ AND bpm <= %@", NSNumber(value: minBPM!), NSNumber(value: maxBPM!))
         }
         
         if filter[4] != "" {
@@ -127,7 +136,15 @@ class MediaModel: ObservableObject {
         
         let mediaObject = try? context.existingObject(with: objectID) as? Media
         
-        array.append((mediaObject?.aufnahmedatum)!)
+        
+        if mediaObject?.aufnahmedatum == nil {
+            array.append("")
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            let dateString = dateFormatter.string(from: (mediaObject?.aufnahmedatum)!)
+            array.append(dateString)
+        }
         array.append((mediaObject?.zeit)!)
         array.append((mediaObject?.aufloesung)!)
         array.append((mediaObject?.kamerahersteller)!)
@@ -152,7 +169,14 @@ class MediaModel: ObservableObject {
         
         let mediaObject = try? context.existingObject(with: objectID) as? Media
         
-        array.append((mediaObject?.aufnahmedatum)!)
+        if mediaObject?.aufnahmedatum == nil {
+            array.append("")
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            let dateString = dateFormatter.string(from: (mediaObject?.aufnahmedatum)!)
+            array.append(dateString)
+        }
         array.append((mediaObject?.zeit)!)
         array.append((mediaObject?.aufloesung)!)
         array.append((mediaObject?.dauer)!)
@@ -178,7 +202,16 @@ class MediaModel: ObservableObject {
         
         let mediaObject = try? context.existingObject(with: objectID) as? Media
         
-        mediaObject!.aufnahmedatum = array[0]
+        
+        if array[0] != "" {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            let date = dateFormatter.date(from: array[0])
+            mediaObject!.aufnahmedatum = date!
+        } else {
+            mediaObject!.aufnahmedatum = nil
+        }
+        
         mediaObject!.zeit = array[1]
         mediaObject!.aufloesung = array[2]
         mediaObject!.kamerahersteller = array[3]
@@ -200,7 +233,15 @@ class MediaModel: ObservableObject {
         
         let mediaObject = try? context.existingObject(with: objectID) as? Media
         
-        mediaObject!.aufnahmedatum = array[0]
+        if array[0] != "" {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            let date = dateFormatter.date(from: array[0])
+            mediaObject!.aufnahmedatum = date!
+        } else {
+            mediaObject!.aufnahmedatum = nil
+        }
+
         mediaObject!.zeit = array[1]
         mediaObject!.aufloesung = array[2]
         mediaObject!.dauer = array[3]

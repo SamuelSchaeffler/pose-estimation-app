@@ -24,7 +24,7 @@ class Trash: NSManagedObject {
     @NSManaged public var hand: String?
     @NSManaged public var grip: String?
     @NSManaged public var bpm: Int64
-    @NSManaged public var aufnahmedatum: String?
+    @NSManaged public var aufnahmedatum: Date?
     @NSManaged public var aufloesung: String?
     @NSManaged public var grip_matched: String?
     @NSManaged public var dauer: String?

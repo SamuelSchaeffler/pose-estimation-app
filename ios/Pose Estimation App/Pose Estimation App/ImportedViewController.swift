@@ -53,7 +53,7 @@ class ImportedViewController: UIViewController {
         let image = UIImage(systemName: "slider.horizontal.2.square", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
         button.setImage(image, for: .normal)
         button.adjustsImageWhenHighlighted = false
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(openFilter), for: .touchUpInside)
         let buttonWidth: CGFloat = 55 //UIScreen.main.bounds.size.width / 2

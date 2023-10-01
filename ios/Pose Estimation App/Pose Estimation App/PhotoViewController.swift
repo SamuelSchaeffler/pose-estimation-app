@@ -189,7 +189,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel) { (action) in
             }
             let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
-                let selectedDate = datePicker.date
+                let selectedDate = datePicker.date 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd.MM.yyyy"
                 let dateString = dateFormatter.string(from: selectedDate)

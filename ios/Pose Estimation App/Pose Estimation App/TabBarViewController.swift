@@ -25,7 +25,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         let nav2 = UINavigationController(rootViewController: vc2)
         
         nav1.tabBarItem = UITabBarItem(title: "Importiert", image: UIImage(systemName: "photo.badge.checkmark")?.withRenderingMode(.alwaysOriginal), tag: 1)
-        nav1.tabBarItem = UITabBarItem(title: "Sonstiges", image: UIImage(systemName: "gear"), tag: 1)
+        nav2.tabBarItem = UITabBarItem(title: "Sonstiges", image: UIImage(systemName: "gear"), tag: 1)
         
         nav1.navigationBar.prefersLargeTitles = true
         nav2.navigationBar.prefersLargeTitles = true

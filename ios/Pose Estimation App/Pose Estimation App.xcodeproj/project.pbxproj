@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B1518EB2AC967B2001C0A2A /* RangeUISlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B1518E42AC967AA001C0A2A /* RangeUISlider.framework */; };
+		3B1518EC2AC967B2001C0A2A /* RangeUISlider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B1518E42AC967AA001C0A2A /* RangeUISlider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3B2B079E2ABDE08C00E57528 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B079D2ABDE08C00E57528 /* AppDelegate.swift */; };
 		3B2B07A02ABDE08C00E57528 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B079F2ABDE08C00E57528 /* SceneDelegate.swift */; };
 		3B2B07A22ABDE08C00E57528 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B07A12ABDE08C00E57528 /* FilterViewController.swift */; };
@@ -28,7 +30,53 @@
 		3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3B1518E32AC967AA001C0A2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3B1518DC2AC967AA001C0A2A /* RangeUISlider.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45E215241E8E812E00F0B8B9;
+			remoteInfo = RangeUISlider;
+		};
+		3B1518E52AC967AA001C0A2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3B1518DC2AC967AA001C0A2A /* RangeUISlider.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 459CBEF4259B79D000FCA5AB;
+			remoteInfo = RangeUISliderTests;
+		};
+		3B1518E72AC967AA001C0A2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3B1518DC2AC967AA001C0A2A /* RangeUISlider.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45F064832599E3CC007B25A7;
+			remoteInfo = RangeUISliderUITests;
+		};
+		3B1518E92AC967AA001C0A2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3B1518DC2AC967AA001C0A2A /* RangeUISlider.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45F064952599E511007B25A7;
+			remoteInfo = RangeUISliderDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3B15188E2AC9670C001C0A2A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3B1518EC2AC967B2001C0A2A /* RangeUISlider.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		3B1518DC2AC967AA001C0A2A /* RangeUISlider.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RangeUISlider.xcodeproj; path = "../../../../../Downloads/RangeUISlider-master/RangeUISlider.xcodeproj"; sourceTree = "<group>"; };
 		3B2B079A2ABDE08C00E57528 /* Pose Estimation App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pose Estimation App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2B079D2ABDE08C00E57528 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B2B079F2ABDE08C00E57528 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,17 +105,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B1518EB2AC967B2001C0A2A /* RangeUISlider.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B15188B2AC9670C001C0A2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3B1518DD2AC967AA001C0A2A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3B1518E42AC967AA001C0A2A /* RangeUISlider.framework */,
+				3B1518E62AC967AA001C0A2A /* RangeUISliderTests.xctest */,
+				3B1518E82AC967AA001C0A2A /* RangeUISliderUITests.xctest */,
+				3B1518EA2AC967AA001C0A2A /* RangeUISliderDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3B2B07912ABDE08C00E57528 = {
 			isa = PBXGroup;
 			children = (
 				3B2B079C2ABDE08C00E57528 /* Pose Estimation App */,
 				3B2B079B2ABDE08C00E57528 /* Products */,
+				3B15188B2AC9670C001C0A2A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,6 +157,7 @@
 				3B2B07B22ABEF64B00E57528 /* Views */,
 				3B2B07B12ABEF63400E57528 /* Resources */,
 				3B2B07AB2ABDE08D00E57528 /* Info.plist */,
+				3B1518DC2AC967AA001C0A2A /* RangeUISlider.xcodeproj */,
 			);
 			path = "Pose Estimation App";
 			sourceTree = "<group>";
@@ -164,6 +233,7 @@
 				3B2B07962ABDE08C00E57528 /* Sources */,
 				3B2B07972ABDE08C00E57528 /* Frameworks */,
 				3B2B07982ABDE08C00E57528 /* Resources */,
+				3B15188E2AC9670C001C0A2A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -200,12 +270,49 @@
 			mainGroup = 3B2B07912ABDE08C00E57528;
 			productRefGroup = 3B2B079B2ABDE08C00E57528 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3B1518DD2AC967AA001C0A2A /* Products */;
+					ProjectRef = 3B1518DC2AC967AA001C0A2A /* RangeUISlider.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3B2B07992ABDE08C00E57528 /* Pose Estimation App */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3B1518E42AC967AA001C0A2A /* RangeUISlider.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RangeUISlider.framework;
+			remoteRef = 3B1518E32AC967AA001C0A2A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3B1518E62AC967AA001C0A2A /* RangeUISliderTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RangeUISliderTests.xctest;
+			remoteRef = 3B1518E52AC967AA001C0A2A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3B1518E82AC967AA001C0A2A /* RangeUISliderUITests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RangeUISliderUITests.xctest;
+			remoteRef = 3B1518E72AC967AA001C0A2A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3B1518EA2AC967AA001C0A2A /* RangeUISliderDemo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = RangeUISliderDemo.app;
+			remoteRef = 3B1518E92AC967AA001C0A2A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3B2B07982ABDE08C00E57528 /* Resources */ = {
