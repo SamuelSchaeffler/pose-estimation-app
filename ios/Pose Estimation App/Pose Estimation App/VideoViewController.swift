@@ -104,6 +104,8 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         NotificationCenter.default.addObserver(self, selector: #selector(updateObjectID(_:)), name: Notification.Name("UpdateObjectID"), object: nil)
         
+        self.tableView.reloadData()
+        
         view.backgroundColor = .systemBackground
         view.addSubview(videoViewContainer)
         videoViewContainer.addSubview(videoView)

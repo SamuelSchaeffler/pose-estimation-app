@@ -11,10 +11,13 @@ import CoreData
 class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var image: UIImage?
+    var photoURL: URL?
     var objectID: NSManagedObjectID?
     
     var mediaModel = MediaModel()
     var trashModel = TrashModel()
+    
+    var handTrackingVC = HandTrackingViewController()
     
     var MetadataArray1 = ["Aufnahmedatum:","Zeit:", "Auflösung:", "Kamerahersteller:", "BPM:", "Rudiment:","Interpret:","Hand:","Grip:","Grip Matched:"]
     var Metadata: [String] = []
@@ -66,7 +69,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let buttonWidth: CGFloat = UIScreen.main.bounds.size.width / 3
         let buttonHeight: CGFloat = 50
         //button.frame = CGRect(x: ((UIScreen.main.bounds.size.width) / 2) + 35, y: UIScreen.main.bounds.size.height - 150, width: buttonWidth, height: buttonHeight)
-        button.frame = CGRect(x: ((UIScreen.main.bounds.size.width - buttonWidth) / 2), y: UIScreen.main.bounds.size.height - 150, width: buttonWidth, height: buttonHeight)
+        button.frame = CGRect(x: ((UIScreen.main.bounds.size.width - buttonWidth) / 2) + 100, y: UIScreen.main.bounds.size.height - 150, width: buttonWidth, height: buttonHeight)
         button.layer.cornerRadius = 25
         
         button.addTarget(self, action: #selector(buttonPressed), for: .touchDown)
@@ -80,11 +83,11 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     lazy var editButton: UIButton = {
         let button = UIButton()
         button.adjustsImageWhenHighlighted = false
-        button.setTitle("Metadaten bearbeiten", for: .normal)
+        button.setTitle("Hand Tracking starten", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(editTablePressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(startHandTracking), for: .touchUpInside)
         let buttonWidth: CGFloat = UIScreen.main.bounds.size.width / 2
         let buttonHeight: CGFloat = 50
         button.frame = CGRect(x: 25, y: UIScreen.main.bounds.size.height - 150, width: buttonWidth, height: buttonHeight)
@@ -118,6 +121,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        handTrackingVC.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI(_:)), name: Notification.Name("UpdatePhoto"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateURL(_:)), name: Notification.Name("UpdateURL"), object: nil)
@@ -126,9 +130,10 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         view.backgroundColor = .systemBackground
         view.addSubview(imageView)
         view.addSubview(deleteButton)
-        //view.addSubview(editButton)
+        view.addSubview(editButton)
         view.addSubview(photoTitle)
         view.addSubview(tableView)
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -146,6 +151,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @objc func updateURL(_ notification: Notification) {
         if let videourl = notification.object as? URL {
             self.photoTitle.text = String(videourl.lastPathComponent)
+            photoURL = videourl
         }
     }
     
@@ -173,6 +179,14 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         trashModel.moveObjectFromMediaToTrash(objectID: objectID!)
         self.dismiss(animated: true, completion: nil)
         NotificationCenter.default.post(name: Notification.Name("SelectedPhotosUpdated"), object: self.mediaModel.getMedia())
+    }
+    
+    @objc func startHandTracking() {
+        let object = UIImage(contentsOfFile: photoURL!.path)
+        NotificationCenter.default.post(name: Notification.Name("UpdateTrackingPhoto"), object: object)
+        DispatchQueue.main.async {
+            self.present(self.handTrackingVC, animated: true, completion: nil)
+        }
     }
     
     @objc func editTablePressed(indexPath: IndexPath) {

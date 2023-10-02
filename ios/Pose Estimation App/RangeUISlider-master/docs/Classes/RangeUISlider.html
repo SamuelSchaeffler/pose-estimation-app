@@ -1,0 +1,2451 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>RangeUISlider Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/RangeUISlider" class="dashAnchor"></a>
+    <a title="RangeUISlider Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">RangeUISlider 3.1.0 Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/chicio/ID3TagEditor"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
+        <div class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">RangeUISlider Reference</a>
+        <img id="carat" src="../img/carat.png" alt=""/>
+        RangeUISlider Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Bar.html">Bar</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Gradient.html">Gradient</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Knob.html">Knob</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/KnobComponents.html">KnobComponents</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:13RangeUISlider9KnobLabelC">KnobLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Knobs.html">Knobs</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/c:@M@RangeUISlider@objc(cs)Progress">Progress</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ProgressViews.html">ProgressViews</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RangeSliderCoordinator.html">RangeSliderCoordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RangeUISlider.html">RangeUISlider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RangeUISliderChangeEvent.html">RangeUISliderChangeEvent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RangeUISliderChangeFinishedEvent.html">RangeUISliderChangeFinishedEvent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RangeUISliderComponents.html">RangeUISliderComponents</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/RangeUISliderDelegate.html">RangeUISliderDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/RangeSlider.html">RangeSlider</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>RangeUISlider</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">@IBDesignable</span>
+<span class="kd">open</span> <span class="kd">class</span> <span class="kt">RangeUISlider</span> <span class="p">:</span> <span class="kt">UIView</span><span class="p">,</span> <span class="kt">ProgrammaticKnobChangeDelegate</span><span class="p">,</span> <span class="kt">RangeUpdaterDelegate</span></code></pre>
+
+                </div>
+              </div>
+            <p>A custom slider with two knobs that allow the user to select a range.
+RangeUISlider has been created using Autolayout. It is an IBDesignable UIVIew and all its properties are IBInspectable.
+RangeUISlider support RTL (right to left) languages automatically out of the box.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)identifier"></a>
+                    <a name="//apple_ref/swift/Property/identifier" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)identifier">identifier</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Slider identifier.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">identifier</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)stepIncrement"></a>
+                    <a name="//apple_ref/swift/Property/stepIncrement" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)stepIncrement">stepIncrement</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Step increment value. If different from 0 RangeUISlider will let the user drag by step increment.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">stepIncrement</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)showKnobsLabels"></a>
+                    <a name="//apple_ref/swift/Property/showKnobsLabels" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)showKnobsLabels">showKnobsLabels</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Show  knobs labels.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">showKnobsLabels</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)knobsLabelTopPosition"></a>
+                    <a name="//apple_ref/swift/Property/knobsLabelTopPosition" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)knobsLabelTopPosition">knobsLabelTopPosition</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Show knobs labels at the top or at the bottom of knobs.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">knobsLabelTopPosition</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)defaultValueLeftKnob"></a>
+                    <a name="//apple_ref/swift/Property/defaultValueLeftKnob" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)defaultValueLeftKnob">defaultValueLeftKnob</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Default left knob starting value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultValueLeftKnob</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)defaultValueRightKnob"></a>
+                    <a name="//apple_ref/swift/Property/defaultValueRightKnob" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)defaultValueRightKnob">defaultValueRightKnob</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Default right knob starting value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultValueRightKnob</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)scaleMinValue"></a>
+                    <a name="//apple_ref/swift/Property/scaleMinValue" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)scaleMinValue">scaleMinValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Scale minimum value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">scaleMinValue</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)scaleMaxValue"></a>
+                    <a name="//apple_ref/swift/Property/scaleMaxValue" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)scaleMaxValue">scaleMaxValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Scale maximum value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">scaleMaxValue</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedColor"></a>
+                    <a name="//apple_ref/swift/Property/rangeSelectedColor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedColor">rangeSelectedColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Selected range color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeSelectedColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedBackgroundImage"></a>
+                    <a name="//apple_ref/swift/Property/rangeSelectedBackgroundImage" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedBackgroundImage">rangeSelectedBackgroundImage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Background range selected strechable image.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeSelectedBackgroundImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedBackgroundEdgeInsetTop"></a>
+                    <a name="//apple_ref/swift/Property/rangeSelectedBackgroundEdgeInsetTop" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedBackgroundEdgeInsetTop">rangeSelectedBackgroundEdgeInsetTop</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Background range selected top edge insect for background image.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeSelectedBackgroundEdgeInsetTop</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedBackgroundEdgeInsetLeft"></a>
+                    <a name="//apple_ref/swift/Property/rangeSelectedBackgroundEdgeInsetLeft" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedBackgroundEdgeInsetLeft">rangeSelectedBackgroundEdgeInsetLeft</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Background range selected left edge insect for background image.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeSelectedBackgroundEdgeInsetLeft</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedBackgroundEdgeInsetBottom"></a>
+                    <a name="//apple_ref/swift/Property/rangeSelectedBackgroundEdgeInsetBottom" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedBackgroundEdgeInsetBottom">rangeSelectedBackgroundEdgeInsetBottom</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Background range selected bottom edge insect for background image.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeSelectedBackgroundEdgeInsetBottom</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedBackgroundEdgeInsetRight"></a>
+                    <a name="//apple_ref/swift/Property/rangeSelectedBackgroundEdgeInsetRight" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedBackgroundEdgeInsetRight">rangeSelectedBackgroundEdgeInsetRight</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Background range selected right edge insect for background image.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeSelectedBackgroundEdgeInsetRight</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedGradientColor1"></a>
+                    <a name="//apple_ref/swift/Property/rangeSelectedGradientColor1" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedGradientColor1">rangeSelectedGradientColor1</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient color 1 for range selected.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeSelectedGradientColor1</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedGradientColor2"></a>
+                    <a name="//apple_ref/swift/Property/rangeSelectedGradientColor2" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedGradientColor2">rangeSelectedGradientColor2</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient color 2 for range selected.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeSelectedGradientColor2</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedGradientStartPoint"></a>
+                    <a name="//apple_ref/swift/Property/rangeSelectedGradientStartPoint" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedGradientStartPoint">rangeSelectedGradientStartPoint</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient start point for selected range.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeSelectedGradientStartPoint</span><span class="p">:</span> <span class="kt">CGPoint</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedGradientEndPoint"></a>
+                    <a name="//apple_ref/swift/Property/rangeSelectedGradientEndPoint" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeSelectedGradientEndPoint">rangeSelectedGradientEndPoint</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient end point for selected range.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeSelectedGradientEndPoint</span><span class="p">:</span> <span class="kt">CGPoint</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedColor"></a>
+                    <a name="//apple_ref/swift/Property/rangeNotSelectedColor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedColor">rangeNotSelectedColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Not selected range color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeNotSelectedColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedBackgroundImage"></a>
+                    <a name="//apple_ref/swift/Property/rangeNotSelectedBackgroundImage" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedBackgroundImage">rangeNotSelectedBackgroundImage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Background range selected strechable image.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeNotSelectedBackgroundImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedBackgroundEdgeInsetTop"></a>
+                    <a name="//apple_ref/swift/Property/rangeNotSelectedBackgroundEdgeInsetTop" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedBackgroundEdgeInsetTop">rangeNotSelectedBackgroundEdgeInsetTop</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Background range selected top edge insect for background image.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeNotSelectedBackgroundEdgeInsetTop</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedBackgroundEdgeInsetLeft"></a>
+                    <a name="//apple_ref/swift/Property/rangeNotSelectedBackgroundEdgeInsetLeft" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedBackgroundEdgeInsetLeft">rangeNotSelectedBackgroundEdgeInsetLeft</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Background range selected left edge insect for background image.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeNotSelectedBackgroundEdgeInsetLeft</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedBackgroundEdgeInsetBottom"></a>
+                    <a name="//apple_ref/swift/Property/rangeNotSelectedBackgroundEdgeInsetBottom" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedBackgroundEdgeInsetBottom">rangeNotSelectedBackgroundEdgeInsetBottom</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Background range selected bottom edge insect for background image.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeNotSelectedBackgroundEdgeInsetBottom</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedBackgroundEdgeInsetRight"></a>
+                    <a name="//apple_ref/swift/Property/rangeNotSelectedBackgroundEdgeInsetRight" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedBackgroundEdgeInsetRight">rangeNotSelectedBackgroundEdgeInsetRight</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Background range selected right edge insect for background image.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeNotSelectedBackgroundEdgeInsetRight</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedGradientColor1"></a>
+                    <a name="//apple_ref/swift/Property/rangeNotSelectedGradientColor1" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedGradientColor1">rangeNotSelectedGradientColor1</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient color 1 for range not selected.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeNotSelectedGradientColor1</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedGradientColor2"></a>
+                    <a name="//apple_ref/swift/Property/rangeNotSelectedGradientColor2" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedGradientColor2">rangeNotSelectedGradientColor2</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient color 2 for range not selected.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeNotSelectedGradientColor2</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedGradientStartPoint"></a>
+                    <a name="//apple_ref/swift/Property/rangeNotSelectedGradientStartPoint" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedGradientStartPoint">rangeNotSelectedGradientStartPoint</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient start point for not selected range.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeNotSelectedGradientStartPoint</span><span class="p">:</span> <span class="kt">CGPoint</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedGradientEndPoint"></a>
+                    <a name="//apple_ref/swift/Property/rangeNotSelectedGradientEndPoint" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rangeNotSelectedGradientEndPoint">rangeNotSelectedGradientEndPoint</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient end point for not selected range.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeNotSelectedGradientEndPoint</span><span class="p">:</span> <span class="kt">CGPoint</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobWidth"></a>
+                    <a name="//apple_ref/swift/Property/leftKnobWidth" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobWidth">leftKnobWidth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Left knob width.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">leftKnobWidth</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobHeight"></a>
+                    <a name="//apple_ref/swift/Property/leftKnobHeight" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobHeight">leftKnobHeight</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Left knob height.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">leftKnobHeight</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobCorners"></a>
+                    <a name="//apple_ref/swift/Property/leftKnobCorners" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobCorners">leftKnobCorners</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Left knob corners.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">leftKnobCorners</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobImage"></a>
+                    <a name="//apple_ref/swift/Property/leftKnobImage" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobImage">leftKnobImage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Left knob image.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">leftKnobImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobColor"></a>
+                    <a name="//apple_ref/swift/Property/leftKnobColor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobColor">leftKnobColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Left knob color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">leftKnobColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftShadowOpacity"></a>
+                    <a name="//apple_ref/swift/Property/leftShadowOpacity" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftShadowOpacity">leftShadowOpacity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Left knob shadow opacity.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">leftShadowOpacity</span><span class="p">:</span> <span class="kt">Float</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftShadowColor"></a>
+                    <a name="//apple_ref/swift/Property/leftShadowColor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftShadowColor">leftShadowColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Left knob shadow color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">leftShadowColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftShadowOffset"></a>
+                    <a name="//apple_ref/swift/Property/leftShadowOffset" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftShadowOffset">leftShadowOffset</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Left knob shadow offset.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">leftShadowOffset</span><span class="p">:</span> <span class="kt">CGSize</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftShadowRadius"></a>
+                    <a name="//apple_ref/swift/Property/leftShadowRadius" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftShadowRadius">leftShadowRadius</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Left knob shadow radius.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">leftShadowRadius</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobGradientColor1"></a>
+                    <a name="//apple_ref/swift/Property/leftKnobGradientColor1" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobGradientColor1">leftKnobGradientColor1</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient color 1 for range not selected.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">leftKnobGradientColor1</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobGradientColor2"></a>
+                    <a name="//apple_ref/swift/Property/leftKnobGradientColor2" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobGradientColor2">leftKnobGradientColor2</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient color 2 for range not selected.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">leftKnobGradientColor2</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobGradientStartPoint"></a>
+                    <a name="//apple_ref/swift/Property/leftKnobGradientStartPoint" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobGradientStartPoint">leftKnobGradientStartPoint</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient start point for not selected range.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">leftKnobGradientStartPoint</span><span class="p">:</span> <span class="kt">CGPoint</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobGradientEndPoint"></a>
+                    <a name="//apple_ref/swift/Property/leftKnobGradientEndPoint" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobGradientEndPoint">leftKnobGradientEndPoint</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient end point for not selected range.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">leftKnobGradientEndPoint</span><span class="p">:</span> <span class="kt">CGPoint</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobBorderWidth"></a>
+                    <a name="//apple_ref/swift/Property/leftKnobBorderWidth" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobBorderWidth">leftKnobBorderWidth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Left knob border width.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">leftKnobBorderWidth</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobBorderColor"></a>
+                    <a name="//apple_ref/swift/Property/leftKnobBorderColor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)leftKnobBorderColor">leftKnobBorderColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Left knob border color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">leftKnobBorderColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobWidth"></a>
+                    <a name="//apple_ref/swift/Property/rightKnobWidth" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobWidth">rightKnobWidth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Right knob width.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rightKnobWidth</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobHeight"></a>
+                    <a name="//apple_ref/swift/Property/rightKnobHeight" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobHeight">rightKnobHeight</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Right knob height.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rightKnobHeight</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobCorners"></a>
+                    <a name="//apple_ref/swift/Property/rightKnobCorners" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobCorners">rightKnobCorners</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Right knob corners.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rightKnobCorners</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobImage"></a>
+                    <a name="//apple_ref/swift/Property/rightKnobImage" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobImage">rightKnobImage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Right knob image.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rightKnobImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobColor"></a>
+                    <a name="//apple_ref/swift/Property/rightKnobColor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobColor">rightKnobColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Right knob color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rightKnobColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightShadowOpacity"></a>
+                    <a name="//apple_ref/swift/Property/rightShadowOpacity" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightShadowOpacity">rightShadowOpacity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Right knob shadow opacity.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rightShadowOpacity</span><span class="p">:</span> <span class="kt">Float</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightShadowColor"></a>
+                    <a name="//apple_ref/swift/Property/rightShadowColor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightShadowColor">rightShadowColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Right knob shadow color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rightShadowColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightShadowOffset"></a>
+                    <a name="//apple_ref/swift/Property/rightShadowOffset" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightShadowOffset">rightShadowOffset</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Right knob shadow offset.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rightShadowOffset</span><span class="p">:</span> <span class="kt">CGSize</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightShadowRadius"></a>
+                    <a name="//apple_ref/swift/Property/rightShadowRadius" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightShadowRadius">rightShadowRadius</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Right knob shadow radius.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rightShadowRadius</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobGradientColor1"></a>
+                    <a name="//apple_ref/swift/Property/rightKnobGradientColor1" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobGradientColor1">rightKnobGradientColor1</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient color 1 for range not selected.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rightKnobGradientColor1</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobGradientColor2"></a>
+                    <a name="//apple_ref/swift/Property/rightKnobGradientColor2" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobGradientColor2">rightKnobGradientColor2</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient color 2 for range not selected.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rightKnobGradientColor2</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobGradientStartPoint"></a>
+                    <a name="//apple_ref/swift/Property/rightKnobGradientStartPoint" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobGradientStartPoint">rightKnobGradientStartPoint</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient start point for not selected range.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rightKnobGradientStartPoint</span><span class="p">:</span> <span class="kt">CGPoint</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobGradientEndPoint"></a>
+                    <a name="//apple_ref/swift/Property/rightKnobGradientEndPoint" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobGradientEndPoint">rightKnobGradientEndPoint</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gradient end point for not selected range.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rightKnobGradientEndPoint</span><span class="p">:</span> <span class="kt">CGPoint</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobBorderWidth"></a>
+                    <a name="//apple_ref/swift/Property/rightKnobBorderWidth" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobBorderWidth">rightKnobBorderWidth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Right knob border width.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rightKnobBorderWidth</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobBorderColor"></a>
+                    <a name="//apple_ref/swift/Property/rightKnobBorderColor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)rightKnobBorderColor">rightKnobBorderColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Right knob border color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">rightKnobBorderColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)knobsLabelFontSize"></a>
+                    <a name="//apple_ref/swift/Property/knobsLabelFontSize" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)knobsLabelFontSize">knobsLabelFontSize</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Knobs labels font size.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">knobsLabelFontSize</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)knobsLabelFontColor"></a>
+                    <a name="//apple_ref/swift/Property/knobsLabelFontColor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)knobsLabelFontColor">knobsLabelFontColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Knobs label font color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">knobsLabelFontColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)knobsLabelNumberOfDecimal"></a>
+                    <a name="//apple_ref/swift/Property/knobsLabelNumberOfDecimal" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)knobsLabelNumberOfDecimal">knobsLabelNumberOfDecimal</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Knobs labels number of decimal.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">knobsLabelNumberOfDecimal</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barHeight"></a>
+                    <a name="//apple_ref/swift/Property/barHeight" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barHeight">barHeight</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bar height.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">barHeight</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barLeading"></a>
+                    <a name="//apple_ref/swift/Property/barLeading" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barLeading">barLeading</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bar leading offset.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">barLeading</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barTrailing"></a>
+                    <a name="//apple_ref/swift/Property/barTrailing" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barTrailing">barTrailing</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bar trailing offset.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">barTrailing</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barCorners"></a>
+                    <a name="//apple_ref/swift/Property/barCorners" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barCorners">barCorners</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bar corners.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">barCorners</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barShadowOpacity"></a>
+                    <a name="//apple_ref/swift/Property/barShadowOpacity" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barShadowOpacity">barShadowOpacity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bar shadow opacity.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">barShadowOpacity</span><span class="p">:</span> <span class="kt">Float</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barShadowColor"></a>
+                    <a name="//apple_ref/swift/Property/barShadowColor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barShadowColor">barShadowColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bar shadow color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">barShadowColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barShadowOffset"></a>
+                    <a name="//apple_ref/swift/Property/barShadowOffset" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barShadowOffset">barShadowOffset</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bar shadow offset.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">barShadowOffset</span><span class="p">:</span> <span class="kt">CGSize</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barShadowRadius"></a>
+                    <a name="//apple_ref/swift/Property/barShadowRadius" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barShadowRadius">barShadowRadius</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bar shadow radius.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">barShadowRadius</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barBorderWidth"></a>
+                    <a name="//apple_ref/swift/Property/barBorderWidth" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barBorderWidth">barBorderWidth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bar border color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">barBorderWidth</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barBorderColor"></a>
+                    <a name="//apple_ref/swift/Property/barBorderColor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(py)barBorderColor">barBorderColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Bar border color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">barBorderColor</span><span class="p">:</span> <span class="kt">UIColor</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RangeUISliderAAC8delegateAA0aB8Delegate_pSgvp"></a>
+                    <a name="//apple_ref/swift/Property/delegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RangeUISliderAAC8delegateAA0aB8Delegate_pSgvp">delegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Slider delegate.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RangeUISliderDelegate.html">RangeUISliderDelegate</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RangeUISliderAAC10componentsAA0aB10ComponentsCvp"></a>
+                    <a name="//apple_ref/swift/Property/components" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RangeUISliderAAC10componentsAA0aB10ComponentsCvp">components</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The UI components of RangeUISlider: knobs, bar, and prosgress views.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">components</span><span class="p">:</span> <span class="kt"><a href="../Classes/RangeUISliderComponents.html">RangeUISliderComponents</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/init"></a>
+                <a name="//apple_ref/swift/Section/init" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/init"></a>
+                  <h3 class="section-name"><span>init</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(im)initWithCoder:"></a>
+                    <a name="//apple_ref/swift/Method/init(coder:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(im)initWithCoder:">init(coder:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Standard init using coder.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">required</span> <span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="n">coder</span> <span class="nv">aDecoder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>aDecoder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the decoder used to init the sliders.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(im)initWithFrame:"></a>
+                    <a name="//apple_ref/swift/Method/init(frame:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(im)initWithFrame:">init(frame:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Standard init using a CGRect.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">frame</span><span class="p">:</span> <span class="kt">CGRect</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>frame</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the frame used to init the slider.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/views%20lifecycle"></a>
+                <a name="//apple_ref/swift/Section/views lifecycle" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/views%20lifecycle"></a>
+                  <h3 class="section-name"><span>views lifecycle</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(im)prepareForInterfaceBuilder"></a>
+                    <a name="//apple_ref/swift/Method/prepareForInterfaceBuilder()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(im)prepareForInterfaceBuilder">prepareForInterfaceBuilder()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Prepare RangeUISlider to be drawn in Interface Builder.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">prepareForInterfaceBuilder</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@RangeUISlider@objc(cs)RangeUISlider(im)layoutSubviews"></a>
+                    <a name="//apple_ref/swift/Method/layoutSubviews()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RangeUISlider@objc(cs)RangeUISlider(im)layoutSubviews">layoutSubviews()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Custom layout subviews to set the default values for the know of RangeUISlider</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">layoutSubviews</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/programmatic%20api"></a>
+                <a name="//apple_ref/swift/Section/programmatic api" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/programmatic%20api"></a>
+                  <h3 class="section-name"><span>programmatic api</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RangeUISliderAAC14changeLeftKnob5valuey12CoreGraphics7CGFloatV_tF"></a>
+                    <a name="//apple_ref/swift/Method/changeLeftKnob(value:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RangeUISliderAAC14changeLeftKnob5valuey12CoreGraphics7CGFloatV_tF">changeLeftKnob(value:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Change the value of the left knob programmatically.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">changeLeftKnob</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the new value to be assigned to the left knob</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RangeUISliderAAC15changeRightKnob5valuey12CoreGraphics7CGFloatV_tF"></a>
+                    <a name="//apple_ref/swift/Method/changeRightKnob(value:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RangeUISliderAAC15changeRightKnob5valuey12CoreGraphics7CGFloatV_tF">changeRightKnob(value:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Change the value of the right knob programmatically.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">changeRightKnob</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the new value to be assigned to the right knob</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>2020 <a class="link" href="https://www.fabrizioduroni.it" target="_blank" rel="external noopener">Fabrizio Duroni</a></p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B1518EB2AC967B2001C0A2A /* RangeUISlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B1518E42AC967AA001C0A2A /* RangeUISlider.framework */; };
-		3B1518EC2AC967B2001C0A2A /* RangeUISlider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B1518E42AC967AA001C0A2A /* RangeUISlider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3B1A654C2ACAB15300FE2B17 /* MediaPipeTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1A654B2ACAB15300FE2B17 /* MediaPipeTasks.swift */; };
 		3B2B079E2ABDE08C00E57528 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B079D2ABDE08C00E57528 /* AppDelegate.swift */; };
 		3B2B07A02ABDE08C00E57528 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B079F2ABDE08C00E57528 /* SceneDelegate.swift */; };
 		3B2B07A22ABDE08C00E57528 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B07A12ABDE08C00E57528 /* FilterViewController.swift */; };
@@ -25,50 +24,24 @@
 		3B8F93612AC077AA0076CC25 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F93602AC077AA0076CC25 /* CoreDataManager.swift */; };
 		3B8F93632AC08AA40076CC25 /* MediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F93622AC08AA40076CC25 /* MediaModel.swift */; };
 		3B8F93652AC096B00076CC25 /* UIImageTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F93642AC096B00076CC25 /* UIImageTransformer.swift */; };
+		3B9A11B12ACB15F0007CDA19 /* RangeUISlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9A11B02ACB15F0007CDA19 /* RangeUISlider.framework */; };
+		3B9A11B22ACB15F0007CDA19 /* RangeUISlider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9A11B02ACB15F0007CDA19 /* RangeUISlider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3BB827272AC2D32000BE7AC0 /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */; };
 		3BB8272B2AC2E80000BE7AC0 /* Trash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB8272A2AC2E80000BE7AC0 /* Trash.swift */; };
 		3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */; };
+		3BCD89E12ACAB6260014CECC /* hand_landmarker.task in Resources */ = {isa = PBXBuildFile; fileRef = 3BCD89DC2ACAB6260014CECC /* hand_landmarker.task */; };
+		3BCD89E32ACAC5820014CECC /* HandTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD89E22ACAC5820014CECC /* HandTrackingViewController.swift */; };
+		4BB6A1C81BA4DC71D8D48002 /* Pods_Pose_Estimation_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		3B1518E32AC967AA001C0A2A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3B1518DC2AC967AA001C0A2A /* RangeUISlider.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45E215241E8E812E00F0B8B9;
-			remoteInfo = RangeUISlider;
-		};
-		3B1518E52AC967AA001C0A2A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3B1518DC2AC967AA001C0A2A /* RangeUISlider.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 459CBEF4259B79D000FCA5AB;
-			remoteInfo = RangeUISliderTests;
-		};
-		3B1518E72AC967AA001C0A2A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3B1518DC2AC967AA001C0A2A /* RangeUISlider.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45F064832599E3CC007B25A7;
-			remoteInfo = RangeUISliderUITests;
-		};
-		3B1518E92AC967AA001C0A2A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3B1518DC2AC967AA001C0A2A /* RangeUISlider.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45F064952599E511007B25A7;
-			remoteInfo = RangeUISliderDemo;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
-		3B15188E2AC9670C001C0A2A /* Embed Frameworks */ = {
+		3B9A11AF2ACB159B007CDA19 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3B1518EC2AC967B2001C0A2A /* RangeUISlider.framework in Embed Frameworks */,
+				3B9A11B22ACB15F0007CDA19 /* RangeUISlider.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,7 +49,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3B1518DC2AC967AA001C0A2A /* RangeUISlider.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RangeUISlider.xcodeproj; path = "../../../../../Downloads/RangeUISlider-master/RangeUISlider.xcodeproj"; sourceTree = "<group>"; };
+		3ADE4A892AF646F03D9892D9 /* Pods-Pose Estimation App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pose Estimation App.release.xcconfig"; path = "Target Support Files/Pods-Pose Estimation App/Pods-Pose Estimation App.release.xcconfig"; sourceTree = "<group>"; };
+		3B1A654B2ACAB15300FE2B17 /* MediaPipeTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPipeTasks.swift; sourceTree = "<group>"; };
 		3B2B079A2ABDE08C00E57528 /* Pose Estimation App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pose Estimation App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2B079D2ABDE08C00E57528 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B2B079F2ABDE08C00E57528 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,9 +69,14 @@
 		3B8F93602AC077AA0076CC25 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		3B8F93622AC08AA40076CC25 /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
 		3B8F93642AC096B00076CC25 /* UIImageTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageTransformer.swift; sourceTree = "<group>"; };
+		3B9A11B02ACB15F0007CDA19 /* RangeUISlider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RangeUISlider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
 		3BB8272A2AC2E80000BE7AC0 /* Trash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trash.swift; sourceTree = "<group>"; };
 		3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashModel.swift; sourceTree = "<group>"; };
+		3BCD89DC2ACAB6260014CECC /* hand_landmarker.task */ = {isa = PBXFileReference; lastKnownFileType = file; path = hand_landmarker.task; sourceTree = "<group>"; };
+		3BCD89E22ACAC5820014CECC /* HandTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandTrackingViewController.swift; sourceTree = "<group>"; };
+		84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pose_Estimation_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D02EC64B86A1C6034C61CE96 /* Pods-Pose Estimation App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pose Estimation App.debug.xcconfig"; path = "Target Support Files/Pods-Pose Estimation App/Pods-Pose Estimation App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +84,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B1518EB2AC967B2001C0A2A /* RangeUISlider.framework in Frameworks */,
+				4BB6A1C81BA4DC71D8D48002 /* Pods_Pose_Estimation_App.framework in Frameworks */,
+				3B9A11B12ACB15F0007CDA19 /* RangeUISlider.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,19 +95,18 @@
 		3B15188B2AC9670C001C0A2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3B9A11B02ACB15F0007CDA19 /* RangeUISlider.framework */,
+				84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3B1518DD2AC967AA001C0A2A /* Products */ = {
+		3B1A654A2ACAB13700FE2B17 /* MediaPipe */ = {
 			isa = PBXGroup;
 			children = (
-				3B1518E42AC967AA001C0A2A /* RangeUISlider.framework */,
-				3B1518E62AC967AA001C0A2A /* RangeUISliderTests.xctest */,
-				3B1518E82AC967AA001C0A2A /* RangeUISliderUITests.xctest */,
-				3B1518EA2AC967AA001C0A2A /* RangeUISliderDemo.app */,
+				3B1A654B2ACAB15300FE2B17 /* MediaPipeTasks.swift */,
 			);
-			name = Products;
+			path = MediaPipe;
 			sourceTree = "<group>";
 		};
 		3B2B07912ABDE08C00E57528 = {
@@ -136,6 +115,7 @@
 				3B2B079C2ABDE08C00E57528 /* Pose Estimation App */,
 				3B2B079B2ABDE08C00E57528 /* Products */,
 				3B15188B2AC9670C001C0A2A /* Frameworks */,
+				B99F1A8A4043BC1436264D6B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -150,14 +130,13 @@
 		3B2B079C2ABDE08C00E57528 /* Pose Estimation App */ = {
 			isa = PBXGroup;
 			children = (
-				3B2B07B62ABEF68900E57528 /* Managers */,
+				3BCD89DC2ACAB6260014CECC /* hand_landmarker.task */,
+				3B1A654A2ACAB13700FE2B17 /* MediaPipe */,
 				3B2B07B52ABEF67F00E57528 /* DataModel */,
-				3B2B07B42ABEF66D00E57528 /* ViewModels */,
 				3B2B07B32ABEF65600E57528 /* Controllers */,
 				3B2B07B22ABEF64B00E57528 /* Views */,
 				3B2B07B12ABEF63400E57528 /* Resources */,
 				3B2B07AB2ABDE08D00E57528 /* Info.plist */,
-				3B1518DC2AC967AA001C0A2A /* RangeUISlider.xcodeproj */,
 			);
 			path = "Pose Estimation App";
 			sourceTree = "<group>";
@@ -191,15 +170,9 @@
 				3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */,
 				3B3B6C052AC1B0700073055F /* VideoViewController.swift */,
 				3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */,
+				3BCD89E22ACAC5820014CECC /* HandTrackingViewController.swift */,
 			);
 			name = Controllers;
-			sourceTree = "<group>";
-		};
-		3B2B07B42ABEF66D00E57528 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		3B2B07B52ABEF67F00E57528 /* DataModel */ = {
@@ -216,11 +189,13 @@
 			path = DataModel;
 			sourceTree = "<group>";
 		};
-		3B2B07B62ABEF68900E57528 /* Managers */ = {
+		B99F1A8A4043BC1436264D6B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				D02EC64B86A1C6034C61CE96 /* Pods-Pose Estimation App.debug.xcconfig */,
+				3ADE4A892AF646F03D9892D9 /* Pods-Pose Estimation App.release.xcconfig */,
 			);
-			path = Managers;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,10 +205,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3B2B07AE2ABDE08D00E57528 /* Build configuration list for PBXNativeTarget "Pose Estimation App" */;
 			buildPhases = (
+				F53B52DDD5617688D87FD237 /* [CP] Check Pods Manifest.lock */,
 				3B2B07962ABDE08C00E57528 /* Sources */,
 				3B2B07972ABDE08C00E57528 /* Frameworks */,
 				3B2B07982ABDE08C00E57528 /* Resources */,
-				3B15188E2AC9670C001C0A2A /* Embed Frameworks */,
+				3B9A11AF2ACB159B007CDA19 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -270,12 +246,6 @@
 			mainGroup = 3B2B07912ABDE08C00E57528;
 			productRefGroup = 3B2B079B2ABDE08C00E57528 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 3B1518DD2AC967AA001C0A2A /* Products */;
-					ProjectRef = 3B1518DC2AC967AA001C0A2A /* RangeUISlider.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				3B2B07992ABDE08C00E57528 /* Pose Estimation App */,
@@ -283,48 +253,43 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		3B1518E42AC967AA001C0A2A /* RangeUISlider.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RangeUISlider.framework;
-			remoteRef = 3B1518E32AC967AA001C0A2A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3B1518E62AC967AA001C0A2A /* RangeUISliderTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = RangeUISliderTests.xctest;
-			remoteRef = 3B1518E52AC967AA001C0A2A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3B1518E82AC967AA001C0A2A /* RangeUISliderUITests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = RangeUISliderUITests.xctest;
-			remoteRef = 3B1518E72AC967AA001C0A2A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3B1518EA2AC967AA001C0A2A /* RangeUISliderDemo.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = RangeUISliderDemo.app;
-			remoteRef = 3B1518E92AC967AA001C0A2A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
 		3B2B07982ABDE08C00E57528 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BCD89E12ACAB6260014CECC /* hand_landmarker.task in Resources */,
 				3B2B07AA2ABDE08D00E57528 /* LaunchScreen.storyboard in Resources */,
 				3B2B07A72ABDE08D00E57528 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F53B52DDD5617688D87FD237 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pose Estimation App-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3B2B07962ABDE08C00E57528 /* Sources */ = {
@@ -336,10 +301,12 @@
 				3B8F935D2AC04B1F0076CC25 /* DataModel.xcdatamodeld in Sources */,
 				3B2B07B82ABEF94100E57528 /* TabBarViewController.swift in Sources */,
 				3B2B07BC2ABEFA4900E57528 /* MiscViewController.swift in Sources */,
+				3B1A654C2ACAB15300FE2B17 /* MediaPipeTasks.swift in Sources */,
 				3B2B07C02ABF6CB100E57528 /* ImportedViewController.swift in Sources */,
 				3BB827272AC2D32000BE7AC0 /* TrashViewController.swift in Sources */,
 				3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */,
 				3B8F935F2AC076790076CC25 /* Media.swift in Sources */,
+				3BCD89E32ACAC5820014CECC /* HandTrackingViewController.swift in Sources */,
 				3BB8272B2AC2E80000BE7AC0 /* Trash.swift in Sources */,
 				3B2B07A22ABDE08C00E57528 /* FilterViewController.swift in Sources */,
 				3B3B6C062AC1B0700073055F /* VideoViewController.swift in Sources */,
@@ -486,6 +453,7 @@
 		};
 		3B2B07AF2ABDE08D00E57528 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D02EC64B86A1C6034C61CE96 /* Pods-Pose Estimation App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -520,6 +488,7 @@
 		};
 		3B2B07B02ABDE08D00E57528 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3ADE4A892AF646F03D9892D9 /* Pods-Pose Estimation App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

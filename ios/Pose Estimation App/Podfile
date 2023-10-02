@@ -1,0 +1,4 @@
+target 'Pose Estimation App' do
+  use_frameworks!
+  pod 'MediaPipeTasksVision'
+end

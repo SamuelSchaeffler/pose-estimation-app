@@ -109,6 +109,7 @@ class ImportedViewController: UIViewController {
         
         photoVC.viewDidLoad()
         videoVC.viewDidLoad()
+
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -260,4 +261,3 @@ class ImageCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
