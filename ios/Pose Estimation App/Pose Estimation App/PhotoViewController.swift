@@ -83,7 +83,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     lazy var editButton: UIButton = {
         let button = UIButton()
         button.adjustsImageWhenHighlighted = false
-        button.setTitle("Hand Tracking starten", for: .normal)
+        button.setTitle("Handerkennung", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
@@ -182,9 +182,10 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @objc func startHandTracking() {
-        let object = UIImage(contentsOfFile: photoURL!.path)
+        let object = photoURL
         NotificationCenter.default.post(name: Notification.Name("UpdateTrackingPhoto"), object: object)
         DispatchQueue.main.async {
+            self.handTrackingVC.modalPresentationStyle = .fullScreen
             self.present(self.handTrackingVC, animated: true, completion: nil)
         }
     }

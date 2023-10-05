@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 import UIKit
+import MediaPipeTasksVision
 
 @objc(Trash)
 class Trash: NSManagedObject {
@@ -31,6 +32,7 @@ class Trash: NSManagedObject {
     @NSManaged public var bildwiederholrate: String?
     
     @NSManaged public var isPhoto: String?
+    
 }
 
 extension Trash : Identifiable {

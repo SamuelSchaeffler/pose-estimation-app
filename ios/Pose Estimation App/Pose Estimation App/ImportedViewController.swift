@@ -94,6 +94,7 @@ class ImportedViewController: UIViewController {
     var objectIDs = [NSManagedObjectID]()
     var photoVC = PhotoViewController()
     var videoVC = VideoViewController()
+    var handTrackingVC = HandTrackingViewController()
 
     
     override func viewDidLoad() {
@@ -109,7 +110,7 @@ class ImportedViewController: UIViewController {
         
         photoVC.viewDidLoad()
         videoVC.viewDidLoad()
-
+        handTrackingVC.viewDidLoad()
         
         collectionView.dataSource = self
         collectionView.delegate = self

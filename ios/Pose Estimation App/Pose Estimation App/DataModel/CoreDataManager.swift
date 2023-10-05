@@ -16,7 +16,7 @@ class CoreDataManager {
     
     private init() {
         
-        ValueTransformer.setValueTransformer(UIImageTransformer(), forName: NSValueTransformerName("UIImageTransformer"))
+        ValueTransformer.setValueTransformer(TrackingResultTransformer(), forName: NSValueTransformerName("TrackingResultTransformer"))
         
         persistentContainer = NSPersistentContainer(name: "DataModel")
         persistentContainer.loadPersistentStores { description, error in

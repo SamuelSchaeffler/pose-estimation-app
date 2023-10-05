@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 import UIKit
+import MediaPipeTasksVision
 
 @objc(Media)
 class Media: NSManagedObject {
@@ -31,6 +32,8 @@ class Media: NSManagedObject {
     @NSManaged public var bildwiederholrate: String?
     
     @NSManaged public var isPhoto: String?
+    
+
 
 }
 

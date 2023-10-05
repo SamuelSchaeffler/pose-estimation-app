@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import CoreData
+import MediaPipeTasksVision
 
 class MediaModel: ObservableObject {
     
@@ -260,4 +261,8 @@ class MediaModel: ObservableObject {
         
         try! self.context.save()
     }
+    
+    
+
+    
 }
