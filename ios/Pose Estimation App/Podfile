@@ -1,4 +1,5 @@
 target 'Pose Estimation App' do
   use_frameworks!
   pod 'MediaPipeTasksVision'
+  pod 'RangeUISlider'
 end
