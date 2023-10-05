@@ -28,6 +28,7 @@
 		3BB827272AC2D32000BE7AC0 /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */; };
 		3BB8272B2AC2E80000BE7AC0 /* Trash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB8272A2AC2E80000BE7AC0 /* Trash.swift */; };
 		3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */; };
+		3BB990442ACEB6E600F324C2 /* FullscreenPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB990432ACEB6E600F324C2 /* FullscreenPhotoViewController.swift */; };
 		3BCD89E12ACAB6260014CECC /* hand_landmarker.task in Resources */ = {isa = PBXBuildFile; fileRef = 3BCD89DC2ACAB6260014CECC /* hand_landmarker.task */; };
 		3BCD89E32ACAC5820014CECC /* HandTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD89E22ACAC5820014CECC /* HandTrackingViewController.swift */; };
 		4BB6A1C81BA4DC71D8D48002 /* Pods_Pose_Estimation_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */; };
@@ -71,6 +72,7 @@
 		3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
 		3BB8272A2AC2E80000BE7AC0 /* Trash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trash.swift; sourceTree = "<group>"; };
 		3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashModel.swift; sourceTree = "<group>"; };
+		3BB990432ACEB6E600F324C2 /* FullscreenPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenPhotoViewController.swift; sourceTree = "<group>"; };
 		3BCD89DC2ACAB6260014CECC /* hand_landmarker.task */ = {isa = PBXFileReference; lastKnownFileType = file; path = hand_landmarker.task; sourceTree = "<group>"; };
 		3BCD89E22ACAC5820014CECC /* HandTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandTrackingViewController.swift; sourceTree = "<group>"; };
 		84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pose_Estimation_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +162,7 @@
 				3B3B6C052AC1B0700073055F /* VideoViewController.swift */,
 				3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */,
 				3BCD89E22ACAC5820014CECC /* HandTrackingViewController.swift */,
+				3BB990432ACEB6E600F324C2 /* FullscreenPhotoViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				3BB827272AC2D32000BE7AC0 /* TrashViewController.swift in Sources */,
 				3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */,
 				3B8F935F2AC076790076CC25 /* Media.swift in Sources */,
+				3BB990442ACEB6E600F324C2 /* FullscreenPhotoViewController.swift in Sources */,
 				3BCD89E32ACAC5820014CECC /* HandTrackingViewController.swift in Sources */,
 				3BB8272B2AC2E80000BE7AC0 /* Trash.swift in Sources */,
 				3B2B07A22ABDE08C00E57528 /* FilterViewController.swift in Sources */,

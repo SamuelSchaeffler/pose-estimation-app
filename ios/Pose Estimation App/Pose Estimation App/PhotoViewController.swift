@@ -17,6 +17,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var mediaModel = MediaModel()
     var trashModel = TrashModel()
     
+    var fullscreenPhotoVC = FullscreenPhotoViewController()
     var handTrackingVC = HandTrackingViewController()
     
     var MetadataArray1 = ["Aufnahmedatum:","Zeit:", "Auflösung:", "Kamerahersteller:", "BPM:", "Rudiment:","Interpret:","Hand:","Grip:","Grip Matched:"]
@@ -33,23 +34,6 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapGesture)
         return imageView
-    }()
-        
-    lazy var fullscreenImageView: UIImageView = {
-        let fullscreenImageView = UIImageView()
-        fullscreenImageView.image = imageView.image
-        fullscreenImageView.frame = view.bounds
-        if traitCollection.userInterfaceStyle == .dark {
-            fullscreenImageView.backgroundColor = .black
-        } else {
-            fullscreenImageView.backgroundColor = .white
-        }
-        fullscreenImageView.contentMode = .scaleAspectFit
-        fullscreenImageView.clipsToBounds = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closeFullscreenImage))
-        fullscreenImageView.isUserInteractionEnabled = true
-        fullscreenImageView.addGestureRecognizer(tapGesture)
-        return fullscreenImageView
     }()
     
     lazy var deleteButton: UIButton = {
@@ -121,6 +105,8 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fullscreenPhotoVC.viewDidLoad()
         handTrackingVC.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI(_:)), name: Notification.Name("UpdatePhoto"), object: nil)
@@ -144,6 +130,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @objc func updateUI(_ notification: Notification) {
         if let image = notification.object as? UIImage {
             self.imageView.image = image
+            self.image = image
             self.tableView.reloadData()
         }
     }
@@ -167,12 +154,13 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     @objc func showFullscreenImage() {
-        view.addSubview(fullscreenImageView)
-        fullscreenImageView.image = imageView.image
-    }
-    
-    @objc private func closeFullscreenImage() {
-        fullscreenImageView.removeFromSuperview()
+        NotificationCenter.default.post(name: Notification.Name("UpdateFullscreenPhoto"), object: image)
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.orientationLock = .all
+        
+        fullscreenPhotoVC.modalPresentationStyle = .fullScreen
+        present(fullscreenPhotoVC, animated: true)
     }
     
     @objc func deleteItem() {
