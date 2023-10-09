@@ -205,14 +205,26 @@ class HandTrackingViewController: UIViewController {
             result = try! handLandmarker!.detect(image: mpImage!)
             handLabel2.text = String(describing: result!.handedness.count)
                 
+            let textLinks = NSMutableAttributedString(string: "Links")
+            let textRechts = NSMutableAttributedString(string: "Rechts")
+            textLinks.addAttribute(.foregroundColor, value: UIColor.blue, range: NSMakeRange(0, 5))
+            textRechts.addAttribute(.foregroundColor, value: UIColor.red, range: NSMakeRange(0, 6))
+
+
             if result!.handedness.count == 1 {
                 let hand = result!.handedness[0]
-                handLabel4.text = (hand[0].categoryName == "Right") ? "Rechts" : "Links"
+                handLabel4.attributedText = (hand[0].categoryName == "Right") ? textRechts : textLinks
                 drawBoundingBox()
             } else if result!.handedness.count == 2 {
                 let hand1 = result!.handedness[0]
                 let hand2 = result!.handedness[1]
-                handLabel4.text = ((hand1[0].categoryName == "Right") ? "Rechts" : "Links") + " & " + ((hand2[0].categoryName == "Right") ? "Rechts" : "Links")
+                
+                let combinedText = NSMutableAttributedString()
+                combinedText.append((hand1[0].categoryName == "Right") ? textRechts : textLinks)
+                combinedText.append(NSMutableAttributedString(string: " & "))
+                combinedText.append((hand2[0].categoryName == "Right") ? textRechts : textLinks)
+                handLabel4.attributedText = combinedText
+                
                 drawBoundingBox()
             } else {
                 handLabel4.text = ""
