@@ -89,24 +89,58 @@ class ImportedViewController: UIViewController {
         return button
     }()
     
+    lazy var compareButton: UIButton = {
+        let button = UIButton()
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .bold)
+        let image = UIImage(systemName: "square.2.layers.3d.top.filled", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        button.setImage(image, for: .normal)
+        button.adjustsImageWhenHighlighted = false
+        button.backgroundColor = .systemYellow
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(openComparison), for: .touchUpInside)
+        let buttonWidth: CGFloat = 55 //UIScreen.main.bounds.size.width / 2
+        let buttonHeight: CGFloat = 55
+        button.frame = CGRect(x: 93 - buttonWidth , y: UIScreen.main.bounds.size.height - 150, width: buttonWidth, height: buttonHeight)
+        button.layer.cornerRadius = 27.5
+        
+        button.isHidden = true
+        
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchDown)
+        button.addTarget(self, action: #selector(buttonReleased), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonReleased), for: .touchUpOutside)
+        
+        return button
+    }()
+    
     var mediaURL = [URL]()
     var mediaModel = MediaModel()
     var objectIDs = [NSManagedObjectID]()
     var photoVC = PhotoViewController()
     var videoVC = VideoViewController()
     var handTrackingVC = HandTrackingViewController()
-
     
+    
+    var selectionStatus = [Bool]()
+    var selectedCount = 0
+    let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateUIWithSelectedMedia), name: Notification.Name("SelectedPhotosUpdated"), object: nil)
         
         self.mediaURL = mediaModel.getMedia()
+        selectionStatus = [Bool](repeating: false, count: mediaModel.getMedia().count)
         
         print("Importierte Medien: \(self.mediaURL.count)")
         
         view.backgroundColor = .systemBackground
+        
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        collectionView.addGestureRecognizer(longPressGesture)
+        
         
         photoVC.viewDidLoad()
         videoVC.viewDidLoad()
@@ -119,6 +153,8 @@ class ImportedViewController: UIViewController {
         view.addSubview(collectionView)
         view.addSubview(filterButton)
         view.addSubview(galleryButton)
+        view.addSubview(compareButton)
+
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -142,7 +178,6 @@ class ImportedViewController: UIViewController {
         let customPopupVC = FilterViewController()
         customPopupVC.modalPresentationStyle = .overFullScreen
         self.present(customPopupVC, animated: false, completion: nil)
-
     }
     
     @objc func openGallery() {
@@ -150,6 +185,21 @@ class ImportedViewController: UIViewController {
         customPopupVC.modalPresentationStyle = .fullScreen
 
         self.present(customPopupVC, animated: false, completion: nil)
+    }
+    
+    @objc func openComparison() {
+        let VC = PhotoComparisonViewController()
+        let selectedIndices = selectionStatus.enumerated().compactMap { index, isSelected in
+            isSelected ? index : nil
+        }
+
+        for i in 0..<(selectedIndices.count) {
+            VC.images.append(UIImage(contentsOfFile: mediaURL[selectedIndices[i]].path)!)
+        }
+        
+        VC.modalPresentationStyle = .overFullScreen
+        self.present(VC, animated: false, completion: nil)
+        
     }
 
     @objc func buttonPressed(sender: UIButton) {
@@ -163,8 +213,30 @@ class ImportedViewController: UIViewController {
         }
     }
 
+    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+        
+        if gesture.state == .began {
+            feedbackGenerator.impactOccurred()
+        }
+        
+        if gesture.state != .ended {
+            return
+        }
+        let point = gesture.location(in: collectionView)
+        if let indexPath = collectionView.indexPathForItem(at: point) {
+            if selectedCount < 5 || selectionStatus[indexPath.item] {
+                selectionStatus[indexPath.item] = !selectionStatus[indexPath.item]
+                selectedCount += selectionStatus[indexPath.item] ? 1 : -1
+                collectionView.reloadItems(at: [indexPath])
+            }
+        }
+        compareButton.isHidden = selectedCount < 1
+    }
+
     func updateCollectionView(withMediaURL mediaURL: [URL]) {
         self.mediaURL = mediaModel.getMedia()
+        selectionStatus = [Bool](repeating: false, count: mediaURL.count)
+        selectedCount = 0
             self.collectionView.reloadData()
         print("Importierte Medien: \(self.mediaURL.count)")
         }
@@ -198,7 +270,8 @@ extension ImportedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCollectionViewCell
         let mediaURL = mediaURL[indexPath.item]
-            
+        
+        
             if mediaURL.pathExtension.lowercased() == "mp4" || mediaURL.pathExtension.lowercased() == "mov" {
 
                 cell.imageView.image = generateThumbnail(for: mediaURL)
@@ -206,7 +279,8 @@ extension ImportedViewController: UICollectionViewDataSource {
                 
                 cell.imageView.image = UIImage(contentsOfFile: mediaURL.path)
             }
-            return cell
+        cell.selectionStatus = selectionStatus[indexPath.item]
+        return cell
     }
 }
 
@@ -245,7 +319,24 @@ class ImageCollectionViewCell: UICollectionViewCell {
         imageView.layer.cornerRadius = 10
         return imageView
     }()
-
+    
+    var selectionIndicator: UIImageView?
+    var image = UIImage(systemName: "checkmark.circle.fill")?.withRenderingMode(.alwaysOriginal)
+    
+    var selectionStatus: Bool = false {
+        didSet {
+            updateSelectionStatus()
+        }
+    }
+    func updateSelectionStatus() {
+        if selectionIndicator == nil {
+            selectionIndicator = UIImageView(image: image)
+            selectionIndicator!.frame = CGRect(x: self.frame.width - 30, y: 5, width: 26, height: 25)
+            contentView.addSubview(selectionIndicator!)
+        }
+        selectionIndicator!.image = selectionStatus ? image : nil
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(imageView)

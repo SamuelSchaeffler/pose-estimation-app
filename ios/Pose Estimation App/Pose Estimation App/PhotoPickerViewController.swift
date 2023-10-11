@@ -29,7 +29,7 @@ class PhotoPickerViewController: UIViewController, PHPickerViewControllerDelegat
     
     func presentPhotoPicker() {
         var configuration = PHPickerConfiguration(photoLibrary: .shared())
-        configuration.selectionLimit = 3
+        configuration.selectionLimit = 15
         
         let pickerViewController = PHPickerViewController(configuration: configuration)
         pickerViewController.delegate = self

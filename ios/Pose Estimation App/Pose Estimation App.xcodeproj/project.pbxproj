@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B25FCD22AD4175800179213 /* PhotoComparisonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B25FCD12AD4175800179213 /* PhotoComparisonViewController.swift */; };
 		3B2B079E2ABDE08C00E57528 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B079D2ABDE08C00E57528 /* AppDelegate.swift */; };
 		3B2B07A02ABDE08C00E57528 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B079F2ABDE08C00E57528 /* SceneDelegate.swift */; };
 		3B2B07A22ABDE08C00E57528 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B07A12ABDE08C00E57528 /* FilterViewController.swift */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		3ADE4A892AF646F03D9892D9 /* Pods-Pose Estimation App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pose Estimation App.release.xcconfig"; path = "Target Support Files/Pods-Pose Estimation App/Pods-Pose Estimation App.release.xcconfig"; sourceTree = "<group>"; };
+		3B25FCD12AD4175800179213 /* PhotoComparisonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoComparisonViewController.swift; sourceTree = "<group>"; };
 		3B2B079A2ABDE08C00E57528 /* Pose Estimation App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pose Estimation App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2B079D2ABDE08C00E57528 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B2B079F2ABDE08C00E57528 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */,
 				3BCD89E22ACAC5820014CECC /* HandTrackingViewController.swift */,
 				3BB990432ACEB6E600F324C2 /* FullscreenPhotoViewController.swift */,
+				3B25FCD12AD4175800179213 /* PhotoComparisonViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				3B2B07B82ABEF94100E57528 /* TabBarViewController.swift in Sources */,
 				3B2B07BC2ABEFA4900E57528 /* MiscViewController.swift in Sources */,
 				3B2B07C02ABF6CB100E57528 /* ImportedViewController.swift in Sources */,
+				3B25FCD22AD4175800179213 /* PhotoComparisonViewController.swift in Sources */,
 				3BB827272AC2D32000BE7AC0 /* TrashViewController.swift in Sources */,
 				3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */,
 				3B8F935F2AC076790076CC25 /* Media.swift in Sources */,
