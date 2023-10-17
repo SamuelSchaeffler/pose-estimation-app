@@ -64,7 +64,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return button
     }()
     
-    lazy var editButton: UIButton = {
+    lazy var trackingButton: UIButton = {
         let button = UIButton()
         button.adjustsImageWhenHighlighted = false
         button.setTitle("Handerkennung", for: .normal)
@@ -116,7 +116,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         view.backgroundColor = .systemBackground
         view.addSubview(imageView)
         view.addSubview(deleteButton)
-        view.addSubview(editButton)
+        view.addSubview(trackingButton)
         view.addSubview(photoTitle)
         view.addSubview(tableView)
         

@@ -33,23 +33,10 @@ class PhotoComparisonViewController: UIViewController {
     }()
     
     var images: [UIImage] = []
-    var mpImages: [MPImage] = []
     var results: [HandLandmarkerResult] = []
     var colors: [UIColor] = [.red, .blue, .green, .yellow, .purple]
     
-    var handLandmarkerOptions: HandLandmarkerOptions = {
-        let options = HandLandmarkerOptions()
-        options.runningMode = .image
-        options.numHands = 2
-        options.minHandDetectionConfidence = 0.5
-        options.minHandPresenceConfidence = 0.5
-        options.minTrackingConfidence = 0.5
-        if let modelPath = Bundle.main.path(forResource: "hand_landmarker", ofType: "task") {
-            options.baseOptions.modelAssetPath = modelPath
-        }
-        return options
-    }()
-    var handLandmarker: HandLandmarker?
+    let handLandmarker = MediaPipeHandLandmarker()
     
     let imageView1: UIImageView = {
         var view = UIImageView()
@@ -65,13 +52,6 @@ class PhotoComparisonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
-                
-        do {
-            handLandmarker = try HandLandmarker(options: handLandmarkerOptions)
-            print("Tracker initialisiert!")
-        } catch {
-            print(error)
-        }
 
         let sceneView = SCNView(frame: self.view.bounds)
         sceneView.backgroundColor = UIColor.white
@@ -81,10 +61,9 @@ class PhotoComparisonViewController: UIViewController {
         sceneView.allowsCameraControl = true
             
         for i in 0..<(images.count) {
-            mpImages.append(try! MPImage(uiImage: images[i]))
-            results.append(try! handLandmarker!.detect(image: mpImages[i]))
+            results.append(handLandmarker.detectHands(image: images[i])!)
             if results[i].landmarks.isEmpty == false {
-                addPoints(coordinates: getWorldLandmarks(result: results[i], image: images[i]), toScene: scene, color: colors[i])
+                addPoints(coordinates: handLandmarker.getWorldLandmarks(result: results[i], image: images[i]), toScene: scene, color: colors[i])
             }
         }
         
@@ -104,50 +83,6 @@ class PhotoComparisonViewController: UIViewController {
     }
     @objc func closeVC() {
         self.dismiss(animated: true)
-    }
-    
-    func getLandmarks(result: HandLandmarkerResult, image: UIImage) -> [SCNVector3] {
-        let imageSize = image.size
-        let coordinates = result.landmarks[0]
-        var points: [SCNVector3] = []
-        if imageSize.height > imageSize.width {
-            for i in 0..<21 {
-                let xPoint = imageSize.width - (CGFloat(coordinates[i].y) * imageSize.width)
-                let yPoint = CGFloat(coordinates[i].x) * imageSize.height
-                let zPoint = CGFloat(coordinates[i].z) * imageSize.width
-                points.append(SCNVector3(x: Float(xPoint), y: Float(yPoint), z: Float(zPoint)))
-            }
-        } else {
-            for i in 0..<21 {
-                let xPoint = CGFloat(coordinates[i].x) * imageSize.width
-                let yPoint = CGFloat(coordinates[i].y) * imageSize.height
-                let zPoint = CGFloat(coordinates[i].z) * imageSize.width
-                points.append(SCNVector3(x: Float(xPoint), y: Float(yPoint), z: Float(zPoint)))
-            }
-        }
-        return points
-    }
-    
-    func getWorldLandmarks(result: HandLandmarkerResult, image: UIImage) -> [SCNVector3] {
-        let imageSize = image.size
-        let coordinates = result.worldLandmarks[0]
-        var points: [SCNVector3] = []
-        if imageSize.height > imageSize.width {
-            for i in 0..<21 {
-                let xPoint = 7000 - CGFloat(coordinates[i].y) * 7000
-                let yPoint = CGFloat(coordinates[i].x) * 7000
-                let zPoint = CGFloat(coordinates[i].z) * 7000
-                points.append(SCNVector3(x: Float(xPoint), y: Float(yPoint), z: Float(zPoint)))
-            }
-        } else {
-            for i in 0..<21 {
-                let xPoint = CGFloat(coordinates[i].x) * 7000
-                let yPoint = CGFloat(coordinates[i].y) * 7000
-                let zPoint = CGFloat(coordinates[i].z) * 7000
-                points.append(SCNVector3(x: Float(xPoint), y: Float(yPoint), z: Float(zPoint)))
-            }
-        }
-        return points
     }
     
     func addPoints(coordinates: [SCNVector3], toScene scene: SCNScene, color: UIColor) {
