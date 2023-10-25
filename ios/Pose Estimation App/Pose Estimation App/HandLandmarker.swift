@@ -40,6 +40,7 @@ class MediaPipeHandLandmarker {
         let mpImage = try! MPImage(uiImage: image)
         do {
             result = try handLandmarker?.detect(image: mpImage)
+            print()
             return result
         } catch {
             print(error)

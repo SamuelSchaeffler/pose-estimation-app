@@ -27,6 +27,7 @@
 		3B8F93652AC096B00076CC25 /* TrackingResultTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F93642AC096B00076CC25 /* TrackingResultTransformer.swift */; };
 		3B9A11B12ACB15F0007CDA19 /* RangeUISlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9A11B02ACB15F0007CDA19 /* RangeUISlider.framework */; };
 		3B9A11B22ACB15F0007CDA19 /* RangeUISlider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9A11B02ACB15F0007CDA19 /* RangeUISlider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3BB7F3C82AE67932003279D8 /* PoseLandmarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB7F3C72AE67932003279D8 /* PoseLandmarker.swift */; };
 		3BB827272AC2D32000BE7AC0 /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */; };
 		3BB8272B2AC2E80000BE7AC0 /* Trash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB8272A2AC2E80000BE7AC0 /* Trash.swift */; };
 		3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */; };
@@ -67,12 +68,14 @@
 		3B2B07BF2ABF6CB100E57528 /* ImportedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedViewController.swift; sourceTree = "<group>"; };
 		3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		3B3B6C052AC1B0700073055F /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		3B82B80B2AE686AE004730D4 /* pose_landmarker_full.task */ = {isa = PBXFileReference; lastKnownFileType = file; path = pose_landmarker_full.task; sourceTree = "<group>"; };
 		3B8F935C2AC04B1F0076CC25 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		3B8F935E2AC076790076CC25 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		3B8F93602AC077AA0076CC25 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		3B8F93622AC08AA40076CC25 /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
 		3B8F93642AC096B00076CC25 /* TrackingResultTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingResultTransformer.swift; sourceTree = "<group>"; };
 		3B9A11B02ACB15F0007CDA19 /* RangeUISlider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RangeUISlider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BB7F3C72AE67932003279D8 /* PoseLandmarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseLandmarker.swift; sourceTree = "<group>"; };
 		3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
 		3BB8272A2AC2E80000BE7AC0 /* Trash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trash.swift; sourceTree = "<group>"; };
 		3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashModel.swift; sourceTree = "<group>"; };
@@ -126,6 +129,7 @@
 		3B2B079C2ABDE08C00E57528 /* Pose Estimation App */ = {
 			isa = PBXGroup;
 			children = (
+				3B82B80B2AE686AE004730D4 /* pose_landmarker_full.task */,
 				3BCD89DC2ACAB6260014CECC /* hand_landmarker.task */,
 				3B2B07B52ABEF67F00E57528 /* DataModel */,
 				3B2B07B32ABEF65600E57528 /* Controllers */,
@@ -133,6 +137,7 @@
 				3B2B07B12ABEF63400E57528 /* Resources */,
 				3B2B07AB2ABDE08D00E57528 /* Info.plist */,
 				3B068EA12ADD945C00B3B900 /* HandLandmarker.swift */,
+				3BB7F3C72AE67932003279D8 /* PoseLandmarker.swift */,
 			);
 			path = "Pose Estimation App";
 			sourceTree = "<group>";
@@ -299,6 +304,7 @@
 				3B8F935D2AC04B1F0076CC25 /* DataModel.xcdatamodeld in Sources */,
 				3B068EA22ADD945C00B3B900 /* HandLandmarker.swift in Sources */,
 				3B2B07B82ABEF94100E57528 /* TabBarViewController.swift in Sources */,
+				3BB7F3C82AE67932003279D8 /* PoseLandmarker.swift in Sources */,
 				3B2B07BC2ABEFA4900E57528 /* MiscViewController.swift in Sources */,
 				3B2B07C02ABF6CB100E57528 /* ImportedViewController.swift in Sources */,
 				3B25FCD22AD4175800179213 /* PhotoComparisonViewController.swift in Sources */,

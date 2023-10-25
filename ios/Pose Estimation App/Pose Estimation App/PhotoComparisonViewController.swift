@@ -58,6 +58,7 @@ class PhotoComparisonViewController: UIViewController {
         sceneView.scene = scene
         sceneView.allowsCameraControl = true
         
+        sceneView.pointOfView?.camera?.automaticallyAdjustsZRange = true
             
         addCoordinateSystem(toScene: scene)
         
@@ -67,6 +68,12 @@ class PhotoComparisonViewController: UIViewController {
                 let coordinates = handLandmarker.getWorldLandmarks(result: results[i], image: images[i])
                 let transformedCoordinates = transform(coordinates: coordinates)
                 addPoints(coordinates: transformedCoordinates, toScene: scene, color: colors[i])
+                //
+                //addPoints(coordinates: coordinates, toScene: scene, color: colors[i+1])
+                //
+                //let transformedNewCoordinates = transformNew(coordinates: coordinates)
+                //addPoints(coordinates: transformedNewCoordinates, toScene: scene, color: .gray)
+                //
             }
         }
         
@@ -184,15 +191,42 @@ class PhotoComparisonViewController: UIViewController {
         let translationMatrix = SCNMatrix4MakeTranslation(-point1.x, -point1.y, -point1.z)
         
         let direction = SCNVector3(x: point2.x - point1.x, y: point2.y - point1.y, z: point2.z - point1.z)
-        let rotationAxis = direction.cross(SCNVector3(x: 1, y: 0, z: 0))
-        let angle = acos(direction.dot(SCNVector3(x: 1, y: 0, z: 0)) / direction.length())
-        let rotationMatrix = SCNMatrix4MakeRotation(angle, rotationAxis.x, rotationAxis.y, rotationAxis.z)
+        let rotationAxis = direction.cross(SCNVector3(x: -1, y: 0, z: 0))
+        let angle = acos(direction.dot(SCNVector3(x: -1, y: 0, z: 0)) / direction.length())
+        print(angle * (180 / .pi))
+        let rotationMatrix1 = SCNMatrix4MakeRotation(angle, rotationAxis.x, rotationAxis.y, rotationAxis.z)
+        print(rotationMatrix1)
+        let rotationMatrix2 = SCNMatrix4MakeRotation( .pi, 1, 0, 0)
         
         var transformedCoordinates = [SCNVector3]()
         for coordinate in coordinates {
             var vector = coordinate
             vector = vector.applying(translationMatrix)
-            vector = vector.applying(rotationMatrix)
+            vector = vector.applying(rotationMatrix1)
+            if (angle * (180 / .pi)) >= 180 {
+                vector = vector.applying(rotationMatrix2)
+            }
+            transformedCoordinates.append(vector)
+        }
+        return transformedCoordinates
+    }
+    
+    func transformNew(coordinates: [SCNVector3]) -> [SCNVector3] {
+        
+        let shiftedCoordinates = shiftCoordinates(coordinates: coordinates)
+        
+        let point1 = shiftedCoordinates[0]
+        let point2 = shiftedCoordinates[9]
+                
+        let direction = SCNVector3(x: point2.x - point1.x, y: point2.y - point1.y, z: point2.z - point1.z)
+        let rotationAxis = direction.cross(SCNVector3(x: 1, y: 0, z: 0))
+        let angle = acos(direction.dot(SCNVector3(x: 1, y: 0, z: 0)) / direction.length())
+        let rotationMatrix = SCNMatrix4MakeRotation(angle, rotationAxis.x, rotationAxis.y, rotationAxis.z)
+        
+        var transformedCoordinates = [SCNVector3]()
+        for coordinate in shiftedCoordinates {
+            var vector = coordinate
+            //vector = vector.applying(rotationMatrix)
             transformedCoordinates.append(vector)
         }
         return transformedCoordinates

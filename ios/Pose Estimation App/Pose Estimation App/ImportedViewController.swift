@@ -235,7 +235,7 @@ class ImportedViewController: UIViewController {
 
     func updateCollectionView(withMediaURL mediaURL: [URL]) {
         self.mediaURL = mediaModel.getMedia()
-        selectionStatus = [Bool](repeating: false, count: mediaURL.count)
+        selectionStatus = [Bool](repeating: false, count: mediaModel.getMedia().count)
         selectedCount = 0
             self.collectionView.reloadData()
         print("Importierte Medien: \(self.mediaURL.count)")
@@ -271,13 +271,18 @@ extension ImportedViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCollectionViewCell
         let mediaURL = mediaURL[indexPath.item]
         
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .bold)
         
             if mediaURL.pathExtension.lowercased() == "mp4" || mediaURL.pathExtension.lowercased() == "mov" {
 
                 cell.imageView.image = generateThumbnail(for: mediaURL)
+                cell.overlayImageView.image = UIImage(systemName: "video.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
+
             } else {
                 
                 cell.imageView.image = UIImage(contentsOfFile: mediaURL.path)
+                cell.overlayImageView.image = UIImage(systemName: "photo.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
+
             }
         cell.selectionStatus = selectionStatus[indexPath.item]
         return cell
@@ -320,6 +325,13 @@ class ImageCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    let overlayImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .center
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     var selectionIndicator: UIImageView?
     var image = UIImage(systemName: "checkmark.circle.fill")?.withRenderingMode(.alwaysOriginal)
     
@@ -340,12 +352,18 @@ class ImageCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(imageView)
+        contentView.addSubview(overlayImageView)
 
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            overlayImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -37),
+            overlayImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 40),
+            overlayImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            overlayImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor)
         ])
     }
 
