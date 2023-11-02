@@ -43,6 +43,8 @@ class TrashModel: ObservableObject {
         trashObject.dauer = mediaObject.dauer
         trashObject.bildwiederholrate = mediaObject.bildwiederholrate
         trashObject.isPhoto = mediaObject.isPhoto
+        trashObject.videoLandmarks = mediaObject.videoLandmarks
+
         do {
             try managedObjectContext.save()
 
@@ -81,6 +83,7 @@ class TrashModel: ObservableObject {
         mediaObject.dauer = trashObject.dauer
         mediaObject.bildwiederholrate = trashObject.bildwiederholrate
         mediaObject.isPhoto = trashObject.isPhoto
+        mediaObject.videoLandmarks = trashObject.videoLandmarks
 
         
         do {

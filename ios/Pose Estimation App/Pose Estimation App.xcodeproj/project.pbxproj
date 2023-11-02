@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3B068EA22ADD945C00B3B900 /* HandLandmarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B068EA12ADD945C00B3B900 /* HandLandmarker.swift */; };
+		3B1335862AF272A60092ED64 /* LandmarkChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1335852AF272A60092ED64 /* LandmarkChart.swift */; };
 		3B25FCD22AD4175800179213 /* PhotoComparisonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B25FCD12AD4175800179213 /* PhotoComparisonViewController.swift */; };
 		3B2B079E2ABDE08C00E57528 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B079D2ABDE08C00E57528 /* AppDelegate.swift */; };
 		3B2B07A02ABDE08C00E57528 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B079F2ABDE08C00E57528 /* SceneDelegate.swift */; };
@@ -18,8 +19,12 @@
 		3B2B07BC2ABEFA4900E57528 /* MiscViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B07BB2ABEFA4900E57528 /* MiscViewController.swift */; };
 		3B2B07BE2ABF256600E57528 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B07BD2ABF256600E57528 /* PhotoPickerViewController.swift */; };
 		3B2B07C02ABF6CB100E57528 /* ImportedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B07BF2ABF6CB100E57528 /* ImportedViewController.swift */; };
+		3B32E1F62AEFC8BF00344718 /* RangeUISlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B32E1EF2AEFC8B700344718 /* RangeUISlider.framework */; };
+		3B32E1F72AEFC8BF00344718 /* RangeUISlider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B32E1EF2AEFC8B700344718 /* RangeUISlider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3B3B6C042AC1AEB40073055F /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */; };
 		3B3B6C062AC1B0700073055F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3B6C052AC1B0700073055F /* VideoViewController.swift */; };
+		3B64D2F02AEBAABF001A6782 /* VideoAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B64D2EF2AEBAABF001A6782 /* VideoAnalysisViewController.swift */; };
+		3B64D2F22AEBAAFD001A6782 /* LandmarkTimeGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B64D2F12AEBAAFD001A6782 /* LandmarkTimeGraphViewController.swift */; };
 		3B8F935D2AC04B1F0076CC25 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F935B2AC04B1F0076CC25 /* DataModel.xcdatamodeld */; };
 		3B8F935F2AC076790076CC25 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F935E2AC076790076CC25 /* Media.swift */; };
 		3B8F93612AC077AA0076CC25 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F93602AC077AA0076CC25 /* CoreDataManager.swift */; };
@@ -34,8 +39,40 @@
 		3BB990442ACEB6E600F324C2 /* FullscreenPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB990432ACEB6E600F324C2 /* FullscreenPhotoViewController.swift */; };
 		3BCD89E12ACAB6260014CECC /* hand_landmarker.task in Resources */ = {isa = PBXBuildFile; fileRef = 3BCD89DC2ACAB6260014CECC /* hand_landmarker.task */; };
 		3BCD89E32ACAC5820014CECC /* HandTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD89E22ACAC5820014CECC /* HandTrackingViewController.swift */; };
+		3BFA8E642AF10E8700092043 /* JSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFA8E632AF10E8700092043 /* JSONSerialization.swift */; };
 		4BB6A1C81BA4DC71D8D48002 /* Pods_Pose_Estimation_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3B32E1EE2AEFC8B700344718 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3B32E1E72AEFC8B700344718 /* RangeUISlider.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45E215241E8E812E00F0B8B9;
+			remoteInfo = RangeUISlider;
+		};
+		3B32E1F02AEFC8B700344718 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3B32E1E72AEFC8B700344718 /* RangeUISlider.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 459CBEF4259B79D000FCA5AB;
+			remoteInfo = RangeUISliderTests;
+		};
+		3B32E1F22AEFC8B700344718 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3B32E1E72AEFC8B700344718 /* RangeUISlider.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45F064832599E3CC007B25A7;
+			remoteInfo = RangeUISliderUITests;
+		};
+		3B32E1F42AEFC8B700344718 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3B32E1E72AEFC8B700344718 /* RangeUISlider.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45F064952599E511007B25A7;
+			remoteInfo = RangeUISliderDemo;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		3B9A11AF2ACB159B007CDA19 /* Embed Frameworks */ = {
@@ -45,6 +82,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				3B9A11B22ACB15F0007CDA19 /* RangeUISlider.framework in Embed Frameworks */,
+				3B32E1F72AEFC8BF00344718 /* RangeUISlider.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,6 +92,7 @@
 /* Begin PBXFileReference section */
 		3ADE4A892AF646F03D9892D9 /* Pods-Pose Estimation App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pose Estimation App.release.xcconfig"; path = "Target Support Files/Pods-Pose Estimation App/Pods-Pose Estimation App.release.xcconfig"; sourceTree = "<group>"; };
 		3B068EA12ADD945C00B3B900 /* HandLandmarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandLandmarker.swift; sourceTree = "<group>"; };
+		3B1335852AF272A60092ED64 /* LandmarkChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkChart.swift; sourceTree = "<group>"; };
 		3B25FCD12AD4175800179213 /* PhotoComparisonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoComparisonViewController.swift; sourceTree = "<group>"; };
 		3B2B079A2ABDE08C00E57528 /* Pose Estimation App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pose Estimation App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2B079D2ABDE08C00E57528 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,8 +105,11 @@
 		3B2B07BB2ABEFA4900E57528 /* MiscViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscViewController.swift; sourceTree = "<group>"; };
 		3B2B07BD2ABF256600E57528 /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
 		3B2B07BF2ABF6CB100E57528 /* ImportedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedViewController.swift; sourceTree = "<group>"; };
+		3B32E1E72AEFC8B700344718 /* RangeUISlider.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RangeUISlider.xcodeproj; path = "RangeUISlider-master/RangeUISlider.xcodeproj"; sourceTree = "<group>"; };
 		3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		3B3B6C052AC1B0700073055F /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		3B64D2EF2AEBAABF001A6782 /* VideoAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAnalysisViewController.swift; sourceTree = "<group>"; };
+		3B64D2F12AEBAAFD001A6782 /* LandmarkTimeGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkTimeGraphViewController.swift; sourceTree = "<group>"; };
 		3B82B80B2AE686AE004730D4 /* pose_landmarker_full.task */ = {isa = PBXFileReference; lastKnownFileType = file; path = pose_landmarker_full.task; sourceTree = "<group>"; };
 		3B8F935C2AC04B1F0076CC25 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		3B8F935E2AC076790076CC25 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
@@ -75,6 +117,8 @@
 		3B8F93622AC08AA40076CC25 /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
 		3B8F93642AC096B00076CC25 /* TrackingResultTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingResultTransformer.swift; sourceTree = "<group>"; };
 		3B9A11B02ACB15F0007CDA19 /* RangeUISlider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RangeUISlider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B9FB4442AF00F31007FF3B2 /* GPUImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GPUImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BB069582AF0094D000E95BC /* Pose Estimation App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pose Estimation App-Bridging-Header.h"; sourceTree = "<group>"; };
 		3BB7F3C72AE67932003279D8 /* PoseLandmarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseLandmarker.swift; sourceTree = "<group>"; };
 		3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
 		3BB8272A2AC2E80000BE7AC0 /* Trash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trash.swift; sourceTree = "<group>"; };
@@ -82,6 +126,7 @@
 		3BB990432ACEB6E600F324C2 /* FullscreenPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenPhotoViewController.swift; sourceTree = "<group>"; };
 		3BCD89DC2ACAB6260014CECC /* hand_landmarker.task */ = {isa = PBXFileReference; lastKnownFileType = file; path = hand_landmarker.task; sourceTree = "<group>"; };
 		3BCD89E22ACAC5820014CECC /* HandTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandTrackingViewController.swift; sourceTree = "<group>"; };
+		3BFA8E632AF10E8700092043 /* JSONSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONSerialization.swift; sourceTree = "<group>"; };
 		84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pose_Estimation_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02EC64B86A1C6034C61CE96 /* Pods-Pose Estimation App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pose Estimation App.debug.xcconfig"; path = "Target Support Files/Pods-Pose Estimation App/Pods-Pose Estimation App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BB6A1C81BA4DC71D8D48002 /* Pods_Pose_Estimation_App.framework in Frameworks */,
+				3B32E1F62AEFC8BF00344718 /* RangeUISlider.framework in Frameworks */,
 				3B9A11B12ACB15F0007CDA19 /* RangeUISlider.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +148,7 @@
 		3B15188B2AC9670C001C0A2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3B9FB4442AF00F31007FF3B2 /* GPUImage.framework */,
 				3B9A11B02ACB15F0007CDA19 /* RangeUISlider.framework */,
 				84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */,
 			);
@@ -111,6 +158,7 @@
 		3B2B07912ABDE08C00E57528 = {
 			isa = PBXGroup;
 			children = (
+				3B32E1E72AEFC8B700344718 /* RangeUISlider.xcodeproj */,
 				3B2B079C2ABDE08C00E57528 /* Pose Estimation App */,
 				3B2B079B2ABDE08C00E57528 /* Products */,
 				3B15188B2AC9670C001C0A2A /* Frameworks */,
@@ -138,6 +186,8 @@
 				3B2B07AB2ABDE08D00E57528 /* Info.plist */,
 				3B068EA12ADD945C00B3B900 /* HandLandmarker.swift */,
 				3BB7F3C72AE67932003279D8 /* PoseLandmarker.swift */,
+				3BB069582AF0094D000E95BC /* Pose Estimation App-Bridging-Header.h */,
+				3B1335852AF272A60092ED64 /* LandmarkChart.swift */,
 			);
 			path = "Pose Estimation App";
 			sourceTree = "<group>";
@@ -174,6 +224,8 @@
 				3BCD89E22ACAC5820014CECC /* HandTrackingViewController.swift */,
 				3BB990432ACEB6E600F324C2 /* FullscreenPhotoViewController.swift */,
 				3B25FCD12AD4175800179213 /* PhotoComparisonViewController.swift */,
+				3B64D2EF2AEBAABF001A6782 /* VideoAnalysisViewController.swift */,
+				3B64D2F12AEBAAFD001A6782 /* LandmarkTimeGraphViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -188,8 +240,20 @@
 				3B8F93622AC08AA40076CC25 /* MediaModel.swift */,
 				3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */,
 				3B8F93642AC096B00076CC25 /* TrackingResultTransformer.swift */,
+				3BFA8E632AF10E8700092043 /* JSONSerialization.swift */,
 			);
 			path = DataModel;
+			sourceTree = "<group>";
+		};
+		3B32E1E82AEFC8B700344718 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3B32E1EF2AEFC8B700344718 /* RangeUISlider.framework */,
+				3B32E1F12AEFC8B700344718 /* RangeUISliderTests.xctest */,
+				3B32E1F32AEFC8B700344718 /* RangeUISliderUITests.xctest */,
+				3B32E1F52AEFC8B700344718 /* RangeUISliderDemo.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B99F1A8A4043BC1436264D6B /* Pods */ = {
@@ -235,6 +299,7 @@
 				TargetAttributes = {
 					3B2B07992ABDE08C00E57528 = {
 						CreatedOnToolsVersion = 15.0;
+						LastSwiftMigration = 1500;
 					};
 				};
 			};
@@ -249,12 +314,49 @@
 			mainGroup = 3B2B07912ABDE08C00E57528;
 			productRefGroup = 3B2B079B2ABDE08C00E57528 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3B32E1E82AEFC8B700344718 /* Products */;
+					ProjectRef = 3B32E1E72AEFC8B700344718 /* RangeUISlider.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3B2B07992ABDE08C00E57528 /* Pose Estimation App */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3B32E1EF2AEFC8B700344718 /* RangeUISlider.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RangeUISlider.framework;
+			remoteRef = 3B32E1EE2AEFC8B700344718 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3B32E1F12AEFC8B700344718 /* RangeUISliderTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RangeUISliderTests.xctest;
+			remoteRef = 3B32E1F02AEFC8B700344718 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3B32E1F32AEFC8B700344718 /* RangeUISliderUITests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RangeUISliderUITests.xctest;
+			remoteRef = 3B32E1F22AEFC8B700344718 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3B32E1F52AEFC8B700344718 /* RangeUISliderDemo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = RangeUISliderDemo.app;
+			remoteRef = 3B32E1F42AEFC8B700344718 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3B2B07982ABDE08C00E57528 /* Resources */ = {
@@ -309,13 +411,17 @@
 				3B2B07C02ABF6CB100E57528 /* ImportedViewController.swift in Sources */,
 				3B25FCD22AD4175800179213 /* PhotoComparisonViewController.swift in Sources */,
 				3BB827272AC2D32000BE7AC0 /* TrashViewController.swift in Sources */,
+				3B1335862AF272A60092ED64 /* LandmarkChart.swift in Sources */,
 				3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */,
 				3B8F935F2AC076790076CC25 /* Media.swift in Sources */,
 				3BB990442ACEB6E600F324C2 /* FullscreenPhotoViewController.swift in Sources */,
+				3B64D2F02AEBAABF001A6782 /* VideoAnalysisViewController.swift in Sources */,
 				3BCD89E32ACAC5820014CECC /* HandTrackingViewController.swift in Sources */,
 				3BB8272B2AC2E80000BE7AC0 /* Trash.swift in Sources */,
 				3B2B07A22ABDE08C00E57528 /* FilterViewController.swift in Sources */,
 				3B3B6C062AC1B0700073055F /* VideoViewController.swift in Sources */,
+				3BFA8E642AF10E8700092043 /* JSONSerialization.swift in Sources */,
+				3B64D2F22AEBAAFD001A6782 /* LandmarkTimeGraphViewController.swift in Sources */,
 				3B2B079E2ABDE08C00E57528 /* AppDelegate.swift in Sources */,
 				3B8F93612AC077AA0076CC25 /* CoreDataManager.swift in Sources */,
 				3B2B07A02ABDE08C00E57528 /* SceneDelegate.swift in Sources */,
@@ -376,10 +482,12 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -439,8 +547,10 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -463,6 +573,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -490,6 +601,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Pose Estimation App/Pose Estimation App-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -501,6 +614,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -528,6 +642,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Pose Estimation App/Pose Estimation App-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

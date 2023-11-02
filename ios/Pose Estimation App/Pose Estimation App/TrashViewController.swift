@@ -144,6 +144,12 @@ class TrashViewController: UIViewController {
                 } catch {
                     print("Fehler beim Löschen der Datei \(url.lastPathComponent): \(error.localizedDescription)")
                 }
+                do {
+                    try fileManager.removeItem(at: annotatedURL(from: url)!)
+                    print("Datei gelöscht: \(annotatedURL(from: url)!.lastPathComponent)")
+                } catch {
+                    print("Fehler beim Löschen der Datei \(annotatedURL(from: url)!.lastPathComponent): \(error.localizedDescription)")
+                }
             }
         trashModel.emptyTrash()
         self.dismiss(animated: true, completion: nil)

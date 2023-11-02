@@ -263,6 +263,27 @@ class MediaModel: ObservableObject {
     }
     
     
-
-    
+    func getVideoURL(objectID: NSManagedObjectID) -> [String] {
+        var array: [String] = []
+        let mediaObject = try? context.existingObject(with: objectID) as? Media
+        array.append((mediaObject?.url)!)
+        return array
+    }
+    func checkVideoLandmarks(objectID: NSManagedObjectID) -> Bool {
+        let mediaObject = try? context.existingObject(with: objectID) as? Media
+        if mediaObject?.videoLandmarks == nil {
+            return false
+        } else {
+            return true
+        }
+    }
+    func saveVideoLandmarks(objectID: NSManagedObjectID, data: String) {
+        let mediaObject = try? context.existingObject(with: objectID) as? Media
+        mediaObject!.videoLandmarks = data
+        try! self.context.save()
+    }
+    func getVideoLandmarks(objectID: NSManagedObjectID) -> String {
+        let mediaObject = try? context.existingObject(with: objectID) as? Media
+        return (mediaObject?.videoLandmarks)!
+    }
 }

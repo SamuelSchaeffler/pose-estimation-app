@@ -32,6 +32,8 @@ class Media: NSManagedObject {
     @NSManaged public var bildwiederholrate: String?
     
     @NSManaged public var isPhoto: String?
+    @NSManaged public var videoLandmarks: String?
+
     
 
 

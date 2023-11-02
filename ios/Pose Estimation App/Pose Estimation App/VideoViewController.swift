@@ -49,12 +49,12 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let spacing: CGFloat = 10
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: spacing)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: 0)
-        button.backgroundColor = .red
+        button.backgroundColor = .systemRed
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(deleteItem), for: .touchUpInside)
         let buttonWidth: CGFloat = UIScreen.main.bounds.size.width / 3
         let buttonHeight: CGFloat = 50
-        button.frame = CGRect(x: ((UIScreen.main.bounds.size.width - buttonWidth) / 2), y: UIScreen.main.bounds.size.height - 150, width: buttonWidth, height: buttonHeight)
+        button.frame = CGRect(x: ((UIScreen.main.bounds.size.width - buttonWidth) / 2) + 100, y: UIScreen.main.bounds.size.height - 150, width: buttonWidth, height: buttonHeight)
         button.layer.cornerRadius = 25
         
         button.addTarget(self, action: #selector(buttonPressed), for: .touchDown)
@@ -65,6 +65,27 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return button
     }()
 
+    lazy var trackingButton: UIButton = {
+        let button = UIButton()
+        button.adjustsImageWhenHighlighted = false
+        button.setTitle("Handerkennung", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        button.backgroundColor = .systemBlue
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(startHandTracking), for: .touchUpInside)
+        let buttonWidth: CGFloat = UIScreen.main.bounds.size.width / 2
+        let buttonHeight: CGFloat = 50
+        button.frame = CGRect(x: 25, y: UIScreen.main.bounds.size.height - 150, width: buttonWidth, height: buttonHeight)
+        button.layer.cornerRadius = 25
+        
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchDown)
+        button.addTarget(self, action: #selector(buttonReleased), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonReleased), for: .touchUpOutside)
+            
+        
+        return button
+    }()
+    
     lazy var playButton: UIButton = {
         let button = UIButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold)
@@ -111,6 +132,7 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         videoViewContainer.addSubview(videoView)
         videoViewContainer.addSubview(playButton)
         view.addSubview(deleteButton)
+        view.addSubview(trackingButton)
         view.addSubview(videoTitle)
         view.addSubview(tableView)
     }
@@ -149,6 +171,19 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         trashModel.moveObjectFromMediaToTrash(objectID: objectID!)
         self.dismiss(animated: true, completion: nil)
         NotificationCenter.default.post(name: Notification.Name("SelectedPhotosUpdated"), object: self.mediaModel.getMedia())
+    }
+    
+    @objc func startHandTracking() {
+        let videoAnalysisVC = VideoAnalysisViewController()
+        videoAnalysisVC.image = videoView.image
+        videoAnalysisVC.url = url
+        videoAnalysisVC.objectID = objectID
+        videoAnalysisVC.videoTitleString = videoTitle.text
+        DispatchQueue.main.async {
+            videoAnalysisVC.modalPresentationStyle = .fullScreen
+            self.present(videoAnalysisVC, animated: true, completion: nil)
+            
+        }
     }
     
     @objc func editTablePressed(indexPath: IndexPath) {
