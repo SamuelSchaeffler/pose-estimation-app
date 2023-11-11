@@ -45,15 +45,20 @@ func stringToVideoLandmarks(_ jsonString: String) -> ([[SCNVector3]], [Int])? {
             if let landmarksAny = jsonObject?["landmarks"] as? [[[String: AnyObject]]],
                let timestampsAny = jsonObject?["timestamps"] as? [Int] {
                 
-                let landmarks = landmarksAny.map { $0.compactMap { dict in
-                    if let x = dict["x"] as? Float,
-                       let y = dict["y"] as? Float,
-                       let z = dict["z"] as? Float {
-                        return SCNVector3(x, y, z)
+                let landmarks = landmarksAny.map { landmarkArray in
+                    return landmarkArray.compactMap { landmarkDict in
+                        if let x = landmarkDict["x"] as? Float ?? landmarkDict["y"] as? Float ?? landmarkDict["z"] as? Float,
+                           let y = landmarkDict["y"] as? Float ?? landmarkDict["x"] as? Float ?? landmarkDict["z"] as? Float,
+                           let z = landmarkDict["z"] as? Float ?? landmarkDict["x"] as? Float ?? landmarkDict["y"] as? Float {
+                            return SCNVector3(x, y, z)
+                        } else {
+                            // Handle the case where a landmark dictionary is missing required values
+                            print("Ungültiger Landmarkeintrag: \(landmarkDict)")
+                            return nil
+                        }
                     }
-                    return nil
-                }}
-                
+                }
+
                 return (landmarks, timestampsAny)
             } else {
                 print("Fehler bei der Typumwandlung!")
@@ -67,3 +72,10 @@ func stringToVideoLandmarks(_ jsonString: String) -> ([[SCNVector3]], [Int])? {
 }
 
 
+func scnVector3ArrayToCGPointArray(_ vectors: [[SCNVector3]]) -> [[CGPoint]] {
+    return vectors.map { innerArray in
+        innerArray.map { vector in
+            CGPoint(x: CGFloat(vector.x), y: CGFloat(vector.y))
+        }
+    }
+}

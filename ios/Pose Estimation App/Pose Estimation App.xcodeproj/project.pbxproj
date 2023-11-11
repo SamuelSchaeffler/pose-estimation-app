@@ -25,6 +25,7 @@
 		3B3B6C062AC1B0700073055F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3B6C052AC1B0700073055F /* VideoViewController.swift */; };
 		3B64D2F02AEBAABF001A6782 /* VideoAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B64D2EF2AEBAABF001A6782 /* VideoAnalysisViewController.swift */; };
 		3B64D2F22AEBAAFD001A6782 /* LandmarkTimeGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B64D2F12AEBAAFD001A6782 /* LandmarkTimeGraphViewController.swift */; };
+		3B87238C2AF64D4F00F6AA03 /* AnalysisVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B87238B2AF64D4F00F6AA03 /* AnalysisVideoPlayerViewController.swift */; };
 		3B8F935D2AC04B1F0076CC25 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F935B2AC04B1F0076CC25 /* DataModel.xcdatamodeld */; };
 		3B8F935F2AC076790076CC25 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F935E2AC076790076CC25 /* Media.swift */; };
 		3B8F93612AC077AA0076CC25 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F93602AC077AA0076CC25 /* CoreDataManager.swift */; };
@@ -111,6 +112,7 @@
 		3B64D2EF2AEBAABF001A6782 /* VideoAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAnalysisViewController.swift; sourceTree = "<group>"; };
 		3B64D2F12AEBAAFD001A6782 /* LandmarkTimeGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkTimeGraphViewController.swift; sourceTree = "<group>"; };
 		3B82B80B2AE686AE004730D4 /* pose_landmarker_full.task */ = {isa = PBXFileReference; lastKnownFileType = file; path = pose_landmarker_full.task; sourceTree = "<group>"; };
+		3B87238B2AF64D4F00F6AA03 /* AnalysisVideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisVideoPlayerViewController.swift; sourceTree = "<group>"; };
 		3B8F935C2AC04B1F0076CC25 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		3B8F935E2AC076790076CC25 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		3B8F93602AC077AA0076CC25 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				3B25FCD12AD4175800179213 /* PhotoComparisonViewController.swift */,
 				3B64D2EF2AEBAABF001A6782 /* VideoAnalysisViewController.swift */,
 				3B64D2F12AEBAAFD001A6782 /* LandmarkTimeGraphViewController.swift */,
+				3B87238B2AF64D4F00F6AA03 /* AnalysisVideoPlayerViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				3BB827272AC2D32000BE7AC0 /* TrashViewController.swift in Sources */,
 				3B1335862AF272A60092ED64 /* LandmarkChart.swift in Sources */,
 				3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */,
+				3B87238C2AF64D4F00F6AA03 /* AnalysisVideoPlayerViewController.swift in Sources */,
 				3B8F935F2AC076790076CC25 /* Media.swift in Sources */,
 				3BB990442ACEB6E600F324C2 /* FullscreenPhotoViewController.swift in Sources */,
 				3B64D2F02AEBAABF001A6782 /* VideoAnalysisViewController.swift in Sources */,
@@ -597,7 +601,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "schaeffler.Pose-Estimation-App";
+				PRODUCT_BUNDLE_IDENTIFIER = "schaeffler.Pose-Estimation-App1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -638,7 +642,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "schaeffler.Pose-Estimation-App";
+				PRODUCT_BUNDLE_IDENTIFIER = "schaeffler.Pose-Estimation-App1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

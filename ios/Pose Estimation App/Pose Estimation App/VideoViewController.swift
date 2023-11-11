@@ -8,6 +8,7 @@
 import UIKit
 import AVKit
 import CoreData
+import SceneKit
 
 class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -21,6 +22,10 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var MetadataArray1 = ["Aufnahmedatum:","Zeit:", "Auflösung:", "Dauer", "Bildwiederholrate", "Kamerahersteller:", "BPM:", "Rudiment:","Interpret:","Hand:","Grip:","Grip Matched:"]
     var Metadata: [String] = []
 
+    let handLandmarker = MediaPipeHandLandmarkerVideo()
+    var videoLandmarks: [[SCNVector3]] = []
+    var videoTimestamps: [Int] = []
+    
     lazy var videoViewContainer: UIView = {
         let container = UIView()
         container.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height / 2.5)
@@ -118,12 +123,31 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return tableView
     }()
     
+    var alertController: UIAlertController = {
+        let alertController = UIAlertController(title: "Handerkennung wird ausgeführt", message: "Bitte warten...", preferredStyle: .alert)
+        
+        var progressBar = UIProgressView(progressViewStyle: .default)
+        progressBar.setProgress(0.0, animated: true)
+        progressBar.frame = CGRect(x: 10, y: 90, width: 250, height: 3)
+        
+        let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel) { (action) in
+            NotificationCenter.default.post(name: Notification.Name("cancelAlert"), object: nil)
+        }
+        //alertController.addAction(cancelAction)
+        alertController.view.addSubview(progressBar)
+
+        return alertController
+    }()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI(_:)), name: Notification.Name("UpdateVideo"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateURL(_:)), name: Notification.Name("UpdateURL"), object: nil)
-
         NotificationCenter.default.addObserver(self, selector: #selector(updateObjectID(_:)), name: Notification.Name("UpdateObjectID"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateProgress(_:)), name: Notification.Name("updateProgress"), object: nil)
+        
         
         self.tableView.reloadData()
         
@@ -174,15 +198,34 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @objc func startHandTracking() {
-        let videoAnalysisVC = VideoAnalysisViewController()
-        videoAnalysisVC.image = videoView.image
-        videoAnalysisVC.url = url
-        videoAnalysisVC.objectID = objectID
-        videoAnalysisVC.videoTitleString = videoTitle.text
-        DispatchQueue.main.async {
-            videoAnalysisVC.modalPresentationStyle = .fullScreen
-            self.present(videoAnalysisVC, animated: true, completion: nil)
-            
+        if mediaModel.checkVideoLandmarks(objectID: objectID!) == false {
+            present(alertController, animated: false)
+            //main = 27sec / background = 59sec / main + uipdate = 27sec / main + no debugmode = 20sec
+            DispatchQueue.main.async { [self] in
+                handLandmarker.generateLandmarks(objectID: objectID!)
+                alertController.dismiss(animated: true)
+            }
+        }
+        DispatchQueue.main.async { [self] in
+            let string = mediaModel.getVideoLandmarks(objectID: objectID!)
+            let data = stringToVideoLandmarks(string)!
+            videoLandmarks = data.0
+            videoTimestamps = data.1
+            let playerVC = AnalysisVideoPlayerViewController()
+            playerVC.videoURL = url
+            playerVC.videoLandmarks = scnVector3ArrayToCGPointArray(videoLandmarks)
+            playerVC.videoLandmarks3 = videoLandmarks
+            playerVC.videoTimestamps = videoTimestamps
+            playerVC.modalPresentationStyle = .fullScreen
+            present(playerVC, animated: false)
+        }
+    }
+    
+    @objc func updateProgress(_ notification: Notification) {
+        RunLoop.main.run(until: Date(timeIntervalSinceNow: 0.001))
+        let progress = notification.object as! Float
+        if let progressBar = self.alertController.view.subviews.first(where: { $0 is UIProgressView }) as? UIProgressView {
+            progressBar.setProgress(progress, animated: true)
         }
     }
     

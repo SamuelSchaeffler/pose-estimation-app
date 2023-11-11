@@ -17,6 +17,7 @@ struct chartData: Identifiable {
 
 var chartDataArrays: ([Float], [Int]) = ([],[])
 var dataList: [chartData] = []
+var videoPointMark: (Float, Int) = (0, 0)
 
 struct LandmarkChart: View {
     
@@ -28,11 +29,15 @@ struct LandmarkChart: View {
                 x: .value("Timestamp", chartData.timestamp),
                 y: .value("Bewegung", chartData.landmark)
             ).foregroundStyle(.red)
+            PointMark(
+                x: .value("Timestamp", videoPointMark.1),
+                y: .value("Bewegung", videoPointMark.0)
+            ).foregroundStyle(.green)
         }.chartYAxis {
             AxisMarks(position: .leading)
         }
         .chartXAxisLabel(position: .bottom, alignment: .center) {Text("Zeit (Millisekunden)")}
-        .chartYAxisLabel(position: .leading, alignment: .center) {Text("Position (Millimeter)")}
+        .chartYAxisLabel(position: .leading, alignment: .center) {Text("Position (Millimeter)")}.background(.clear)
     }
     
 }
