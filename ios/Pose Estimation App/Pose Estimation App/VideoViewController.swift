@@ -22,8 +22,8 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var MetadataArray1 = ["Aufnahmedatum:","Zeit:", "Auflösung:", "Dauer", "Bildwiederholrate", "Kamerahersteller:", "BPM:", "Rudiment:","Interpret:","Hand:","Grip:","Grip Matched:"]
     var Metadata: [String] = []
 
-    let handLandmarker = MediaPipeHandLandmarkerVideo()
     var videoLandmarks: [[SCNVector3]] = []
+    var videoWorldLandmarks: [[SCNVector3]] = []
     var videoTimestamps: [Int] = []
     
     lazy var videoViewContainer: UIView = {
@@ -201,6 +201,7 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if mediaModel.checkVideoLandmarks(objectID: objectID!) == false {
             present(alertController, animated: false)
             //main = 27sec / background = 59sec / main + uipdate = 27sec / main + no debugmode = 20sec
+            let handLandmarker = MediaPipeHandLandmarkerVideo()
             DispatchQueue.main.async { [self] in
                 handLandmarker.generateLandmarks(objectID: objectID!)
                 alertController.dismiss(animated: true)
@@ -210,11 +211,12 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let string = mediaModel.getVideoLandmarks(objectID: objectID!)
             let data = stringToVideoLandmarks(string)!
             videoLandmarks = data.0
-            videoTimestamps = data.1
+            videoWorldLandmarks = data.1
+            videoTimestamps = data.2
             let playerVC = AnalysisVideoPlayerViewController()
             playerVC.videoURL = url
             playerVC.videoLandmarks = scnVector3ArrayToCGPointArray(videoLandmarks)
-            playerVC.videoLandmarks3 = videoLandmarks
+            playerVC.videoLandmarks3 = lowPassFilter(for: videoWorldLandmarks, alpha: 0.5)//movingAverage(for: videoWorldLandmarks, windowSize: 5)
             playerVC.videoTimestamps = videoTimestamps
             playerVC.modalPresentationStyle = .fullScreen
             present(playerVC, animated: false)

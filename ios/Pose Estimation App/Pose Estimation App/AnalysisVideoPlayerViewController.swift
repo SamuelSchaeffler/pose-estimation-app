@@ -44,7 +44,6 @@ class AnalysisVideoPlayerViewController: UIViewController {
         view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.height, height: UIScreen.main.bounds.size.width)
         return view
     }()
-    
     var chart: UIView = {
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.height, height: UIScreen.main.bounds.size.width)
@@ -176,8 +175,6 @@ class AnalysisVideoPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
-        
-
 
         player = AVPlayer(url: videoURL!)
         let playerLayer = AVPlayerLayer(player: player)
@@ -185,12 +182,9 @@ class AnalysisVideoPlayerViewController: UIViewController {
         playerView.layer.addSublayer(playerLayer)
         NotificationCenter.default.addObserver(self, selector: #selector(videoDidEnd), name: .AVPlayerItemDidPlayToEndTime, object: nil)
         view.addSubview(playerView)
-
-        
+  
         setScreenOrientation()
-        
-        
-        
+             
         landmarksView = LandmarksView(frame: landmarkFrame!)
         landmarksView.backgroundColor = .clear//.systemPink.withAlphaComponent(0.5)
         landmarksView.isUserInteractionEnabled = true
@@ -202,7 +196,6 @@ class AnalysisVideoPlayerViewController: UIViewController {
         }
         
         view.addSubview(chart)
-        
         
         view.addSubview(playButton)
         view.addSubview(closeButton)
@@ -272,37 +265,46 @@ class AnalysisVideoPlayerViewController: UIViewController {
     }
     
     func updateChartView() {
-        if landmarksView.selectedLandmarkIndex == nil {
-            dataList = []
+        if landmarksView.selectedCounter == 0 {
+            dataList = [[], [], []]
         } else {
-            let landmarkPoint = landmarksView.selectedLandmarkIndex!
-            var coordinates: [Float] = []
+
+            var coordinates: [[Float]] = [[], [], []]
             if buttonStates[2] == true {
                 //x
-                for subArray in videoLandmarks3 {
-                    let point = subArray[landmarkPoint]
-                    coordinates.append(point.x)
+                for i in 0..<landmarksView.selectedCounter {
+                    for subArray in videoLandmarks3 {
+                        let point = subArray[landmarksView.landmarkPoints[i]]
+                        coordinates[i].append(point.x)
+                    }
                 }
             } else if buttonStates[3] == true {
                 //y
-                for subArray in videoLandmarks3 {
-                    let point = subArray[landmarkPoint]
-                    coordinates.append(point.y)
+                for i in 0..<landmarksView.selectedCounter {
+                    for subArray in videoLandmarks3 {
+                        let point = subArray[landmarksView.landmarkPoints[i]]
+                        coordinates[i].append(point.y)
+                    }
                 }
             } else if buttonStates[4] == true {
                 //z
-                for subArray in videoLandmarks3 {
-                    let point = subArray[landmarkPoint]
-                    coordinates.append(point.z)
+                for i in 0..<landmarksView.selectedCounter {
+                    for subArray in videoLandmarks3 {
+                        let point = subArray[landmarksView.landmarkPoints[i]]
+                        coordinates[i].append(point.z)
+                    }
                 }
             }
-            chartDataArrays = (coordinates, videoTimestamps)
-            dataList = []
-            var index = 0
-            for point in chartDataArrays.0 {
-                dataList.append(chartData(landmark: point, timestamp: chartDataArrays.1[index]))
-                index = index + 1
+            dataList = [[], [], []]
+            
+            for i in 0..<landmarksView.selectedCounter {
+                var timeIndex = 0
+                for point in coordinates[i] {
+                    dataList[i].append(chartData(landmarks: point, timestamps: videoTimestamps[timeIndex]))
+                    timeIndex = timeIndex + 1
+                }
             }
+            
         }
         for view in self.chart.subviews {
             view.removeFromSuperview()
@@ -316,18 +318,37 @@ class AnalysisVideoPlayerViewController: UIViewController {
     
     func updateLandmarks(for time: CMTime) {
         currentTimeMillis = Int(CMTimeGetSeconds(time) * 1000)
-        videoPointMark.1 = currentTimeMillis
+        videoPointMarkTime = currentTimeMillis
         if let index = videoTimestamps.firstIndex(where: { ($0 >= currentTimeMillis) && ($0 < (currentTimeMillis + 100))}) {
             let pixelCoordinates = videoLandmarks[index]
             let pointCoordinates = convertPixelsToPoints(pixelCoordinates)
             currentLandmarkIndex = index
-            if landmarksView.selectedLandmarkIndex != nil {
+            if landmarksView.selectedCounter >= 1 {
                 if buttonStates[2] {
-                    videoPointMark.0 = (videoLandmarks3[index][landmarksView.selectedLandmarkIndex!].x)
+                    videoPointMark1 = (videoLandmarks3[index][landmarksView.landmarkPoints[0]].x)
                 } else if buttonStates[3] {
-                    videoPointMark.0 = (videoLandmarks3[index][landmarksView.selectedLandmarkIndex!].y)
+                    videoPointMark1 = (videoLandmarks3[index][landmarksView.landmarkPoints[0]].y)
                 } else if buttonStates[4]{
-                    videoPointMark.0 = (videoLandmarks3[index][landmarksView.selectedLandmarkIndex!].z)
+                    videoPointMark1 = (videoLandmarks3[index][landmarksView.landmarkPoints[0]].z)
+                    print(videoPointMark1)
+                }
+            }
+            if landmarksView.selectedCounter >= 2 {
+                if buttonStates[2] {
+                    videoPointMark2 = (videoLandmarks3[index][landmarksView.landmarkPoints[1]].x)
+                } else if buttonStates[3] {
+                    videoPointMark2 = (videoLandmarks3[index][landmarksView.landmarkPoints[1]].y)
+                } else if buttonStates[4]{
+                    videoPointMark2 = (videoLandmarks3[index][landmarksView.landmarkPoints[1]].z)
+                }
+            }
+            if landmarksView.selectedCounter >= 3 {
+                if buttonStates[2] {
+                    videoPointMark3 = (videoLandmarks3[index][landmarksView.landmarkPoints[2]].x)
+                } else if buttonStates[3] {
+                    videoPointMark3 = (videoLandmarks3[index][landmarksView.landmarkPoints[2]].y)
+                } else if buttonStates[4]{
+                    videoPointMark3 = (videoLandmarks3[index][landmarksView.landmarkPoints[2]].z)
                 }
             }
             
@@ -335,7 +356,7 @@ class AnalysisVideoPlayerViewController: UIViewController {
             if firstFrame == true {
                 landmarks = []
                 for point in pointCoordinates {
-                    landmarks.append(Landmark(point: point, color: .red))
+                    landmarks.append(Landmark(point: point, color: .darkGray, selected: false))
                 }
                 landmarksView.landmarks = landmarks
                 firstFrame = false
@@ -345,7 +366,7 @@ class AnalysisVideoPlayerViewController: UIViewController {
                 }
                 var i = 0
                 for point in pointCoordinates {
-                    landmarks[i] = Landmark(point: point, color: landmarksView.landmarks[i].color)
+                    landmarks[i] = Landmark(point: point, color: landmarksView.landmarks[i].color, selected: landmarksView.landmarks[i].selected)
                     i = i + 1
                 }
                 landmarksView.landmarks = landmarks
@@ -434,13 +455,47 @@ class AnalysisVideoPlayerViewController: UIViewController {
             zAxisButton.isHidden = false
             chart.isHidden = false
             
-            videoPointMark.1 = currentTimeMillis
-            if buttonStates[2] {
-                videoPointMark.0 = (videoLandmarks3[currentLandmarkIndex][landmarksView.selectedLandmarkIndex ?? 0].x)
-            } else if buttonStates[3] {
-                videoPointMark.0 = (videoLandmarks3[currentLandmarkIndex][landmarksView.selectedLandmarkIndex ?? 0].y)
-            } else {
-                videoPointMark.0 = (videoLandmarks3[currentLandmarkIndex][landmarksView.selectedLandmarkIndex ?? 0].z)
+            videoPointMarkTime = currentTimeMillis
+            
+            opacityPointMark1 = 0
+            opacityPointMark2 = 0
+            opacityPointMark3 = 0
+            
+            if landmarksView.selectedCounter >= 1 {
+                
+                opacityPointMark1 = 1
+                
+                if buttonStates[2] {
+                    videoPointMark1 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[0]].x)
+                } else if buttonStates[3] {
+                    videoPointMark1 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[0]].y)
+                } else if buttonStates[4]{
+                    videoPointMark1 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[0]].z)
+                }
+            }
+            if landmarksView.selectedCounter >= 2 {
+                
+                opacityPointMark2 = 1
+                
+                if buttonStates[2] {
+                    videoPointMark2 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[1]].x)
+                } else if buttonStates[3] {
+                    videoPointMark2 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[1]].y)
+                } else if buttonStates[4]{
+                    videoPointMark2 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[1]].z)
+                }
+            }
+            if landmarksView.selectedCounter >= 3 {
+                
+                opacityPointMark3 = 1
+                
+                if buttonStates[2] {
+                    videoPointMark3 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[2]].x)
+                } else if buttonStates[3] {
+                    videoPointMark3 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[2]].y)
+                } else if buttonStates[4]{
+                    videoPointMark3 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[2]].z)
+                }
             }
             
             
@@ -470,8 +525,17 @@ class AnalysisVideoPlayerViewController: UIViewController {
         buttonStates[3] = false
         buttonStates[4] = false
         
-        videoPointMark.1 = currentTimeMillis
-        videoPointMark.0 = (videoLandmarks3[currentLandmarkIndex][landmarksView.selectedLandmarkIndex ?? 0].x)
+        videoPointMarkTime = currentTimeMillis
+        
+        if landmarksView.selectedCounter >= 1 {
+            videoPointMark1 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[0]].x)
+        }
+        if landmarksView.selectedCounter >= 2 {
+            videoPointMark2 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[1]].x)
+        }
+        if landmarksView.selectedCounter >= 3 {
+            videoPointMark3 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[2]].x)
+        }
         
         updateChartView()
     }
@@ -483,8 +547,17 @@ class AnalysisVideoPlayerViewController: UIViewController {
         buttonStates[3] = true
         buttonStates[4] = false
         
-        videoPointMark.1 = currentTimeMillis
-        videoPointMark.0 = (videoLandmarks3[currentLandmarkIndex][landmarksView.selectedLandmarkIndex ?? 0].y)
+        videoPointMarkTime = currentTimeMillis
+        
+        if landmarksView.selectedCounter >= 1 {
+            videoPointMark1 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[0]].y)
+        }
+        if landmarksView.selectedCounter >= 2 {
+            videoPointMark2 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[1]].y)
+        }
+        if landmarksView.selectedCounter >= 3 {
+            videoPointMark3 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[2]].y)
+        }
         
         updateChartView()
     }
@@ -496,9 +569,17 @@ class AnalysisVideoPlayerViewController: UIViewController {
         buttonStates[3] = false
         buttonStates[4] = true
         
-        videoPointMark.1 = currentTimeMillis
-        videoPointMark.0 = (videoLandmarks3[currentLandmarkIndex][landmarksView.selectedLandmarkIndex ?? 0].z)
+        videoPointMarkTime = currentTimeMillis
         
+        if landmarksView.selectedCounter >= 1 {
+            videoPointMark1 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[0]].z)
+        }
+        if landmarksView.selectedCounter >= 2 {
+            videoPointMark2 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[1]].z)
+        }
+        if landmarksView.selectedCounter >= 3 {
+            videoPointMark3 = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[2]].z)
+        }
         updateChartView()
     }
     
@@ -558,10 +639,10 @@ class AnalysisVideoPlayerViewController: UIViewController {
     
     func convertPixelsToPoints(_ points: [CGPoint]) -> [CGPoint] {
         if videoIsPortrait == true {
-            let scale = (UIScreen.main.scale) / (CGFloat(videoWidth!) / CGFloat(videoHeight!))
+            let scale = (UIScreen.main.scale) / (CGFloat(videoWidth!) / CGFloat(videoHeight!)) * 0.95
             return points.map { CGPoint(x: $0.x / scale, y: $0.y / scale) }
         } else {
-            let scale = UIScreen.main.scale
+            let scale = UIScreen.main.scale * 0.95
             let minus = videoHeight! / (videoWidth!/375)
             return points.map { CGPoint(x: ($0.y / scale), y: CGFloat(minus) - ($0.x / scale)) }
         }
@@ -578,13 +659,15 @@ class AnalysisVideoPlayerViewController: UIViewController {
     struct Landmark {
         var point: CGPoint
         var color: UIColor
+        var selected: Bool
     }
     class LandmarksView: UIView {
         
         var landmarks: [Landmark] = []
         var touchIsActive = false
-        var landmarkSelected = false
-        var selectedLandmarkIndex: Int?
+        
+        var selectedCounter = 0
+        var landmarkPoints: [Int] = []
         
         override init(frame: CGRect) {
             super.init(frame: frame)
@@ -619,17 +702,44 @@ class AnalysisVideoPlayerViewController: UIViewController {
                         if let index = landmarks.firstIndex(where: { $0.point == nearestLandmark.point }) {
                             print("change Color")
                             
-                            if landmarkSelected == false {
-                                landmarkSelected = true
-                                landmarks[index].color = .green //landmarks[index].color == .red ? .green : .red
-                                selectedLandmarkIndex = index
-                            } else {
-                                if landmarks[index].color == .green {
-                                    landmarkSelected = false
-                                    landmarks[index].color = .red
-                                    selectedLandmarkIndex = nil
-                                }
+                            
+                                if landmarks[index].selected {
+                                    landmarks[index].color = .darkGray
+                                    landmarks[index].selected.toggle()
+                                    selectedCounter = selectedCounter - 1
+                                    
+                                    for (i, landmark) in landmarkPoints.enumerated() {
+                                        if landmark == index {
+                                            landmarkPoints.remove(at: i)
+                                        }
+                                        
+                                    }
+                                    
+                                    if selectedCounter == 1 {
+                                        landmarks[landmarkPoints[0]].color = .red
+                                    } else if selectedCounter == 2 {
+                                        landmarks[landmarkPoints[0]].color = .red
+                                        landmarks[landmarkPoints[1]].color = .blue
+                                    }
+                                    
+                                } else if selectedCounter < 3 {
+                                    if selectedCounter == 0 {
+                                        landmarks[index].color = .red
+                                    } else if selectedCounter == 1 {
+                                        landmarks[index].color = .blue
+                                    } else if selectedCounter == 2 {
+                                        landmarks[index].color = .green
+                                    }
+                                    
+                                    landmarks[index].selected.toggle()
+                                    selectedCounter = selectedCounter + 1
+                                    landmarkPoints.append(index)
+                               }
+                            
+                            if selectedCounter == 0 {
+                                landmarkPoints = []
                             }
+
                             setNeedsDisplay()  // Ansicht neu zeichnen
                         }
                     }

@@ -232,6 +232,7 @@ class MediaPipeHandLandmarkerVideo {
     
    
     var videoLandmarks: [[SCNVector3]] = []
+    var videoWorldLandmarks: [[SCNVector3]] = []
     var videoTimestamps: [Int] = []
     
     
@@ -297,9 +298,10 @@ class MediaPipeHandLandmarkerVideo {
                     
                 } else {
                     reader.cancelReading()
-                    let videoLandmarksString = videoLandmarksToString(landmarks: videoLandmarks, timestamps: videoTimestamps)
+                    let videoLandmarksString = videoLandmarksToString(landmarks: videoLandmarks, worldLandmarks: videoWorldLandmarks, timestamps: videoTimestamps)
                     mediaModel.saveVideoLandmarks(objectID: objectID, data: videoLandmarksString!)
                     videoLandmarks = []
+                    videoWorldLandmarks = []
                     videoTimestamps = []
                     break
                 }
@@ -308,97 +310,6 @@ class MediaPipeHandLandmarkerVideo {
         
     }
     
-    func generateVideoWithLandmarks(objectID: NSManagedObjectID) {
-        
-        let videoURL = URL(string: mediaModel.getVideoURL(objectID: objectID)[0])
-        let outputURL = annotatedURL(from: videoURL!)
-        
-        autoreleasepool {
-            let asset = AVAsset(url: videoURL!)
-            guard let videoTrack = asset.tracks(withMediaType: .video).first else {
-                print("Fehler beim Abrufen des Video-Tracks")
-                return
-            }
-            let naturalSize = videoTrack.naturalSize
-            let transform = videoTrack.preferredTransform
-            
-            let duration = CMTimeGetSeconds(asset.duration) * 1000
-            
-            guard let reader = try? AVAssetReader(asset: asset) else {
-                print("Fehler beim Erstellen des AVAssetReaders")
-                return
-            }
-            guard let writer = try? AVAssetWriter(outputURL: outputURL!, fileType: .mov) else {
-                print("Fehler beim Erstellen des AVAssetWriters")
-                return
-            }
-            let readerOutputSettings: [String: Any] = [
-                kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32ARGB,
-                
-            ]
-            let readerOutput = AVAssetReaderTrackOutput(track: asset.tracks(withMediaType: .video)[0], outputSettings: readerOutputSettings)
-            reader.add(readerOutput)
-            reader.startReading()
-            let videoSettings: [String: Any] = [
-                AVVideoCodecKey: AVVideoCodecType.h264.rawValue,
-                AVVideoWidthKey: naturalSize.width,
-                AVVideoHeightKey: naturalSize.height
-            ]
-            let context = CIContext()
-            let writerInput = AVAssetWriterInput(mediaType: .video, outputSettings: videoSettings)
-            writerInput.transform = transform
-            writer.add(writerInput)
-            writer.startWriting()
-            writer.startSession(atSourceTime: CMTime.zero)
-            writerInput.requestMediaDataWhenReady(on: DispatchQueue.main) { [self] in
-                while writerInput.isReadyForMoreMediaData {
-                    if let sampleBuffer = readerOutput.copyNextSampleBuffer() {
-                        
-                        autoreleasepool {
-                            let timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
-                            let orginalImage = self.convertSampleBufferToUIImage(sampleBuffer, context: context)
-                           // let image = resizeImage(image: orginalImage!)
-                            let progress = Float((CMTimeGetSeconds(timestamp) * 1000) / duration)
-                            
-                            NotificationCenter.default.post(name: Notification.Name("updateProgress"), object: progress)
-                            do {
-                                let annotatedImage = processFrameWithMediaPipe(orginalImage: orginalImage!, image: orginalImage!, timestamp: timestamp)
-                                if let annotatedSampleBuffer = addImageToSampleBuffer(sampleBuffer, image: annotatedImage) {
-                                    writerInput.append(annotatedSampleBuffer)
-                                } else {
-                                    print("Fehler beim Erstellen des annotierten SampleBuffers.")
-                                }
-                            } catch {
-                                print("Fehler bei der Handlandmarkenerkennung: \(error)")
-                            }
-                        }
-                        
-                    } else {
-                        writerInput.markAsFinished()
-                        writer.finishWriting {
-                            if writer.status == .failed {
-                                print("Fehler beim Schreiben: \(String(describing: writer.error))")
-                            } else {
-                                print("Video erfolgreich geschrieben.")
-                            }                                }
-                        reader.cancelReading()
-                        
-                        let videoLandmarksString = videoLandmarksToString(landmarks: videoLandmarks, timestamps: videoTimestamps)
-                        mediaModel.saveVideoLandmarks(objectID: objectID, data: videoLandmarksString!)
-                        NotificationCenter.default.post(name: Notification.Name("closeAlert"), object: (videoLandmarks, videoTimestamps))
-                        videoLandmarks = []
-                        videoTimestamps = []
-                        break
-                    }
-                    
-                    
-                }
-            
-            }
-            
-        }
-        
-    }
     func convertSampleBufferToUIImage(_ sampleBuffer: CMSampleBuffer, context: CIContext) -> UIImage? {
         autoreleasepool {
             let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
@@ -431,7 +342,9 @@ class MediaPipeHandLandmarkerVideo {
         let result = try! self.handLandmarker?.detect(videoFrame: mpImage, timestampInMilliseconds: timestampInMilliseconds)
         if result!.worldLandmarks.count > 0 {
             let landmarks = getLandmarks(result: result!, image: image)
+            let worldLandmarks = getWorldLandmarks(result: result!, image: image)
             videoLandmarks.append(landmarks)
+            videoWorldLandmarks.append(worldLandmarks)
             videoTimestamps.append(timestampInMilliseconds)
         }
     }
@@ -592,6 +505,7 @@ class MediaPipeHandLandmarkerVideo {
                 points.append(SCNVector3(x: Float(xPoint), y: Float(yPoint), z: Float(zPoint)))
             }
         }
+        //print(points[0])
         return points
     }
     func resizeImage(image: UIImage) -> UIImage {
