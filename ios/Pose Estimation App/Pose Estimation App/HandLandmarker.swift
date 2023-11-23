@@ -241,9 +241,9 @@ class MediaPipeHandLandmarkerVideo {
         options = HandLandmarkerOptions()
         options.runningMode = .video
         options.numHands = 2
-        options.minHandDetectionConfidence = 0.5
-        options.minHandPresenceConfidence = 0.5
-        options.minTrackingConfidence = 0.5
+        options.minHandDetectionConfidence = 0.4
+        options.minHandPresenceConfidence = 0.4
+        options.minTrackingConfidence = 0.4
         
         if let modelPath = Bundle.main.path(forResource: "hand_landmarker", ofType: "task") {
             options.baseOptions.modelAssetPath = modelPath

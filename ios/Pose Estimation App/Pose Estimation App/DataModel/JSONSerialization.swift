@@ -141,3 +141,14 @@ func lowPassFilter(for landmarks: [[SCNVector3]], alpha: Float) -> [[SCNVector3]
     return filteredLandmarks
 }
 
+func angleBetweenVectors(_ v1: SCNVector3, _ v2: SCNVector3, _ v3: SCNVector3) -> CGFloat {
+    let vectorBA = SCNVector3(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z)
+    let vectorBC = SCNVector3(v3.x - v2.x, v3.y - v2.y, v3.z - v2.z)
+
+    let dotProduct = vectorBA.x * vectorBC.x + vectorBA.y * vectorBC.y + vectorBA.z * vectorBC.z
+    let magnitudeBA = sqrt(vectorBA.x * vectorBA.x + vectorBA.y * vectorBA.y + vectorBA.z * vectorBA.z)
+    let magnitudeBC = sqrt(vectorBC.x * vectorBC.x + vectorBC.y * vectorBC.y + vectorBC.z * vectorBC.z)
+
+    let angle = acos(dotProduct / (magnitudeBA * magnitudeBC))
+    return CGFloat(180 - (angle * (180 / .pi)))
+}

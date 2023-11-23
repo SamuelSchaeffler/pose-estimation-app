@@ -216,7 +216,7 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let playerVC = AnalysisVideoPlayerViewController()
             playerVC.videoURL = url
             playerVC.videoLandmarks = scnVector3ArrayToCGPointArray(videoLandmarks)
-            playerVC.videoLandmarks3 = lowPassFilter(for: videoWorldLandmarks, alpha: 0.5)//movingAverage(for: videoWorldLandmarks, windowSize: 5)
+            playerVC.videoLandmarks3 = movingAverage(for: videoWorldLandmarks, windowSize: 10)
             playerVC.videoTimestamps = videoTimestamps
             playerVC.modalPresentationStyle = .fullScreen
             present(playerVC, animated: false)

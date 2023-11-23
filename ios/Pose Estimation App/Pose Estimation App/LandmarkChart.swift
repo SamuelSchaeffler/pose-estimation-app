@@ -9,79 +9,91 @@ import Foundation
 import SwiftUI
 import Charts
 
-struct chartData: Identifiable, Hashable {
+struct chartLandmarkData: Identifiable, Hashable {
     let id = UUID()
     let landmarks: Float
     let timestamps: Int
 }
 
+struct chartAngleData: Identifiable, Hashable {
+    let id = UUID()
+    let angles: Float
+    let timestamps: Int
+}
 
-//var chartDataArrays: ([Float], [Int]) = ([],[])
-var dataList: [[chartData]] = [[], [], []]
+
+var landmarkDataList: [[chartLandmarkData]] = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+var videoPointMarks: [Float] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 var videoPointMarkTime: Int = 0
-var videoPointMark1: Float = 0
-var videoPointMark2: Float = 0
-var videoPointMark3: Float = 0
-var opacityPointMark1: Double = 0
-var opacityPointMark2: Double = 0
-var opacityPointMark3: Double = 0
+var chartColors: [Color] = [.clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear]
+var fingerNumbers: [Int] = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+
+var angleDataList: [[chartAngleData]] = [[], [], [], [], []]
+var anglePointMarks: [Float] = [0, 0, 0, 0, 0]
+var angleChartColors: [UIColor] = [.clear, .clear, .clear, .clear, .clear]//[.systemRed, .systemYellow, .magenta, .systemGreen, .systemOrange]
+
+
 
 struct LandmarkChart: View {
-    
-   let colors: [Color] = [.red, .blue, .green]
     
     var body: some View {
         
         Chart {
-            
-            ForEach(dataList[0], id: \.self) { series in
-                LineMark(
-                    x: .value("Kategorie", series.timestamps),
-                    y: .value("Wert", series.landmarks),
-                    series: .value("", "0")
-                )
-                .foregroundStyle(.red)
+            ForEach(Array(landmarkDataList.enumerated()), id: \.element) { index, dataList in
+                ForEach(dataList, id: \.self) { series in
+                    LineMark(
+                        x: .value("Timestamp", series.timestamps),
+                        y: .value("Bewegung", series.landmarks),
+                        series: .value("LM\(index)", "\(index)")
+                    )
+                    .foregroundStyle(chartColors[index])
+                }
+                PointMark(
+                    x: .value("Timestamp", videoPointMarkTime),
+                    y: .value("Bewegung", videoPointMarks[index])
+                )//.foregroundStyle(chartColors[index])
+                .symbol {
+                    Image(systemName: "\(fingerNumbers[index]).circle.fill")
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(.black, chartColors[index])
+                    .font(.system(size: 12))
+                }
             }
-            ForEach(dataList[1], id: \.self) { series in
-                LineMark(
-                    x: .value("Kategorie", series.timestamps),
-                    y: .value("Wert", series.landmarks),
-                    series: .value("", "1")
-                )
-                .foregroundStyle(.blue)
-            }
-            ForEach(dataList[2], id: \.self) { series in
-                LineMark(
-                    x: .value("Kategorie", series.timestamps),
-                    y: .value("Wert", series.landmarks),
-                    series: .value("", "2")
-                )
-                .foregroundStyle(.green)
-            }
-            
-            PointMark(
-                x: .value("Timestamp", videoPointMarkTime),
-                y: .value("Bewegung", videoPointMark1)
-            ).foregroundStyle(Color(red: 160, green: 0, blue: 0).opacity(opacityPointMark1))
-            PointMark(
-                x: .value("Timestamp", videoPointMarkTime),
-                y: .value("Bewegung", videoPointMark2)
-            ).foregroundStyle(Color(red: 0, green: 0, blue: 160).opacity(opacityPointMark2))
-            PointMark(
-                x: .value("Timestamp", videoPointMarkTime),
-                y: .value("Bewegung", videoPointMark3)
-            ).foregroundStyle(Color(red: 0, green: 160, blue: 0).opacity(opacityPointMark3))
-            
-        }
-
-            
-        
+        }.chartLegend(.hidden)
         .chartYAxis {
             AxisMarks(position: .leading)
         }
         .chartXAxisLabel(position: .bottom, alignment: .center) {Text("Zeit (Millisekunden)")}
         .chartYAxisLabel(position: .leading, alignment: .center) {Text("Position (Millimeter)")}.background(.clear)
     }
-    
 }
 
+struct AngleChart: View {
+    
+    var body: some View {
+        
+        Chart {
+            ForEach(Array(angleDataList.enumerated()), id: \.element) { index, dataList in
+                ForEach(dataList, id: \.self) { series in
+                    LineMark(
+                        x: .value("Timestamp", series.timestamps),
+                        y: .value("Winkel", series.angles),
+                        series: .value("Angles\(index)", "\(index)")
+                    )
+                    .foregroundStyle(Color(angleChartColors[index]))
+                }
+                PointMark(
+                    x: .value("Timestamp", videoPointMarkTime),
+                    y: .value("Winkel", anglePointMarks[index])
+                )
+                .foregroundStyle(Color(angleChartColors[index]))
+                
+            }
+        }.chartLegend(.visible)
+        .chartYAxis {
+            AxisMarks(position: .leading)
+        }
+        .chartXAxisLabel(position: .bottom, alignment: .center) {Text("Zeit (Millisekunden)")}
+        .chartYAxisLabel(position: .leading, alignment: .center) {Text("Winkel (°)")}.background(.clear)
+    }
+}
