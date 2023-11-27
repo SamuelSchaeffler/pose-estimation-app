@@ -199,12 +199,13 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @objc func startHandTracking() {
         if mediaModel.checkVideoLandmarks(objectID: objectID!) == false {
-            present(alertController, animated: false)
+            
+            self.present(alertController, animated: false)
             //main = 27sec / background = 59sec / main + uipdate = 27sec / main + no debugmode = 20sec
             let handLandmarker = MediaPipeHandLandmarkerVideo()
             DispatchQueue.main.async { [self] in
                 handLandmarker.generateLandmarks(objectID: objectID!)
-                alertController.dismiss(animated: true)
+                alertController.dismiss(animated: false)
             }
         }
         DispatchQueue.main.async { [self] in
@@ -227,7 +228,7 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         RunLoop.main.run(until: Date(timeIntervalSinceNow: 0.001))
         let progress = notification.object as! Float
         if let progressBar = self.alertController.view.subviews.first(where: { $0 is UIProgressView }) as? UIProgressView {
-            progressBar.setProgress(progress, animated: true)
+            progressBar.setProgress(progress, animated: false)
         }
     }
     

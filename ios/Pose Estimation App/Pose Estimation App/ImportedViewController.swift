@@ -243,14 +243,24 @@ class ImportedViewController: UIViewController {
 
     func generateThumbnail(for videoURL: URL) -> UIImage? {
         let asset = AVAsset(url: videoURL)
+        let videoTrack = asset.tracks(withMediaType: AVMediaType.video).first!
         let imageGenerator = AVAssetImageGenerator(asset: asset)
+        let videoOrientation = videoTrack.preferredTransform
+        let videoAngle = atan2(videoOrientation.b, videoOrientation.a) * (180 / .pi)
         
         do {
             let cgImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 2), actualTime: nil)
             var image = UIImage(cgImage: cgImage)
             
             if let cgImage = image.cgImage {
-               // image = UIImage(cgImage: cgImage, scale: image.scale, orientation: .right)
+                if abs(videoAngle) == 90 {
+                    //Hochformat
+                    image = UIImage(cgImage: cgImage, scale: image.scale, orientation: .right)
+                } else if abs(videoAngle) == 180 {
+                    image = UIImage(cgImage: cgImage, scale: image.scale, orientation: .down)
+                }
+                
+               
             }
             
             return image

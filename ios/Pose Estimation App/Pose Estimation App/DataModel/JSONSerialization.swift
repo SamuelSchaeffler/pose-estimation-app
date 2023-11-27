@@ -141,14 +141,80 @@ func lowPassFilter(for landmarks: [[SCNVector3]], alpha: Float) -> [[SCNVector3]
     return filteredLandmarks
 }
 
-func angleBetweenVectors(_ v1: SCNVector3, _ v2: SCNVector3, _ v3: SCNVector3) -> CGFloat {
-    let vectorBA = SCNVector3(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z)
-    let vectorBC = SCNVector3(v3.x - v2.x, v3.y - v2.y, v3.z - v2.z)
-
-    let dotProduct = vectorBA.x * vectorBC.x + vectorBA.y * vectorBC.y + vectorBA.z * vectorBC.z
-    let magnitudeBA = sqrt(vectorBA.x * vectorBA.x + vectorBA.y * vectorBA.y + vectorBA.z * vectorBA.z)
-    let magnitudeBC = sqrt(vectorBC.x * vectorBC.x + vectorBC.y * vectorBC.y + vectorBC.z * vectorBC.z)
-
-    let angle = acos(dotProduct / (magnitudeBA * magnitudeBC))
-    return CGFloat(180 - (angle * (180 / .pi)))
+func angleBetweenVectors1(_ a: SCNVector3, _ b: SCNVector3, _ c: SCNVector3) -> CGFloat {
+    let ab = SCNVector3(b.x - a.x, b.y - a.y, b.z - a.z)
+    let bc = SCNVector3(c.x - b.x, c.y - b.y, c.z - b.z)
+    let dot = ab.x * bc.x + ab.y * bc.y + ab.z * bc.z
+    let magnitudeAB = sqrt(ab.x * ab.x + ab.y * ab.y + ab.z * ab.z)
+    let magnitudeBC = sqrt(bc.x * bc.x + bc.y * bc.y + bc.z * bc.z)
+    let magnitudeProduct = magnitudeAB * magnitudeBC
+    let angle = acos(dot / magnitudeProduct)
+    return CGFloat((angle * (180 / .pi)))
 }
+
+func angleBetweenVectors2(_ a: SCNVector3, _ b: SCNVector3, _ c: SCNVector3) -> CGFloat {
+    let ab = SCNVector3(b.x - a.x, b.y - a.y, b.z - a.z)
+    let bc = SCNVector3(c.x - a.x, c.y - a.y, c.z - a.z)
+
+    let normal = SCNVector3(
+        x: ab.y * bc.z - ab.z * bc.y,
+        y: ab.z * bc.x - ab.x * bc.z,
+        z: ab.x * bc.y - ab.y * bc.x
+    ).normalized
+
+    let rotationAxis = SCNVector3CrossProduct(normal, SCNVector3(x: 0, y: 0, z: 1)).normalized
+    let angle = acos(SCNVector3DotProduct(normal, SCNVector3(x: 0, y: 0, z: 1)))
+
+    let rotationMatrix = SCNMatrix4MakeRotation(Float(angle), rotationAxis.x, rotationAxis.y, rotationAxis.z)
+
+    let rotatedA = a.transformed(by: rotationMatrix)
+    let rotatedB = b.transformed(by: rotationMatrix)
+    let rotatedC = c.transformed(by: rotationMatrix)
+
+    let newA = CGPoint(x: Double(rotatedA.x), y: Double(rotatedA.y))
+    let newB = CGPoint(x: Double(rotatedB.x), y: Double(rotatedB.y))
+    let newC = CGPoint(x: Double(rotatedC.x), y: Double(rotatedC.y))
+    
+    let steigungAB = calculateSlope(from: newA, to: newB)
+    let steigungBC = calculateSlope(from: newB, to: newC)
+    
+    let schnittwinkel = atan(abs(((steigungBC - steigungAB) / (1 + steigungAB * steigungBC))))
+    return CGFloat((schnittwinkel * (180 / .pi)))
+}
+
+
+func calculateSlope(from point1: CGPoint, to point2: CGPoint) -> CGFloat {
+    if point1.x == point2.x {
+        return 0
+    }
+    return (point2.y - point1.y) / (point2.x - point1.x)
+}
+
+extension SCNVector3 {
+    var normalized: SCNVector3 {
+        let len = sqrt(x * x + y * y + z * z)
+        return SCNVector3(x: x / len, y: y / len, z: z / len)
+    }
+}
+
+func SCNVector3CrossProduct(_ v1: SCNVector3, _ v2: SCNVector3) -> SCNVector3 {
+    return SCNVector3(
+        x: v1.y * v2.z - v1.z * v2.y,
+        y: v1.z * v2.x - v1.x * v2.z,
+        z: v1.x * v2.y - v1.y * v2.x
+    )
+}
+
+func SCNVector3DotProduct(_ v1: SCNVector3, _ v2: SCNVector3) -> CGFloat {
+    return CGFloat(v1.x * v2.x + v1.y * v2.y + v1.z * v2.z)
+}
+
+extension SCNVector3 {
+    func transformed(by matrix: SCNMatrix4) -> SCNVector3 {
+        let x = self.x * matrix.m11 + self.y * matrix.m21 + self.z * matrix.m31 + matrix.m41
+        let y = self.x * matrix.m12 + self.y * matrix.m22 + self.z * matrix.m32 + matrix.m42
+        let z = self.x * matrix.m13 + self.y * matrix.m23 + self.z * matrix.m33 + matrix.m43
+        return SCNVector3(x: x, y: y, z: z)
+    }
+}
+

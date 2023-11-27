@@ -30,6 +30,7 @@ class AnalysisVideoPlayerViewController: UIViewController {
     var landmarks: [Landmark] = []
     var landmarkMemory: [Landmark] = []
     var firstFrame: Bool = true
+    var videoAngle: CGFloat = 0
         
     var anglesGenerated: Bool = false
     
@@ -75,11 +76,13 @@ class AnalysisVideoPlayerViewController: UIViewController {
         button.backgroundColor = .clear
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(closePlayer), for: .touchUpInside)
-        let buttonWidth: CGFloat = 20
-        let buttonHeight: CGFloat = 20
-        button.frame = CGRect(x: 20, y: 20, width: buttonWidth, height: buttonHeight)
+        let buttonWidth: CGFloat = 40
+        let buttonHeight: CGFloat = 40
+        button.frame = CGRect(x: 10, y: 10, width: buttonWidth, height: buttonHeight)
         return button
     }()
+    
+    var panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
     
     var slider: UISlider = {
         let frame = CGRect(x: 40, y: UIScreen.main.bounds.size.width - 60, width: UIScreen.main.bounds.size.height - 80, height: 24)
@@ -120,7 +123,7 @@ class AnalysisVideoPlayerViewController: UIViewController {
     }()
     var openChartButton: UIButton = {
         let button = UIButton()
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold)
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold)
         let image = UIImage(systemName: "chart.line.uptrend.xyaxis.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
         button.setImage(image, for: .normal)
         button.backgroundColor = .clear
@@ -133,7 +136,7 @@ class AnalysisVideoPlayerViewController: UIViewController {
     }()
     var zAxisButton: UIButton = {
         let button = UIButton()
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .bold)
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 35, weight: .bold)
         let image = UIImage(systemName: "z.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
         button.setImage(image, for: .normal)
         button.backgroundColor = .clear
@@ -147,7 +150,7 @@ class AnalysisVideoPlayerViewController: UIViewController {
     }()
     var yAxisButton: UIButton = {
         let button = UIButton()
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .bold)
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 35, weight: .bold)
         let image = UIImage(systemName: "y.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
         button.setImage(image, for: .normal)
         button.backgroundColor = .clear
@@ -155,13 +158,13 @@ class AnalysisVideoPlayerViewController: UIViewController {
         button.addTarget(self, action: #selector(yAxisSelected), for: .touchUpInside)
         let buttonWidth: CGFloat = 25
         let buttonHeight: CGFloat = 25
-        button.frame = CGRect(x: (UIScreen.main.bounds.size.height - 67.5), y: (UIScreen.main.bounds.size.width - 140), width: buttonWidth, height: buttonHeight)
+        button.frame = CGRect(x: (UIScreen.main.bounds.size.height - 67.5), y: (UIScreen.main.bounds.size.width - 145), width: buttonWidth, height: buttonHeight)
         button.isHidden = true
         return button
     }()
     var xAxisButton: UIButton = {
         let button = UIButton()
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .bold)
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 35, weight: .bold)
         let image = UIImage(systemName: "x.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal)
         button.setImage(image, for: .normal)
         button.backgroundColor = .clear
@@ -169,14 +172,14 @@ class AnalysisVideoPlayerViewController: UIViewController {
         button.addTarget(self, action: #selector(xAxisSelected), for: .touchUpInside)
         let buttonWidth: CGFloat = 25
         let buttonHeight: CGFloat = 25
-        button.frame = CGRect(x: (UIScreen.main.bounds.size.height - 67.5), y: (UIScreen.main.bounds.size.width - 165), width: buttonWidth, height: buttonHeight)
+        button.frame = CGRect(x: (UIScreen.main.bounds.size.height - 67.5), y: (UIScreen.main.bounds.size.width - 175), width: buttonWidth, height: buttonHeight)
         button.isHidden = true
         return button
     }()
     
     var openAngleChartButton: UIButton = {
         let button = UIButton()
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold)
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold)
         let image = UIImage(systemName: "a.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
         button.setImage(image, for: .normal)
         button.backgroundColor = .clear
@@ -184,9 +187,26 @@ class AnalysisVideoPlayerViewController: UIViewController {
         button.addTarget(self, action: #selector(openAngleChart), for: .touchUpInside)
         let buttonWidth: CGFloat = 30
         let buttonHeight: CGFloat = 30
-        button.frame = CGRect(x: (UIScreen.main.bounds.size.height - 70), y: (UIScreen.main.bounds.size.width - 200), width: buttonWidth, height: buttonHeight)
+        button.frame = CGRect(x: (UIScreen.main.bounds.size.height - 110), y: (UIScreen.main.bounds.size.width - 85), width: buttonWidth, height: buttonHeight)
         button.isHidden = true
         return button
+    }()
+    
+    var chartOpacitySlider: UISlider = {
+        let slider = UISlider()
+        slider.isHidden = true
+        slider.transform = CGAffineTransform(rotationAngle: -.pi/2)
+        let thumbImage = UIImage(systemName: "circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .regular))
+        slider.setThumbImage(thumbImage, for: .normal)
+        let sliderWidth: CGFloat = 25
+        let sliderHeight: CGFloat = 100
+        slider.frame = CGRect(x: (UIScreen.main.bounds.size.height - 67), y: (UIScreen.main.bounds.size.width - 310), width: sliderWidth, height: sliderHeight)
+        slider.minimumValue = 0
+        slider.maximumValue = 100
+        slider.value = 80
+        slider.addTarget(self, action: #selector(opacitySliderValueChanged), for: .valueChanged)
+
+        return slider
     }()
     
     override func viewDidLoad() {
@@ -214,6 +234,12 @@ class AnalysisVideoPlayerViewController: UIViewController {
         
         view.addSubview(chart)
         
+        view.addSubview(slider)
+        
+        panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        self.view.addGestureRecognizer(panGesture)
+        panGesture.isEnabled = true
+        
         view.addSubview(playButton)
         view.addSubview(closeButton)
         view.addSubview(selectLandmarksButton)
@@ -222,7 +248,8 @@ class AnalysisVideoPlayerViewController: UIViewController {
         view.addSubview(yAxisButton)
         view.addSubview(zAxisButton)
         view.addSubview(openAngleChartButton)
-        view.addSubview(slider)
+        view.addSubview(chartOpacitySlider)
+        
         view.addSubview(currentLabel)
         view.addSubview(remainingLabel)
         
@@ -264,9 +291,10 @@ class AnalysisVideoPlayerViewController: UIViewController {
         let videoTrack = asset.tracks(withMediaType: AVMediaType.video).first!
         let naturalSize = videoTrack.naturalSize
         let videoOrientation = videoTrack.preferredTransform
-        let videoAngle = atan2(videoOrientation.b, videoOrientation.a)
+        videoAngle = atan2(videoOrientation.b, videoOrientation.a) * (180 / .pi)
+        print("videoAngle: \(videoAngle)")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if abs(videoAngle) == .pi / 2 {
+        if abs(videoAngle) == 90 {
             // Hochformat
             videoIsPortrait = true
             let factor = naturalSize.width / 375
@@ -274,8 +302,16 @@ class AnalysisVideoPlayerViewController: UIViewController {
             videoHeight = Int(naturalSize.width / factor)
             landmarkFrame = CGRect(x: ((Int(UIScreen.main.bounds.size.height) - videoWidth!) / 2), y: 0, width: videoWidth!, height: videoHeight!)
             appDelegate.orientationLock = .landscape
-        } else {
-            // Querformat
+        } else if abs(videoAngle) == 0 {
+            // Querformat 1
+            videoIsPortrait = false
+            let factor = naturalSize.height / 375
+            videoWidth = Int(naturalSize.width / factor)
+            videoHeight = Int(naturalSize.height / factor)
+            landmarkFrame = CGRect(x: ((Int(UIScreen.main.bounds.size.height) - videoWidth!) / 2), y: 0, width: videoWidth!, height: videoHeight!)
+            appDelegate.orientationLock = .landscape
+        } else if abs(videoAngle) == 180 {
+            // Querformat 2
             videoIsPortrait = false
             let factor = naturalSize.height / 375
             videoWidth = Int(naturalSize.width / factor)
@@ -422,6 +458,7 @@ class AnalysisVideoPlayerViewController: UIViewController {
             self.yAxisButton.alpha = 1.0
             self.zAxisButton.alpha = 1.0
             self.openAngleChartButton.alpha = 1.0
+            self.chartOpacitySlider.alpha = 1.0
             hideButtonTimer?.invalidate()
         }
     }
@@ -445,6 +482,7 @@ class AnalysisVideoPlayerViewController: UIViewController {
             slider.isHidden = true
             currentLabel.isHidden = true
             remainingLabel.isHidden = true
+            panGesture.isEnabled = false
         } else {
             let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 32, weight: .bold)
             let image = UIImage(systemName: "dot.circle.and.hand.point.up.left.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
@@ -458,19 +496,20 @@ class AnalysisVideoPlayerViewController: UIViewController {
             slider.isHidden = false
             currentLabel.isHidden = false
             remainingLabel.isHidden = false
+            panGesture.isEnabled = true
         }
         
         
     }
     @objc func openChart() {
         if buttonStates[1] == false {
-            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold)
+            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold)
             let image = UIImage(systemName: "chart.line.uptrend.xyaxis.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal)
             openChartButton.setImage(image, for: .normal)
             buttonStates[1] = true
             
-            playerView.layer.opacity = 0.2
-            landmarksView.layer.opacity = 0.2
+            playerView.layer.opacity = 1 - (chartOpacitySlider.value / 100)
+            landmarksView.layer.opacity = 1 - (chartOpacitySlider.value / 100)
             
             selectLandmarksButton.isHidden = true
             xAxisButton.isHidden = false
@@ -479,6 +518,7 @@ class AnalysisVideoPlayerViewController: UIViewController {
             chart.isHidden = false
             
             openAngleChartButton.isHidden = false
+            chartOpacitySlider.isHidden = false
             
             videoPointMarkTime = currentTimeMillis
             
@@ -496,13 +536,13 @@ class AnalysisVideoPlayerViewController: UIViewController {
             
             updateChartView()
         } else {
-            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold)
+            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold)
             let image = UIImage(systemName: "chart.line.uptrend.xyaxis.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
             openChartButton.setImage(image, for: .normal)
             buttonStates[1] = false
             
-            playerView.layer.opacity = 1.0
-            landmarksView.layer.opacity = 1.0
+            playerView.layer.opacity = 1
+            landmarksView.layer.opacity = 1
             
             selectLandmarksButton.isHidden = false
             xAxisButton.isHidden = true
@@ -512,12 +552,13 @@ class AnalysisVideoPlayerViewController: UIViewController {
             chart.isHidden = true
             
             openAngleChartButton.isHidden = true
+            chartOpacitySlider.isHidden = true
         }
     }
     
     @objc func openAngleChart() {
         if buttonStates[5] == false {
-            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold)
+            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold)
             let image = UIImage(systemName: "a.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.systemPink, renderingMode: .alwaysOriginal)
             openAngleChartButton.setImage(image, for: .normal)
             xAxisButton.isHidden = true
@@ -529,7 +570,7 @@ class AnalysisVideoPlayerViewController: UIViewController {
             buttonStates[5].toggle()
             updateChartView()
         } else {
-            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold)
+            let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold)
             let image = UIImage(systemName: "a.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
             openAngleChartButton.setImage(image, for: .normal)
             xAxisButton.isHidden = false
@@ -544,9 +585,9 @@ class AnalysisVideoPlayerViewController: UIViewController {
     }
     
     @objc func xAxisSelected() {
-        xAxisButton.setImage(UIImage(systemName: "x.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal), for: .normal)
-        yAxisButton.setImage(UIImage(systemName: "y.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
-        zAxisButton.setImage(UIImage(systemName: "z.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
+        xAxisButton.setImage(UIImage(systemName: "x.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold))?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal), for: .normal)
+        yAxisButton.setImage(UIImage(systemName: "y.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
+        zAxisButton.setImage(UIImage(systemName: "z.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
         buttonStates[2] = true
         buttonStates[3] = false
         buttonStates[4] = false
@@ -561,9 +602,9 @@ class AnalysisVideoPlayerViewController: UIViewController {
         updateChartView()
     }
     @objc func yAxisSelected() {
-        xAxisButton.setImage(UIImage(systemName: "x.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
-        yAxisButton.setImage(UIImage(systemName: "y.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal), for: .normal)
-        zAxisButton.setImage(UIImage(systemName: "z.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
+        xAxisButton.setImage(UIImage(systemName: "x.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
+        yAxisButton.setImage(UIImage(systemName: "y.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold))?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal), for: .normal)
+        zAxisButton.setImage(UIImage(systemName: "z.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
         buttonStates[2] = false
         buttonStates[3] = true
         buttonStates[4] = false
@@ -577,9 +618,9 @@ class AnalysisVideoPlayerViewController: UIViewController {
         updateChartView()
     }
     @objc func zAxisSelected() {
-        xAxisButton.setImage(UIImage(systemName: "x.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
-        yAxisButton.setImage(UIImage(systemName: "y.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
-        zAxisButton.setImage(UIImage(systemName: "z.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .bold))?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal), for: .normal)
+        xAxisButton.setImage(UIImage(systemName: "x.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
+        yAxisButton.setImage(UIImage(systemName: "y.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
+        zAxisButton.setImage(UIImage(systemName: "z.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold))?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal), for: .normal)
         buttonStates[2] = false
         buttonStates[3] = false
         buttonStates[4] = true
@@ -610,6 +651,7 @@ class AnalysisVideoPlayerViewController: UIViewController {
             self.yAxisButton.alpha = 0.0
             self.zAxisButton.alpha = 0.0
             self.openAngleChartButton.alpha = 0.0
+            self.chartOpacitySlider.alpha = 0.0
 
         }
     }
@@ -626,6 +668,7 @@ class AnalysisVideoPlayerViewController: UIViewController {
         self.yAxisButton.alpha = 1.0
         self.zAxisButton.alpha = 1.0
         self.openAngleChartButton.alpha = 1.0
+        self.chartOpacitySlider.alpha = 1.0
         if player.timeControlStatus == .playing {
             hideButtonTimer?.invalidate()
             hideButtonTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(hidePlayButton), userInfo: nil, repeats: false)
@@ -643,16 +686,41 @@ class AnalysisVideoPlayerViewController: UIViewController {
             }
         }
     }
+    
+    @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        let delta = translation.x / view.bounds.height
+        let sliderChange = Float(delta) * (slider.maximumValue - slider.minimumValue)
+        if gesture.state == .changed {
+            slider.value += sliderChange * 0.7
+            gesture.setTranslation(.zero, in: view)
+        }
+        sliderValueChanged()
+    }
+    
     @objc func sliderValueChanged() {
         let seconds = Double(slider.value)
-        let targetTime = CMTime(value: CMTimeValue(seconds), timescale: 1)
-        player.seek(to: targetTime)
+        let milliSeconds = seconds * 1000
+        let targetTime = CMTime(value: CMTimeValue(milliSeconds), timescale: 1000)
+        player.seek(to: targetTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+    }
+    
+    @objc func opacitySliderValueChanged() {
+        let value = chartOpacitySlider.value
+        self.chart.alpha = CGFloat(value / 100)
+        playerView.layer.opacity = 1 - (value / 100)
+        landmarksView.layer.opacity = 1 - (value / 100)
+        
     }
     
     func convertPixelsToPoints(_ points: [CGPoint]) -> [CGPoint] {
         if videoIsPortrait == true {
             let scale = (UIScreen.main.scale) / (CGFloat(videoWidth!) / CGFloat(videoHeight!)) * 0.95
             return points.map { CGPoint(x: $0.x / scale, y: $0.y / scale) }
+        } else if videoAngle == 180 {
+            let scale = UIScreen.main.scale * 0.95
+            let minus = videoWidth! / (videoHeight!/375)
+            return points.map { CGPoint(x: (CGFloat(minus) - ($0.y / scale)), y: ($0.x / scale)) }
         } else {
             let scale = UIScreen.main.scale * 0.95
             let minus = videoHeight! / (videoWidth!/375)
@@ -663,11 +731,11 @@ class AnalysisVideoPlayerViewController: UIViewController {
     func calculateAngles() {
         if anglesGenerated == false {
             for (index, landmark) in videoLandmarks3.enumerated() {
-                let angle1: Float = Float(angleBetweenVectors(landmark[0], landmark[1], landmark[2]))
-                let angle2: Float = Float(angleBetweenVectors(landmark[0], landmark[5], landmark[6]))
-                let angle3: Float = Float(angleBetweenVectors(landmark[0], landmark[9], landmark[10]))
-                let angle4: Float = Float(angleBetweenVectors(landmark[0], landmark[13], landmark[14]))
-                let angle5: Float = Float(angleBetweenVectors(landmark[0], landmark[17], landmark[18]))
+                let angle1: Float = Float(angleBetweenVectors1(landmark[0], landmark[1], landmark[2]))
+                let angle2: Float = Float(angleBetweenVectors1(landmark[0], landmark[5], landmark[6]))
+                let angle3: Float = Float(angleBetweenVectors1(landmark[0], landmark[9], landmark[10]))
+                let angle4: Float = Float(angleBetweenVectors1(landmark[0], landmark[13], landmark[14]))
+                let angle5: Float = Float(angleBetweenVectors1(landmark[0], landmark[17], landmark[18]))
 
                 angleDataList[0].append(chartAngleData(angles: angle1, timestamps: videoTimestamps[index]))
                 angleDataList[1].append(chartAngleData(angles: angle2, timestamps: videoTimestamps[index]))

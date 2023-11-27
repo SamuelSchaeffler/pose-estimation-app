@@ -298,6 +298,7 @@ class MediaPipeHandLandmarkerVideo {
                     
                 } else {
                     reader.cancelReading()
+                    NotificationCenter.default.post(name: Notification.Name("updateProgress"), object: 0)
                     let videoLandmarksString = videoLandmarksToString(landmarks: videoLandmarks, worldLandmarks: videoWorldLandmarks, timestamps: videoTimestamps)
                     mediaModel.saveVideoLandmarks(objectID: objectID, data: videoLandmarksString!)
                     videoLandmarks = []
