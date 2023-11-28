@@ -255,6 +255,7 @@ class AnalysisVideoPlayerViewController: UIViewController {
         
         angleDataList = [[], [], [], [], []]
         angleChartColors = [.clear, .clear, .clear, .clear, .clear]
+        calculateAngles()
         
         player.currentItem?.addObserver(self, forKeyPath: "status", options: .new, context: nil)
         let interval = CMTime(seconds: 0.1, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
@@ -292,7 +293,6 @@ class AnalysisVideoPlayerViewController: UIViewController {
         let naturalSize = videoTrack.naturalSize
         let videoOrientation = videoTrack.preferredTransform
         videoAngle = atan2(videoOrientation.b, videoOrientation.a) * (180 / .pi)
-        print("videoAngle: \(videoAngle)")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if abs(videoAngle) == 90 {
             // Hochformat
@@ -370,16 +370,9 @@ class AnalysisVideoPlayerViewController: UIViewController {
         chartView = controller.view
         
         if buttonStates[5] {
-            
-            calculateAngles()
-            
-            
-            
-            
             var angleController = UIHostingController(rootView: AngleChart())
             chartView = angleController.view
         }
-        
         
         chartView.frame = CGRect(x: 40, y: 20, width: Int(UIScreen.main.bounds.size.width) - 80, height: Int(UIScreen.main.bounds.size.height) - 80)
         chartView.backgroundColor = .clear
@@ -409,7 +402,6 @@ class AnalysisVideoPlayerViewController: UIViewController {
                     anglePointMarks[i] = angleDataList[i][index].angles
                 }
             }
-            
             
             if firstFrame == true {
                 landmarks = []
@@ -525,11 +517,11 @@ class AnalysisVideoPlayerViewController: UIViewController {
             
             for i in 0..<landmarksView.selectedCounter {
                 if buttonStates[2] {
-                    videoPointMarks[i] = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[0]].x)
+                    videoPointMarks[i] = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[i]].x)
                 } else if buttonStates[3] {
-                    videoPointMarks[i] = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[0]].y)
+                    videoPointMarks[i] = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[i]].y)
                 } else if buttonStates[4]{
-                    videoPointMarks[i] = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[0]].z)
+                    videoPointMarks[i] = (videoLandmarks3[currentLandmarkIndex][landmarksView.landmarkPoints[i]].z)
                 }
             }
             
@@ -568,6 +560,11 @@ class AnalysisVideoPlayerViewController: UIViewController {
             openChartButton.isHidden = true
             
             buttonStates[5].toggle()
+            
+            for i in 0..<5 {
+                anglePointMarks[i] = angleDataList[i][currentLandmarkIndex].angles
+            }
+            
             updateChartView()
         } else {
             let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold)
@@ -781,7 +778,6 @@ class AnalysisVideoPlayerViewController: UIViewController {
         }
         
         private func setupTapGestureRecognizer() {
-            print("setup TapGestureRecognizer")
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
             tapGestureRecognizer.isEnabled = true
             addGestureRecognizer(tapGestureRecognizer)
@@ -790,17 +786,12 @@ class AnalysisVideoPlayerViewController: UIViewController {
         @objc private func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
             if touchIsActive {
                 let tapLocation = gestureRecognizer.location(in: self)
-                // ... finde die nächste Landmarke und ändere ihre Farbe ...
-                print("handle Tap Location: \(tapLocation)")
                 let touchPoint = tapLocation
                 if let nearestLandmark = nearestLandmark(to: touchPoint) {
-                    print(nearestLandmark)
+                    //print(nearestLandmark)
                     if distance(from: nearestLandmark.point, to: touchPoint) < 20 {  // Reaktionsradius definieren
                         
-                        // Die Farbe der nächsten Landmarke ändern
                         if let index = landmarks.firstIndex(where: { $0.point == nearestLandmark.point }) {
-                            print("change Color")
-                            
                             
                                 if landmarks[index].selected {
                                     
@@ -828,7 +819,7 @@ class AnalysisVideoPlayerViewController: UIViewController {
                                             chartColors.append(.clear)
                                             print(chartColors)
                                             fingerNumbers.remove(at: i)
-                                            fingerNumbers.append(100)
+                                            fingerNumbers.append(0)
                                         }
                                         
                                     }
@@ -836,21 +827,21 @@ class AnalysisVideoPlayerViewController: UIViewController {
                                 } else if selectedCounter < 21 {
                                     
                                     if index == 0 {
-                                        landmarks[index].color = .systemBlue//UIColor(red: 51, green: 51, blue: 255, alpha: 1)
+                                        landmarks[index].color = .systemBlue
                                     } else if index >= 1 && index <= 4 {
-                                        landmarks[index].color = .systemRed//UIColor(red: 179, green: 0, blue: 0, alpha: 1)
+                                        landmarks[index].color = .systemRed
                                         angleChartColors[0] = .systemRed
                                     } else if index >= 5 && index <= 8 {
-                                        landmarks[index].color = .systemYellow//UIColor(red: 255, green: 255, blue: 0, alpha: 1)
+                                        landmarks[index].color = .systemYellow
                                         angleChartColors[1] = .systemYellow
                                     } else if index >= 9 && index <= 12 {
-                                        landmarks[index].color = .magenta//UIColor(red: 255, green: 0, blue: 255, alpha: 1)
+                                        landmarks[index].color = .magenta
                                         angleChartColors[2] = .magenta
                                     } else if index >= 13 && index <= 16 {
-                                        landmarks[index].color = .systemGreen//UIColor(red: 102, green: 255, blue: 102, alpha: 1)
+                                        landmarks[index].color = .systemGreen
                                         angleChartColors[3] = .systemGreen
                                     } else if index >= 17 && index <= 20 {
-                                        landmarks[index].color = .systemOrange//UIColor(red: 255, green: 165, blue: 0, alpha: 1)
+                                        landmarks[index].color = .systemOrange
                                         angleChartColors[4] = .systemOrange
                                     }
                                     

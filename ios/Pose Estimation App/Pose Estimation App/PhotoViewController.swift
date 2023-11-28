@@ -230,11 +230,11 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             
             
-        } else {
-            let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie den neuen Text ein:", preferredStyle: .alert)
+        } else if indexPath.row == 2 {
+            let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie die neue Auflösung ein:", preferredStyle: .alert)
             
             alertController.addTextField { textField in
-                textField.placeholder = "Neuer Text"
+                textField.placeholder = "Auflösung"
             }
             
             let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
@@ -242,6 +242,146 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let newText = textField.text ?? ""
                 self?.Metadata[indexPath.row] = newText
                 self?.mediaModel.savePhotoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+                self?.tableView.reloadData()
+            }
+            let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+            
+            alertController.addAction(saveAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+        } else if indexPath.row == 3 {
+            let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie den neuen Kamerahersteller ein:", preferredStyle: .alert)
+            
+            alertController.addTextField { textField in
+                textField.placeholder = "Kamerahersteller"
+            }
+            
+            let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
+                guard let textField = alertController.textFields?.first else { return }
+                let newText = textField.text ?? ""
+                self?.Metadata[indexPath.row] = newText
+                self?.mediaModel.saveVideoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+                self?.tableView.reloadData()
+            }
+            let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+            
+            alertController.addAction(saveAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+        } else if indexPath.row == 4 {
+            let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie die neuen BPM ein:", preferredStyle: .alert)
+            
+            alertController.addTextField { textField in
+                textField.placeholder = "BPM"
+            }
+            
+            let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
+                guard let textField = alertController.textFields?.first else { return }
+                let newText = textField.text ?? ""
+                self?.Metadata[indexPath.row] = newText
+                self?.mediaModel.saveVideoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+                self?.tableView.reloadData()
+            }
+            let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+            
+            alertController.addAction(saveAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+        } else if indexPath.row == 5 {
+            let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie das neue Rudiment ein:", preferredStyle: .alert)
+            
+            alertController.addTextField { textField in
+                textField.placeholder = "Rudiment"
+            }
+            
+            let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
+                guard let textField = alertController.textFields?.first else { return }
+                let newText = textField.text ?? ""
+                self?.Metadata[indexPath.row] = newText
+                self?.mediaModel.saveVideoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+                self?.tableView.reloadData()
+            }
+            let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+            
+            alertController.addAction(saveAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+        } else if indexPath.row == 6 {
+            let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie den neuen Interpret ein:", preferredStyle: .alert)
+            
+            alertController.addTextField { textField in
+                textField.placeholder = "Interpret"
+            }
+            
+            let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
+                guard let textField = alertController.textFields?.first else { return }
+                let newText = textField.text ?? ""
+                self?.Metadata[indexPath.row] = newText
+                self?.mediaModel.saveVideoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+                self?.tableView.reloadData()
+            }
+            let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+            
+            alertController.addAction(saveAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+        } else if indexPath.row == 7 {
+            let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie die neue Hand ein:", preferredStyle: .alert)
+            
+            alertController.addTextField { textField in
+                textField.placeholder = "Hand"
+            }
+            
+            let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
+                guard let textField = alertController.textFields?.first else { return }
+                let newText = textField.text ?? ""
+                self?.Metadata[indexPath.row] = newText
+                self?.mediaModel.saveVideoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+                self?.tableView.reloadData()
+            }
+            let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+            
+            alertController.addAction(saveAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+        } else if indexPath.row == 8 {
+            let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie den neuen Grip ein:", preferredStyle: .alert)
+            
+            alertController.addTextField { textField in
+                textField.placeholder = "Grip"
+            }
+            
+            let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
+                guard let textField = alertController.textFields?.first else { return }
+                let newText = textField.text ?? ""
+                self?.Metadata[indexPath.row] = newText
+                self?.mediaModel.saveVideoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+                self?.tableView.reloadData()
+            }
+            let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+            
+            alertController.addAction(saveAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+        } else if indexPath.row == 9 {
+            let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie den neuen Grip Matched ein:", preferredStyle: .alert)
+            
+            alertController.addTextField { textField in
+                textField.placeholder = "Grip Matched"
+            }
+            
+            let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
+                guard let textField = alertController.textFields?.first else { return }
+                let newText = textField.text ?? ""
+                self?.Metadata[indexPath.row] = newText
+                self?.mediaModel.saveVideoMetadata(objectID: self!.objectID!, array: self!.Metadata)
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)

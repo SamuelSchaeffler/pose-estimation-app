@@ -235,6 +235,7 @@ class MediaPipeHandLandmarkerVideo {
     var videoWorldLandmarks: [[SCNVector3]] = []
     var videoTimestamps: [Int] = []
     
+    var videoAngle: CGFloat = 0
     
     
     init() {
@@ -266,6 +267,7 @@ class MediaPipeHandLandmarkerVideo {
             }
             let naturalSize = videoTrack.naturalSize
             let transform = videoTrack.preferredTransform
+            videoAngle = atan2(transform.b, transform.a) * (180 / .pi)
             let duration = CMTimeGetSeconds(asset.duration) * 1000
             guard let reader = try? AVAssetReader(asset: asset) else {
                 print("Fehler beim Erstellen des AVAssetReaders")
@@ -325,7 +327,7 @@ class MediaPipeHandLandmarkerVideo {
     func processFrameWithMediaPipe(orginalImage: UIImage, image: UIImage, timestamp: CMTime) -> UIImage {
         let mpImage = try! MPImage(uiImage: image)
         let timestampInMilliseconds = Int(CMTimeGetSeconds(timestamp) * 1000)
-        print(timestampInMilliseconds)
+        //print(timestampInMilliseconds)
         let result = try! self.handLandmarker?.detect(videoFrame: mpImage, timestampInMilliseconds: timestampInMilliseconds)
         let annotatedImage = self.drawLandmarks(result: result!, image: orginalImage)
         if result!.worldLandmarks.count > 0 {
@@ -339,7 +341,7 @@ class MediaPipeHandLandmarkerVideo {
     func processFrameWithMediaPipe2(orginalImage: UIImage, image: UIImage, timestamp: CMTime) {
         let mpImage = try! MPImage(uiImage: image)
         let timestampInMilliseconds = Int(CMTimeGetSeconds(timestamp) * 1000)
-        print(timestampInMilliseconds)
+        //print(timestampInMilliseconds)
         let result = try! self.handLandmarker?.detect(videoFrame: mpImage, timestampInMilliseconds: timestampInMilliseconds)
         if result!.worldLandmarks.count > 0 {
             let landmarks = getLandmarks(result: result!, image: image)
@@ -470,10 +472,17 @@ class MediaPipeHandLandmarkerVideo {
         let coordinates = result.worldLandmarks[0]
         var points: [SCNVector3] = []
         let factor = CGFloat(1000)
-        if imageSize.height > imageSize.width {
+        if videoAngle == 90 {
             for i in 0..<21 {
-                let xPoint = factor - CGFloat(coordinates[i].y) * factor
+                let xPoint = CGFloat(coordinates[i].y) * factor * (-1)
                 let yPoint = CGFloat(coordinates[i].x) * factor
+                let zPoint = CGFloat(coordinates[i].z) * factor
+                points.append(SCNVector3(x: Float(xPoint), y: Float(yPoint), z: Float(zPoint)))
+            }
+        } else if videoAngle == 180 {
+            for i in 0..<21 {
+                let xPoint = CGFloat(coordinates[i].x) * factor * (-1)
+                let yPoint = CGFloat(coordinates[i].y) * factor * (-1)
                 let zPoint = CGFloat(coordinates[i].z) * factor
                 points.append(SCNVector3(x: Float(xPoint), y: Float(yPoint), z: Float(zPoint)))
             }

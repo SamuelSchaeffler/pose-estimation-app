@@ -26,7 +26,7 @@ var landmarkDataList: [[chartLandmarkData]] = [[], [], [], [], [], [], [], [], [
 var videoPointMarks: [Float] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 var videoPointMarkTime: Int = 0
 var chartColors: [Color] = [.clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear]
-var fingerNumbers: [Int] = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+var fingerNumbers: [Int] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 var angleDataList: [[chartAngleData]] = [[], [], [], [], []]
 var anglePointMarks: [Float] = [0, 0, 0, 0, 0]
@@ -55,7 +55,7 @@ struct LandmarkChart: View {
                 .symbol {
                     Image(systemName: "\(fingerNumbers[index]).circle.fill")
                     .symbolRenderingMode(.palette)
-                    .foregroundStyle(.black, chartColors[index])
+                    .foregroundStyle((chartColors[index] == .clear ? .clear : .black), chartColors[index])
                     .font(.system(size: 12))
                 }
             }
@@ -97,3 +97,5 @@ struct AngleChart: View {
         .chartYAxisLabel(position: .leading, alignment: .center) {Text("Winkel (°)")}.background(.clear)
     }
 }
+
+

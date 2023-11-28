@@ -238,7 +238,7 @@ class ImportedViewController: UIViewController {
         selectionStatus = [Bool](repeating: false, count: mediaModel.getMedia().count)
         selectedCount = 0
             self.collectionView.reloadData()
-        print("Importierte Medien: \(self.mediaURL.count)")
+        //print("Importierte Medien: \(self.mediaURL.count)")
         }
 
     func generateThumbnail(for videoURL: URL) -> UIImage? {
