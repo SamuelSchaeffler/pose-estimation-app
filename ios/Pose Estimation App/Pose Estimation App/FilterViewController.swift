@@ -8,6 +8,8 @@
 import UIKit
 import RangeUISlider
 
+let currentDate = DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .none)
+
 var filterSettings: [String] = ["0","","1","","","","0","0"]
 var dateFilterSettings: [String] = ["false", "", ""]
 var bpmFilterSettings: [String] = ["false", "50", "150"]
@@ -16,7 +18,7 @@ class FilterViewController: UIViewController, RangeUISliderDelegate {
     
 
     
-    var importedVC = ImportedViewController()
+    
     var mediaModel = MediaModel()
     
     class LineView: UIView {
@@ -390,6 +392,15 @@ class FilterViewController: UIViewController, RangeUISliderDelegate {
         interpretTextField.text = filterSettings[4]
         gripTextField.text = filterSettings[5]
         
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        if dateFilterSettings[1] == "" {
+            dateFilterSettings[1] = formatter.string(from: Date())
+        }
+        if dateFilterSettings[2] == "" {
+            dateFilterSettings[2] = formatter.string(from: Date())
+        }
+        
         customView.center = view.center
         view.addSubview(customView)
         view.addSubview(filterButton)
@@ -474,7 +485,6 @@ class FilterViewController: UIViewController, RangeUISliderDelegate {
     @objc func closeFilter() {
         dismiss(animated: false, completion: nil)
         NotificationCenter.default.post(name: Notification.Name("SelectedPhotosUpdated"), object: self.mediaModel.getMedia())
-        self.importedVC.collectionView.reloadData()
     }
     
     @objc func dateToggleChanged(_ sender: UISwitch) {

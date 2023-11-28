@@ -120,8 +120,63 @@ class MediaModel: ObservableObject {
     
     func getObjectIDs() -> [NSManagedObjectID] {
         
+        var filter = filterSettings
+        var dateFilter = dateFilterSettings
+        var bpmFilter = bpmFilterSettings
+        
         let entityName = "Media"
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        
+        var mediaPredicate = NSPredicate(value: true)
+        var datePredicate = NSPredicate(value: true)
+        var bpmPredicate = NSPredicate(value: true)
+        var interpretPredicate = NSPredicate(value: true)
+        var gripPredicate = NSPredicate(value: true)
+        var gripMatchedPredicate = NSPredicate(value: true)
+        var handPredicate = NSPredicate(value: true)
+        
+        if filter[0] == "2" {
+            mediaPredicate = NSPredicate(format: "isPhoto == %@", argumentArray: ["true"])
+        } else if filter[0] == "1" {
+            mediaPredicate = NSPredicate(format: "isPhoto == %@", argumentArray: ["false"])
+        }
+        
+        if dateFilter[0] == "true" {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            let startDate = dateFormatter.date(from: dateFilter[1])
+            let endDate = dateFormatter.date(from: dateFilter[2])
+            datePredicate = NSPredicate(format: "aufnahmedatum >= %@ AND aufnahmedatum <= %@", startDate as! NSDate, endDate as! NSDate)
+        }
+        
+        if bpmFilter[0] == "true" {
+                let minBPM = Int64(bpmFilter[1])
+                let maxBPM = Int64(bpmFilter[2])
+            bpmPredicate = NSPredicate(format: "bpm >= %@ AND bpm <= %@", NSNumber(value: minBPM!), NSNumber(value: maxBPM!))
+        }
+        
+        if filter[4] != "" {
+            interpretPredicate = NSPredicate(format: "interpret == %@", argumentArray: [String(filter[4])])
+        }
+        
+        if filter[5] != "" {
+            interpretPredicate = NSPredicate(format: "grip == %@", argumentArray: [String(filter[5])])
+        }
+        
+        if filter[6] == "2" {
+            gripMatchedPredicate = NSPredicate(format: "grip_matched == %@", argumentArray: ["Nein"])
+        } else if filter[6] == "1" {
+            gripMatchedPredicate = NSPredicate(format: "grip_matched == %@", argumentArray: ["Ja"])
+        }
+        
+        if filter[7] == "2" {
+            handPredicate = NSPredicate(format: "hand == %@", argumentArray: ["Rechts"])
+        } else if filter[7] == "1" {
+            handPredicate = NSPredicate(format: "hand == %@", argumentArray: ["Links"])
+        }
+        
+        let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [mediaPredicate, datePredicate, bpmPredicate, interpretPredicate, gripPredicate, gripMatchedPredicate, handPredicate])
+        fetchRequest.predicate = combinedPredicate
         
         do {
             let results = try context.fetch(fetchRequest)
