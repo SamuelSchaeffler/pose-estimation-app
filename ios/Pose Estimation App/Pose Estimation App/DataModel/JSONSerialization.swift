@@ -99,47 +99,6 @@ func scnVector3ArrayToCGPointArray(_ vectors: [[SCNVector3]]) -> [[CGPoint]] {
 func addVector(_ vector1: SCNVector3, _ vector2: SCNVector3) -> SCNVector3 {
     return SCNVector3(vector1.x + vector2.x, vector1.y + vector2.y, vector1.z + vector2.z)
 }
-func movingAverage(for landmarks: [[SCNVector3]], windowSize: Int) -> [[SCNVector3]] {
-    var smoothedLandmarks = [[SCNVector3]]()
-
-    for i in 0..<landmarks.count {
-        var smoothedFrame = [SCNVector3]()
-        for j in 0..<landmarks[i].count {
-            var sum = SCNVector3(0, 0, 0)
-            var count = 0
-            for k in max(0, i - windowSize / 2)...min(landmarks.count - 1, i + windowSize / 2) {
-                sum = addVector(sum, landmarks[k][j])
-                count += 1
-            }
-            smoothedFrame.append(SCNVector3(sum.x / Float(count), sum.y / Float(count), sum.z / Float(count)))
-        }
-        smoothedLandmarks.append(smoothedFrame)
-    }
-
-    return smoothedLandmarks
-}
-func lowPassFilter(for landmarks: [[SCNVector3]], alpha: Float) -> [[SCNVector3]] {
-    guard !landmarks.isEmpty else { return [] }
-    
-    var filteredLandmarks = [landmarks[0]] // Start with the first set of landmarks
-
-    for i in 1..<landmarks.count {
-        var filteredFrame = [SCNVector3]()
-        for j in 0..<landmarks[i].count {
-            let previousFilteredValue = filteredLandmarks[i-1][j]
-            let currentValue = landmarks[i][j]
-            let filteredValue = SCNVector3(
-                alpha * currentValue.x + (1 - alpha) * previousFilteredValue.x,
-                alpha * currentValue.y + (1 - alpha) * previousFilteredValue.y,
-                alpha * currentValue.z + (1 - alpha) * previousFilteredValue.z
-            )
-            filteredFrame.append(filteredValue)
-        }
-        filteredLandmarks.append(filteredFrame)
-    }
-
-    return filteredLandmarks
-}
 
 func angleBetweenVectors1(_ a: SCNVector3, _ b: SCNVector3, _ c: SCNVector3) -> CGFloat {
     let ab = SCNVector3(b.x - a.x, b.y - a.y, b.z - a.z)

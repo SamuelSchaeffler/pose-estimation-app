@@ -230,7 +230,8 @@ class MediaPipeHandLandmarkerVideo {
     var videoURL: URL?
     var result: HandLandmarkerResult?
     
-   
+    var tempTimestamp: Int = 0
+    
     var videoLandmarks: [[SCNVector3]] = []
     var videoWorldLandmarks: [[SCNVector3]] = []
     var videoTimestamps: [Int] = []
@@ -244,7 +245,7 @@ class MediaPipeHandLandmarkerVideo {
         options.numHands = 2
         options.minHandDetectionConfidence = 0.4
         options.minHandPresenceConfidence = 0.4
-        options.minTrackingConfidence = 0.4
+        options.minTrackingConfidence = 0.9
         
         if let modelPath = Bundle.main.path(forResource: "hand_landmarker", ofType: "task") {
             options.baseOptions.modelAssetPath = modelPath
@@ -285,10 +286,12 @@ class MediaPipeHandLandmarkerVideo {
                 AVVideoHeightKey: naturalSize.height
             ]
             let context = CIContext()
+            
             while reader.status == .reading {
                 if let sampleBuffer = readerOutput.copyNextSampleBuffer() {
                     autoreleasepool {
-                        let timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
+                        var timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
+                        
                         let orginalImage = self.convertSampleBufferToUIImage(sampleBuffer, context: context)
                         // let image = resizeImage(image: orginalImage!)
                         let progress = Float((CMTimeGetSeconds(timestamp) * 1000) / duration)
@@ -301,6 +304,8 @@ class MediaPipeHandLandmarkerVideo {
                 } else {
                     reader.cancelReading()
                     NotificationCenter.default.post(name: Notification.Name("updateProgress"), object: 0)
+//                    let filteredLandmarks = PT2Filter(to: videoLandmarks, withTimeConstant: 5.0)
+//                    let filteredWorldLandmarks = PT2Filter(to: videoWorldLandmarks, withTimeConstant: 5.0)
                     let videoLandmarksString = videoLandmarksToString(landmarks: videoLandmarks, worldLandmarks: videoWorldLandmarks, timestamps: videoTimestamps)
                     mediaModel.saveVideoLandmarks(objectID: objectID, data: videoLandmarksString!)
                     videoLandmarks = []
@@ -340,8 +345,14 @@ class MediaPipeHandLandmarkerVideo {
     
     func processFrameWithMediaPipe2(orginalImage: UIImage, image: UIImage, timestamp: CMTime) {
         let mpImage = try! MPImage(uiImage: image)
-        let timestampInMilliseconds = Int(CMTimeGetSeconds(timestamp) * 1000)
-        //print(timestampInMilliseconds)
+        var timestampInMilliseconds = Int(CMTimeGetSeconds(timestamp) * 1000)
+        
+        if timestampInMilliseconds == tempTimestamp {
+            timestampInMilliseconds += 1
+        }
+        tempTimestamp = timestampInMilliseconds
+        
+        print(timestampInMilliseconds)
         let result = try! self.handLandmarker?.detect(videoFrame: mpImage, timestampInMilliseconds: timestampInMilliseconds)
         if result!.worldLandmarks.count > 0 {
             let landmarks = getLandmarks(result: result!, image: image)
@@ -352,10 +363,25 @@ class MediaPipeHandLandmarkerVideo {
         }
     }
     
+
+    
     func drawLandmarks(result: HandLandmarkerResult, image: UIImage) -> UIImage? {
         autoreleasepool {
             var index = -1
-            let imageSize = image.size
+            var imageSize = image.size
+            let targetSize = CGSize(width: 1920, height: 1080)
+            
+            let widthRatio  = targetSize.width  / imageSize.width
+            let heightRatio = targetSize.height / imageSize.height
+            var newSize: CGSize
+            if(widthRatio > heightRatio) {
+                newSize = CGSize(width: imageSize.width * heightRatio, height: imageSize.height * heightRatio)
+            } else {
+                newSize = CGSize(width: imageSize.width * widthRatio,  height: imageSize.height * widthRatio)
+            }
+            
+            imageSize = newSize
+            
             UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
                         
             for hand in result.landmarks {
@@ -497,7 +523,21 @@ class MediaPipeHandLandmarkerVideo {
         return points
     }
     func getLandmarks(result: HandLandmarkerResult, image: UIImage) -> [SCNVector3] {
-        let imageSize = image.size
+        var imageSize = image.size
+        
+        let targetSize = CGSize(width: 1920, height: 1080)
+        
+        let widthRatio  = targetSize.width  / imageSize.width
+        let heightRatio = targetSize.height / imageSize.height
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: imageSize.width * heightRatio, height: imageSize.height * heightRatio)
+        } else {
+            newSize = CGSize(width: imageSize.width * widthRatio,  height: imageSize.height * widthRatio)
+        }
+        
+        imageSize = newSize
+        
         let coordinates = result.landmarks[0]
         var points: [SCNVector3] = []
         if imageSize.height < imageSize.width {

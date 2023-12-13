@@ -124,11 +124,23 @@ class ImportedViewController: UIViewController {
     var selectedCount = 0
     let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
 
+    var alertController: UIAlertController = {
+        let alertController = UIAlertController(title: "Handerkennung wird ausgeführt", message: "Bitte warten...", preferredStyle: .alert)
+        
+        var progressBar = UIProgressView(progressViewStyle: .default)
+        progressBar.setProgress(0.0, animated: true)
+        progressBar.frame = CGRect(x: 10, y: 90, width: 250, height: 3)
+        alertController.view.addSubview(progressBar)
+
+        return alertController
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateUIWithSelectedMedia), name: Notification.Name("SelectedPhotosUpdated"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateProgress(_:)), name: Notification.Name("updateProgress"), object: nil)
         
         self.mediaURL = mediaModel.getMedia()
         selectionStatus = [Bool](repeating: false, count: mediaModel.getMedia().count)
@@ -188,18 +200,90 @@ class ImportedViewController: UIViewController {
     }
     
     @objc func openComparison() {
-        let VC = PhotoComparisonViewController()
+        
+        let pVC = PhotoComparisonViewController()
+        let vVC = VideoComparisonViewController()
         let selectedIndices = selectionStatus.enumerated().compactMap { index, isSelected in
             isSelected ? index : nil
         }
-
+        
+        var isPhotoArray: [String] = []
+        self.objectIDs = mediaModel.getObjectIDs()
         for i in 0..<(selectedIndices.count) {
-            VC.images.append(UIImage(contentsOfFile: mediaURL[selectedIndices[i]].path)!)
+            isPhotoArray.append(mediaModel.checkMediaType(objectID: objectIDs[selectedIndices[i]]))
         }
-        
-        VC.modalPresentationStyle = .overFullScreen
-        self.present(VC, animated: false, completion: nil)
-        
+        if isPhotoArray.allSatisfy({ $0 == "true" }) {
+            for i in 0..<(selectedIndices.count) {
+                pVC.images.append(UIImage(contentsOfFile: mediaURL[selectedIndices[i]].path)!)
+            }
+            pVC.modalPresentationStyle = .overFullScreen
+            self.present(pVC, animated: false, completion: nil)
+        } else if isPhotoArray.allSatisfy({ $0 == "false" }) {
+            if selectedIndices.count == 2 {
+                var isAlertControllerPresented = false
+                if mediaModel.checkVideoLandmarks(objectID: objectIDs[selectedIndices[0]]) == false {
+                    if !isAlertControllerPresented {
+                        self.present(alertController, animated: false)
+                        isAlertControllerPresented = true
+                    }
+                    let handLandmarker = MediaPipeHandLandmarkerVideo()
+                    DispatchQueue.main.async { [self] in
+                        handLandmarker.generateLandmarks(objectID: objectIDs[selectedIndices[0]])
+                        alertController.dismiss(animated: false)
+                        isAlertControllerPresented = false
+                    }
+                }
+                if mediaModel.checkVideoLandmarks(objectID: objectIDs[selectedIndices[1]]) == false {
+                    if !isAlertControllerPresented {
+                        self.present(alertController, animated: false)
+                        isAlertControllerPresented = true
+                    }
+                    let handLandmarker = MediaPipeHandLandmarkerVideo()
+                    DispatchQueue.main.async { [self] in
+                        handLandmarker.generateLandmarks(objectID: objectIDs[selectedIndices[1]])
+                        alertController.dismiss(animated: false)
+                        isAlertControllerPresented = false
+                    }
+                }
+                DispatchQueue.main.async { [self] in
+                    let string1 = mediaModel.getVideoLandmarks(objectID: objectIDs[selectedIndices[0]])
+                    let string2 = mediaModel.getVideoLandmarks(objectID: objectIDs[selectedIndices[1]])
+                    let data1 = stringToVideoLandmarks(string1)!
+                    let data2 = stringToVideoLandmarks(string2)!
+
+                    
+                    vVC.video1URL = mediaURL[selectedIndices[0]]
+                    vVC.video2URL = mediaURL[selectedIndices[1]]
+                    vVC.video1Landmarks = scnVector3ArrayToCGPointArray(data1.0)
+                    vVC.video2Landmarks = scnVector3ArrayToCGPointArray(data2.0)
+                    vVC.video1Landmarks3 = data1.1//movingAverage(for: data1.1, windowSize: 10)
+                    vVC.video2Landmarks3 = data2.1//movingAverage(for: data2.1, windowSize: 10)
+                    vVC.video1Timestamps = data1.2
+                    vVC.video2Timestamps = data2.2
+                }
+                vVC.modalPresentationStyle = .fullScreen
+                DispatchQueue.main.async { [weak self] in
+                    guard let strongSelf = self else { return }
+                    if strongSelf.presentedViewController == nil {
+                        strongSelf.present(vVC, animated: false)
+                    } else {
+                        strongSelf.presentedViewController?.dismiss(animated: false, completion: {
+                            strongSelf.present(vVC, animated: false)
+                        })
+                    }
+                }
+            } else {
+                let alertController = UIAlertController(title: "Achtung!", message: "Bitte wählen Sie insgesamt 2 Videos aus.", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                present(alertController, animated: false, completion: nil)
+            }
+        } else {
+            let alertController = UIAlertController(title: "Achtung!", message: "Bitte wählen Sie nur Fotos oder Videos aus.", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            present(alertController, animated: false, completion: nil)
+        }
     }
 
     @objc func buttonPressed(sender: UIButton) {
@@ -224,15 +308,25 @@ class ImportedViewController: UIViewController {
         }
         let point = gesture.location(in: collectionView)
         if let indexPath = collectionView.indexPathForItem(at: point) {
+            
             if selectedCount < 5 || selectionStatus[indexPath.item] {
                 selectionStatus[indexPath.item] = !selectionStatus[indexPath.item]
                 selectedCount += selectionStatus[indexPath.item] ? 1 : -1
                 collectionView.reloadItems(at: [indexPath])
             }
+            
         }
         compareButton.isHidden = selectedCount < 1
     }
 
+    @objc func updateProgress(_ notification: Notification) {
+        RunLoop.main.run(until: Date(timeIntervalSinceNow: 0.001))
+        let progress = notification.object as! Float
+        if let progressBar = self.alertController.view.subviews.first(where: { $0 is UIProgressView }) as? UIProgressView {
+            progressBar.setProgress(progress, animated: false)
+        }
+    }
+    
     func updateCollectionView(withMediaURL mediaURL: [URL]) {
         self.mediaURL = mediaModel.getMedia()
         selectionStatus = [Bool](repeating: false, count: mediaModel.getMedia().count)

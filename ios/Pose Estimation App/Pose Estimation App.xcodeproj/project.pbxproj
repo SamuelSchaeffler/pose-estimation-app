@@ -23,6 +23,7 @@
 		3B32E1F72AEFC8BF00344718 /* RangeUISlider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B32E1EF2AEFC8B700344718 /* RangeUISlider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3B3B6C042AC1AEB40073055F /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */; };
 		3B3B6C062AC1B0700073055F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3B6C052AC1B0700073055F /* VideoViewController.swift */; };
+		3B62442E2B1B4C2000E7B795 /* VideoComparisonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B62442D2B1B4C2000E7B795 /* VideoComparisonViewController.swift */; };
 		3B64D2F02AEBAABF001A6782 /* VideoAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B64D2EF2AEBAABF001A6782 /* VideoAnalysisViewController.swift */; };
 		3B64D2F22AEBAAFD001A6782 /* LandmarkTimeGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B64D2F12AEBAAFD001A6782 /* LandmarkTimeGraphViewController.swift */; };
 		3B87238C2AF64D4F00F6AA03 /* AnalysisVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B87238B2AF64D4F00F6AA03 /* AnalysisVideoPlayerViewController.swift */; };
@@ -40,6 +41,7 @@
 		3BB990442ACEB6E600F324C2 /* FullscreenPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB990432ACEB6E600F324C2 /* FullscreenPhotoViewController.swift */; };
 		3BCD89E12ACAB6260014CECC /* hand_landmarker.task in Resources */ = {isa = PBXBuildFile; fileRef = 3BCD89DC2ACAB6260014CECC /* hand_landmarker.task */; };
 		3BCD89E32ACAC5820014CECC /* HandTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD89E22ACAC5820014CECC /* HandTrackingViewController.swift */; };
+		3BD5F4CA2B286E0D009BB712 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD5F4C92B286E0D009BB712 /* Filters.swift */; };
 		3BFA8E642AF10E8700092043 /* JSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFA8E632AF10E8700092043 /* JSONSerialization.swift */; };
 		4BB6A1C81BA4DC71D8D48002 /* Pods_Pose_Estimation_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */; };
 /* End PBXBuildFile section */
@@ -109,6 +111,7 @@
 		3B32E1E72AEFC8B700344718 /* RangeUISlider.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RangeUISlider.xcodeproj; path = "RangeUISlider-master/RangeUISlider.xcodeproj"; sourceTree = "<group>"; };
 		3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		3B3B6C052AC1B0700073055F /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		3B62442D2B1B4C2000E7B795 /* VideoComparisonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoComparisonViewController.swift; sourceTree = "<group>"; };
 		3B64D2EF2AEBAABF001A6782 /* VideoAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAnalysisViewController.swift; sourceTree = "<group>"; };
 		3B64D2F12AEBAAFD001A6782 /* LandmarkTimeGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkTimeGraphViewController.swift; sourceTree = "<group>"; };
 		3B82B80B2AE686AE004730D4 /* pose_landmarker_full.task */ = {isa = PBXFileReference; lastKnownFileType = file; path = pose_landmarker_full.task; sourceTree = "<group>"; };
@@ -128,6 +131,7 @@
 		3BB990432ACEB6E600F324C2 /* FullscreenPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenPhotoViewController.swift; sourceTree = "<group>"; };
 		3BCD89DC2ACAB6260014CECC /* hand_landmarker.task */ = {isa = PBXFileReference; lastKnownFileType = file; path = hand_landmarker.task; sourceTree = "<group>"; };
 		3BCD89E22ACAC5820014CECC /* HandTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandTrackingViewController.swift; sourceTree = "<group>"; };
+		3BD5F4C92B286E0D009BB712 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 		3BFA8E632AF10E8700092043 /* JSONSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONSerialization.swift; sourceTree = "<group>"; };
 		84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pose_Estimation_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02EC64B86A1C6034C61CE96 /* Pods-Pose Estimation App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pose Estimation App.debug.xcconfig"; path = "Target Support Files/Pods-Pose Estimation App/Pods-Pose Estimation App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 				3BB7F3C72AE67932003279D8 /* PoseLandmarker.swift */,
 				3BB069582AF0094D000E95BC /* Pose Estimation App-Bridging-Header.h */,
 				3B1335852AF272A60092ED64 /* LandmarkChart.swift */,
+				3BD5F4C92B286E0D009BB712 /* Filters.swift */,
 			);
 			path = "Pose Estimation App";
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 				3B64D2EF2AEBAABF001A6782 /* VideoAnalysisViewController.swift */,
 				3B64D2F12AEBAAFD001A6782 /* LandmarkTimeGraphViewController.swift */,
 				3B87238B2AF64D4F00F6AA03 /* AnalysisVideoPlayerViewController.swift */,
+				3B62442D2B1B4C2000E7B795 /* VideoComparisonViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -419,8 +425,10 @@
 				3B87238C2AF64D4F00F6AA03 /* AnalysisVideoPlayerViewController.swift in Sources */,
 				3B8F935F2AC076790076CC25 /* Media.swift in Sources */,
 				3BB990442ACEB6E600F324C2 /* FullscreenPhotoViewController.swift in Sources */,
+				3B62442E2B1B4C2000E7B795 /* VideoComparisonViewController.swift in Sources */,
 				3B64D2F02AEBAABF001A6782 /* VideoAnalysisViewController.swift in Sources */,
 				3BCD89E32ACAC5820014CECC /* HandTrackingViewController.swift in Sources */,
+				3BD5F4CA2B286E0D009BB712 /* Filters.swift in Sources */,
 				3BB8272B2AC2E80000BE7AC0 /* Trash.swift in Sources */,
 				3B2B07A22ABDE08C00E57528 /* FilterViewController.swift in Sources */,
 				3B3B6C062AC1B0700073055F /* VideoViewController.swift in Sources */,
@@ -601,7 +609,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "schaeffler.Pose-Estimation-App1";
+				PRODUCT_BUNDLE_IDENTIFIER = "schaeffler.Pose-Estimation-App2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -642,7 +650,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "schaeffler.Pose-Estimation-App1";
+				PRODUCT_BUNDLE_IDENTIFIER = "schaeffler.Pose-Estimation-App2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

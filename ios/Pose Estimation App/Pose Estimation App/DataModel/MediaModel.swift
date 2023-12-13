@@ -341,4 +341,10 @@ class MediaModel: ObservableObject {
         let mediaObject = try? context.existingObject(with: objectID) as? Media
         return (mediaObject?.videoLandmarks)!
     }
+    
+    func checkMediaType(objectID: NSManagedObjectID) -> String {
+        let mediaObject = try? context.existingObject(with: objectID) as? Media
+        let isPhoto = mediaObject!.isPhoto
+        return isPhoto!
+    }
 }

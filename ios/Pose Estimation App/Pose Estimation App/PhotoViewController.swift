@@ -261,7 +261,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
                 self?.Metadata[indexPath.row] = newText
-                self?.mediaModel.saveVideoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+                self?.mediaModel.savePhotoMetadata(objectID: self!.objectID!, array: self!.Metadata)
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
@@ -281,7 +281,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
                 self?.Metadata[indexPath.row] = newText
-                self?.mediaModel.saveVideoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+                self?.mediaModel.savePhotoMetadata(objectID: self!.objectID!, array: self!.Metadata)
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
@@ -301,7 +301,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
                 self?.Metadata[indexPath.row] = newText
-                self?.mediaModel.saveVideoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+                self?.mediaModel.savePhotoMetadata(objectID: self!.objectID!, array: self!.Metadata)
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
@@ -321,7 +321,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
                 self?.Metadata[indexPath.row] = newText
-                self?.mediaModel.saveVideoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+                self?.mediaModel.savePhotoMetadata(objectID: self!.objectID!, array: self!.Metadata)
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
@@ -341,7 +341,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
                 self?.Metadata[indexPath.row] = newText
-                self?.mediaModel.saveVideoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+                self?.mediaModel.savePhotoMetadata(objectID: self!.objectID!, array: self!.Metadata)
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
@@ -361,7 +361,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
                 self?.Metadata[indexPath.row] = newText
-                self?.mediaModel.saveVideoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+                self?.mediaModel.savePhotoMetadata(objectID: self!.objectID!, array: self!.Metadata)
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
@@ -381,7 +381,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
                 self?.Metadata[indexPath.row] = newText
-                self?.mediaModel.saveVideoMetadata(objectID: self!.objectID!, array: self!.Metadata)
+                self?.mediaModel.savePhotoMetadata(objectID: self!.objectID!, array: self!.Metadata)
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
