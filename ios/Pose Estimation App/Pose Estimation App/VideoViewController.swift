@@ -26,7 +26,7 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var videoWorldLandmarks: [[SCNVector3]] = []
     var videoTimestamps: [Int] = []
     
-    lazy var videoViewContainer: UIView = {
+    let videoViewContainer: UIView = {
         let container = UIView()
         container.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height / 2.5)
         container.backgroundColor = .systemBackground
@@ -43,7 +43,7 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return videoView
     }()
     
-    lazy var deleteButton: UIButton = {
+    let deleteButton: UIButton = {
         let button = UIButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 15, weight: .bold)
         let image = UIImage(systemName: "trash", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
@@ -61,16 +61,13 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let buttonHeight: CGFloat = 50
         button.frame = CGRect(x: ((UIScreen.main.bounds.size.width - buttonWidth) / 2) + 100, y: UIScreen.main.bounds.size.height - 150, width: buttonWidth, height: buttonHeight)
         button.layer.cornerRadius = 25
-        
         button.addTarget(self, action: #selector(buttonPressed), for: .touchDown)
         button.addTarget(self, action: #selector(buttonReleased), for: .touchUpInside)
         button.addTarget(self, action: #selector(buttonReleased), for: .touchUpOutside)
-            
-        
         return button
     }()
 
-    lazy var trackingButton: UIButton = {
+    let trackingButton: UIButton = {
         let button = UIButton()
         button.adjustsImageWhenHighlighted = false
         button.setTitle("Handerkennung", for: .normal)
@@ -82,12 +79,9 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let buttonHeight: CGFloat = 50
         button.frame = CGRect(x: 25, y: UIScreen.main.bounds.size.height - 150, width: buttonWidth, height: buttonHeight)
         button.layer.cornerRadius = 25
-        
         button.addTarget(self, action: #selector(buttonPressed), for: .touchDown)
         button.addTarget(self, action: #selector(buttonReleased), for: .touchUpInside)
         button.addTarget(self, action: #selector(buttonReleased), for: .touchUpOutside)
-            
-        
         return button
     }()
     
@@ -111,7 +105,6 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         title.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         title.textAlignment = .center
         title.frame = CGRect(x: 0, y: (UIScreen.main.bounds.size.height / 2.5) + 10, width: view.frame.width, height: 40)
-        
         return title
     }()
     
@@ -125,33 +118,28 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var alertController: UIAlertController = {
         let alertController = UIAlertController(title: "Handerkennung wird ausgeführt", message: "Bitte warten...", preferredStyle: .alert)
-        
         var progressBar = UIProgressView(progressViewStyle: .default)
         progressBar.setProgress(0.0, animated: true)
         progressBar.frame = CGRect(x: 10, y: 90, width: 250, height: 3)
-        
         let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel) { (action) in
             NotificationCenter.default.post(name: Notification.Name("cancelAlert"), object: nil)
         }
-        //alertController.addAction(cancelAction)
         alertController.view.addSubview(progressBar)
-
         return alertController
     }()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        view.backgroundColor = .systemBackground
+        
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI(_:)), name: Notification.Name("UpdateVideo"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateURL(_:)), name: Notification.Name("UpdateURL"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateObjectID(_:)), name: Notification.Name("UpdateObjectID"), object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(updateProgress(_:)), name: Notification.Name("updateProgress"), object: nil)
-        
         
         self.tableView.reloadData()
         
-        view.backgroundColor = .systemBackground
         view.addSubview(videoViewContainer)
         videoViewContainer.addSubview(videoView)
         videoViewContainer.addSubview(playButton)
@@ -199,9 +187,7 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @objc func startHandTracking() {
         if mediaModel.checkVideoLandmarks(objectID: objectID!) == false {
-            
             self.present(alertController, animated: false)
-            //main = 27sec / background = 59sec / main + uipdate = 27sec / main + no debugmode = 20sec
             let handLandmarker = MediaPipeHandLandmarkerVideo()
             DispatchQueue.main.async { [self] in
                 handLandmarker.generateLandmarks(objectID: objectID!)
@@ -217,7 +203,7 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let playerVC = AnalysisVideoPlayerViewController()
             playerVC.videoURL = url
             playerVC.videoLandmarks = scnVector3ArrayToCGPointArray(videoLandmarks)
-            playerVC.videoLandmarks3 = movingAverage(for: videoWorldLandmarks, windowSize: 10)
+            playerVC.videoLandmarks3 = videoWorldLandmarks
             playerVC.videoTimestamps = videoTimestamps
             playerVC.modalPresentationStyle = .fullScreen
             present(playerVC, animated: false)
@@ -234,14 +220,11 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @objc func editTablePressed(indexPath: IndexPath) {
         if indexPath.row == 0 {
-            
             let datePicker = UIDatePicker()
             datePicker.datePickerMode = .date
             datePicker.layer.frame = CGRect(x: ((UIScreen.main.bounds.size.width-150)/2) - 43, y: 34, width: 130, height: 50)
-
             let alertController = UIAlertController(title: "Wählen Sie ein Datum", message: "                         ", preferredStyle: .alert)
             alertController.view.addSubview(datePicker)
-            
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel) { (action) in
             }
             let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
@@ -256,16 +239,12 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
             alertController.addAction(cancelAction)
             alertController.addAction(okAction)
             present(alertController, animated: true, completion: nil)
-
         } else if indexPath.row == 1 {
-
             let datePicker = UIDatePicker()
             datePicker.datePickerMode = .time
             datePicker.layer.frame = CGRect(x: ((UIScreen.main.bounds.size.width-150)/2)-34, y: 34, width: 100, height: 50)
-
             let alertController = UIAlertController(title: "Wählen Sie eine Zeit", message: "                         ", preferredStyle: .alert)
             alertController.view.addSubview(datePicker)
-            
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel) { (action) in
             }
             let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
@@ -280,16 +259,11 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
             alertController.addAction(cancelAction)
             alertController.addAction(okAction)
             present(alertController, animated: true, completion: nil)
-            
-            
-            
         } else if indexPath.row == 2 {
             let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie die neue Auflösung ein:", preferredStyle: .alert)
-            
             alertController.addTextField { textField in
                 textField.placeholder = "Auflösung"
             }
-            
             let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
@@ -298,18 +272,14 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
-            
             alertController.addAction(saveAction)
             alertController.addAction(cancelAction)
-            
             present(alertController, animated: true, completion: nil)
         } else if indexPath.row == 3 {
             let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie die neue Dauer ein:", preferredStyle: .alert)
-            
             alertController.addTextField { textField in
                 textField.placeholder = "Dauer"
             }
-            
             let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
@@ -318,18 +288,14 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
-            
             alertController.addAction(saveAction)
             alertController.addAction(cancelAction)
-            
             present(alertController, animated: true, completion: nil)
         } else if indexPath.row == 4 {
             let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie die neue Bildwiederholrate ein:", preferredStyle: .alert)
-            
             alertController.addTextField { textField in
                 textField.placeholder = "Bildwiederholrate"
             }
-            
             let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
@@ -338,18 +304,14 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
-            
             alertController.addAction(saveAction)
             alertController.addAction(cancelAction)
-            
             present(alertController, animated: true, completion: nil)
         } else if indexPath.row == 5 {
             let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie den neuen Kamerahersteller ein:", preferredStyle: .alert)
-            
             alertController.addTextField { textField in
                 textField.placeholder = "Kamerahersteller"
             }
-            
             let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
@@ -358,18 +320,14 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
-            
             alertController.addAction(saveAction)
             alertController.addAction(cancelAction)
-            
             present(alertController, animated: true, completion: nil)
         } else if indexPath.row == 6 {
             let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie die neuen BPM ein:", preferredStyle: .alert)
-            
             alertController.addTextField { textField in
                 textField.placeholder = "BPM"
             }
-            
             let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
@@ -378,18 +336,14 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
-            
             alertController.addAction(saveAction)
             alertController.addAction(cancelAction)
-            
             present(alertController, animated: true, completion: nil)
         } else if indexPath.row == 7 {
             let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie das neue Rudiment ein:", preferredStyle: .alert)
-            
             alertController.addTextField { textField in
                 textField.placeholder = "Rudiment"
             }
-            
             let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
@@ -398,18 +352,14 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
-            
             alertController.addAction(saveAction)
             alertController.addAction(cancelAction)
-            
             present(alertController, animated: true, completion: nil)
         } else if indexPath.row == 8 {
             let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie den neuen Interpret ein:", preferredStyle: .alert)
-            
             alertController.addTextField { textField in
                 textField.placeholder = "Interpret"
             }
-            
             let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
@@ -418,18 +368,14 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
-            
             alertController.addAction(saveAction)
             alertController.addAction(cancelAction)
-            
             present(alertController, animated: true, completion: nil)
         } else if indexPath.row == 9 {
             let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie die neue Hand ein:", preferredStyle: .alert)
-            
             alertController.addTextField { textField in
                 textField.placeholder = "Hand"
             }
-            
             let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
@@ -438,18 +384,14 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
-            
             alertController.addAction(saveAction)
             alertController.addAction(cancelAction)
-            
             present(alertController, animated: true, completion: nil)
         } else if indexPath.row == 10 {
             let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie den neuen Grip ein:", preferredStyle: .alert)
-            
             alertController.addTextField { textField in
                 textField.placeholder = "Grip"
             }
-            
             let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
@@ -458,18 +400,14 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
-            
             alertController.addAction(saveAction)
             alertController.addAction(cancelAction)
-            
             present(alertController, animated: true, completion: nil)
         } else if indexPath.row == 11 {
             let alertController = UIAlertController(title: "Bearbeiten", message: "Geben Sie den neuen Grip Matched ein:", preferredStyle: .alert)
-            
             alertController.addTextField { textField in
                 textField.placeholder = "Grip Matched"
             }
-            
             let saveAction = UIAlertAction(title: "Speichern", style: .default) { [weak self] _ in
                 guard let textField = alertController.textFields?.first else { return }
                 let newText = textField.text ?? ""
@@ -478,10 +416,8 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self?.tableView.reloadData()
             }
             let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
-            
             alertController.addAction(saveAction)
             alertController.addAction(cancelAction)
-            
             present(alertController, animated: true, completion: nil)
         }
     }
@@ -500,6 +436,7 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
             sender.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         }
     }
+    
     @objc func buttonReleased(sender: UIButton) {
         UIView.animate(withDuration: 0.1) {
             sender.transform = .identity
@@ -510,15 +447,15 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.deselectRow(at: indexPath, animated: true)
         editTablePressed(indexPath: indexPath)
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return max(MetadataArray1.count, Metadata.count)
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-       
         var label1 = cell.viewWithTag(1) as? UILabel
         var label2 = cell.viewWithTag(2) as? UILabel
-        
         if label1 == nil {
             label1 = UILabel(frame: CGRect(x: 10, y: 0, width: tableView.bounds.size.width / 2 - 15, height: cell.bounds.size.height))
             label1?.tag = 1
@@ -527,7 +464,6 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
             label1?.minimumScaleFactor = 0.5
             cell.contentView.addSubview(label1!)
         }
-        
         if label2 == nil {
             label2 = UILabel(frame: CGRect(x: tableView.bounds.size.width / 2, y: 0, width: tableView.bounds.size.width / 2 - 10, height: cell.bounds.size.height))
             label2?.tag = 2
@@ -537,10 +473,8 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
             label2?.minimumScaleFactor = 0.5
             cell.contentView.addSubview(label2!)
         }
-        
         label1?.text = (indexPath.row < MetadataArray1.count) ? MetadataArray1[indexPath.row] : ""
         label2?.text = (indexPath.row < Metadata.count) ? Metadata[indexPath.row] : ""
-        
         return cell
     }
 }

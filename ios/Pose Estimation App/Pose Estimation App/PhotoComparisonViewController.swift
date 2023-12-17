@@ -11,6 +11,11 @@ import MediaPipeTasksVision
 
 class PhotoComparisonViewController: UIViewController {
 
+    var images: [UIImage] = []
+    var results: [HandLandmarkerResult] = []
+    var colors: [UIColor] = [.red, .blue, .green, .yellow, .purple]
+    let handLandmarker = MediaPipeHandLandmarker()
+    
     lazy var closeButton: UIButton = {
         let button = UIButton()
         button.adjustsImageWhenHighlighted = false
@@ -31,14 +36,7 @@ class PhotoComparisonViewController: UIViewController {
         
         return button
     }()
-    
-    var images: [UIImage] = []
-    var results: [HandLandmarkerResult] = []
-    var colors: [UIColor] = [.red, .blue, .green, .yellow, .purple]
-    
-    let handLandmarker = MediaPipeHandLandmarker()
-    
-    
+
     let handAngleText: UILabel = {
         var text = UILabel()
         text.textColor = .black
@@ -49,15 +47,14 @@ class PhotoComparisonViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        
+        view.backgroundColor = .systemBackground
 
         let sceneView = SCNView(frame: self.view.bounds)
         sceneView.backgroundColor = UIColor.white
-            
         let scene = SCNScene()
         sceneView.scene = scene
         sceneView.allowsCameraControl = true
-        
         sceneView.pointOfView?.camera?.automaticallyAdjustsZRange = true
             
         addCoordinateSystem(toScene: scene)
@@ -68,12 +65,6 @@ class PhotoComparisonViewController: UIViewController {
                 let coordinates = handLandmarker.getWorldLandmarks(result: results[i], image: images[i])
                 let transformedCoordinates = transform(coordinates: coordinates)
                 addPoints(coordinates: transformedCoordinates, toScene: scene, color: colors[i])
-                //
-                //addPoints(coordinates: coordinates, toScene: scene, color: colors[i+1])
-                //
-                //let transformedNewCoordinates = transformNew(coordinates: coordinates)
-                //addPoints(coordinates: transformedNewCoordinates, toScene: scene, color: .gray)
-                //
             }
         }
         
@@ -91,11 +82,13 @@ class PhotoComparisonViewController: UIViewController {
             sender.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         }
     }
+    
     @objc func buttonReleased(sender: UIButton) {
         UIView.animate(withDuration: 0.1) {
             sender.transform = .identity
         }
     }
+    
     @objc func closeVC() {
         self.dismiss(animated: true)
     }
@@ -108,14 +101,12 @@ class PhotoComparisonViewController: UIViewController {
         xNode.position = SCNVector3(length/2, 0, 0)
         xNode.eulerAngles.z = Float.pi / 2
         scene.rootNode.addChildNode(xNode)
-        
         // Y-Achse (grün)
         let yCylinder = SCNCylinder(radius: 3, height: CGFloat(length))
         yCylinder.firstMaterial?.diffuse.contents = UIColor.green
         let yNode = SCNNode(geometry: yCylinder)
         yNode.position = SCNVector3(0, length/2, 0)
         scene.rootNode.addChildNode(yNode)
-        
         // Z-Achse (blau)
         let zCylinder = SCNCylinder(radius: 3, height: CGFloat(length))
         zCylinder.firstMaterial?.diffuse.contents = UIColor.blue
@@ -126,7 +117,6 @@ class PhotoComparisonViewController: UIViewController {
     }
     
     func addPoints(coordinates: [SCNVector3], toScene scene: SCNScene, color: UIColor) {
-        //let shiftedCoordinates = shiftCoordinates(coordinates: coordinates)
         for coordinate in coordinates {
             let sphere = SCNSphere(radius: 15)
             let material = SCNMaterial()
@@ -157,19 +147,14 @@ class PhotoComparisonViewController: UIViewController {
     func lineFrom(vector vector1: SCNVector3, toVector vector2: SCNVector3,  toScene scene: SCNScene, color: UIColor) -> SCNNode {
         let distance = vector1.distance(to: vector2)
         let midPoint = vector1.midPoint(to: vector2)
-
         let cylinder = SCNCylinder(radius: 5, height: CGFloat(distance))
         cylinder.firstMaterial?.diffuse.contents = color
-
         let node = SCNNode()
         node.position = midPoint
         node.look(at: vector2, up: scene.rootNode.worldUp, localFront: SCNNode.localFront)
-
         let cylinderNode = SCNNode(geometry: cylinder)
         cylinderNode.eulerAngles.x = Float.pi / 2
-
         node.addChildNode(cylinderNode)
-
         return node
     }
     
@@ -187,9 +172,7 @@ class PhotoComparisonViewController: UIViewController {
     func transform(coordinates: [SCNVector3]) -> [SCNVector3] {
         let point1 = coordinates[0]
         let point2 = coordinates[9]
-        
         let translationMatrix = SCNMatrix4MakeTranslation(-point1.x, -point1.y, -point1.z)
-        
         let direction = SCNVector3(x: point2.x - point1.x, y: point2.y - point1.y, z: point2.z - point1.z)
         let rotationAxis = direction.cross(SCNVector3(x: -1, y: 0, z: 0))
         let angle = acos(direction.dot(SCNVector3(x: -1, y: 0, z: 0)) / direction.length())
@@ -197,7 +180,6 @@ class PhotoComparisonViewController: UIViewController {
         let rotationMatrix1 = SCNMatrix4MakeRotation(angle, rotationAxis.x, rotationAxis.y, rotationAxis.z)
         print(rotationMatrix1)
         let rotationMatrix2 = SCNMatrix4MakeRotation( .pi, 1, 0, 0)
-        
         var transformedCoordinates = [SCNVector3]()
         for coordinate in coordinates {
             var vector = coordinate
@@ -212,21 +194,16 @@ class PhotoComparisonViewController: UIViewController {
     }
     
     func transformNew(coordinates: [SCNVector3]) -> [SCNVector3] {
-        
         let shiftedCoordinates = shiftCoordinates(coordinates: coordinates)
-        
         let point1 = shiftedCoordinates[0]
         let point2 = shiftedCoordinates[9]
-                
         let direction = SCNVector3(x: point2.x - point1.x, y: point2.y - point1.y, z: point2.z - point1.z)
         let rotationAxis = direction.cross(SCNVector3(x: 1, y: 0, z: 0))
         let angle = acos(direction.dot(SCNVector3(x: 1, y: 0, z: 0)) / direction.length())
         let rotationMatrix = SCNMatrix4MakeRotation(angle, rotationAxis.x, rotationAxis.y, rotationAxis.z)
-        
         var transformedCoordinates = [SCNVector3]()
         for coordinate in shiftedCoordinates {
             var vector = coordinate
-            //vector = vector.applying(rotationMatrix)
             transformedCoordinates.append(vector)
         }
         return transformedCoordinates
@@ -242,14 +219,12 @@ class PhotoComparisonViewController: UIViewController {
         let laenge2 = handVector2.length()
         let winkelInRadians = acos(skalarProdukt / (laenge1 * laenge2))
         let winkelInGrad = winkelInRadians * 180.0 / .pi
-        
-        print("Winkel zwischen den Händen: \(winkelInGrad)°")
         handAngleText.text = ("Verdrehungswinkel: \(round(winkelInGrad))°")
     }
-    
 }
 
 extension SCNVector3 {
+    
     func distance(to vector: SCNVector3) -> Float {
         let dx = vector.x - x
         let dy = vector.y - y
@@ -260,6 +235,7 @@ extension SCNVector3 {
     func midPoint(to vector: SCNVector3) -> SCNVector3 {
         return SCNVector3((vector.x + x) / 2, (vector.y + y) / 2, (vector.z + z) / 2)
     }
+    
     func applying(_ transform: SCNMatrix4) -> SCNVector3 {
         let x = transform.m11 * self.x + transform.m21 * self.y + transform.m31 * self.z + transform.m41
         let y = transform.m12 * self.x + transform.m22 * self.y + transform.m32 * self.z + transform.m42

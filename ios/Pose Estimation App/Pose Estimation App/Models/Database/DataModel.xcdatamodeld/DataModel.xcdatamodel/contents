@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Media" representedClassName="Media" syncable="YES">
+        <attribute name="aufloesung" optional="YES" attributeType="String"/>
+        <attribute name="aufnahmedatum" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="bildwiederholrate" optional="YES" attributeType="String"/>
+        <attribute name="bpm" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="dauer" optional="YES" attributeType="String"/>
+        <attribute name="grip" optional="YES" attributeType="String"/>
+        <attribute name="grip_matched" optional="YES" attributeType="String"/>
+        <attribute name="hand" optional="YES" attributeType="String"/>
+        <attribute name="interpret" optional="YES" attributeType="String"/>
+        <attribute name="isPhoto" optional="YES" attributeType="String"/>
+        <attribute name="kamerahersteller" optional="YES" attributeType="String"/>
+        <attribute name="rudiment" optional="YES" attributeType="String"/>
+        <attribute name="url" attributeType="String"/>
+        <attribute name="videoLandmarks" optional="YES" attributeType="String"/>
+        <attribute name="zeit" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Trash" representedClassName="Trash" syncable="YES">
+        <attribute name="aufloesung" optional="YES" attributeType="String"/>
+        <attribute name="aufnahmedatum" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="bildwiederholrate" optional="YES" attributeType="String"/>
+        <attribute name="bpm" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="dauer" optional="YES" attributeType="String"/>
+        <attribute name="grip" optional="YES" attributeType="String"/>
+        <attribute name="grip_matched" optional="YES" attributeType="String"/>
+        <attribute name="hand" optional="YES" attributeType="String"/>
+        <attribute name="interpret" optional="YES" attributeType="String"/>
+        <attribute name="isPhoto" optional="YES" attributeType="String"/>
+        <attribute name="kamerahersteller" optional="YES" attributeType="String"/>
+        <attribute name="rudiment" optional="YES" attributeType="String"/>
+        <attribute name="url" attributeType="String"/>
+        <attribute name="videoLandmarks" optional="YES" attributeType="String"/>
+        <attribute name="zeit" optional="YES" attributeType="String"/>
+    </entity>
+</model>

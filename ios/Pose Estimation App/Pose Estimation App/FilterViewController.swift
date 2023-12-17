@@ -9,43 +9,13 @@ import UIKit
 import RangeUISlider
 
 let currentDate = DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .none)
-
 var filterSettings: [String] = ["0","","1","","","","0","0"]
 var dateFilterSettings: [String] = ["false", "", ""]
 var bpmFilterSettings: [String] = ["false", "50", "150"]
 
 class FilterViewController: UIViewController, RangeUISliderDelegate {
     
-
-    
-    
     var mediaModel = MediaModel()
-    
-    class LineView: UIView {
-        override func draw(_ rect: CGRect) {
-            super.draw(rect)
-            
-            // Definieren Sie die Start- und Endpunkte der Linie
-            let startPoint = CGPoint(x: 0, y: rect.height / 2)
-            let endPoint = CGPoint(x: rect.width, y: rect.height / 2)
-            
-            // Erstellen Sie ein UIBezierPath-Objekt für die Linie
-            let linePath = UIBezierPath()
-            linePath.move(to: startPoint)
-            linePath.addLine(to: endPoint)
-            
-            // Legen Sie die Linienfarbe und -dicke fest
-            let lineColor = UIColor.systemGray2.withAlphaComponent(0.5)
-            lineColor.setStroke()
-            linePath.lineWidth = 2.0
-            
-            // Zeichnen Sie die Linie
-            linePath.stroke()
-        }
-    }
-
-    let line1 = LineView(frame: CGRect(x: 4, y: 90, width: 292, height: 2))
-    let line2 = LineView(frame: CGRect(x: 4, y: 180, width: 292, height: 2))
     
     let customView: UIView = {
         let customView = UIView()
@@ -53,7 +23,6 @@ class FilterViewController: UIViewController, RangeUISliderDelegate {
         customView.frame = CGRect(x: 0, y: -230, width: 300, height: 500)
         customView.layer.cornerRadius = 20
         return customView
-        
     }()
     
     let filterButton: UIButton = {
@@ -68,12 +37,10 @@ class FilterViewController: UIViewController, RangeUISliderDelegate {
             let buttonWidth: CGFloat = 55 //UIScreen.main.bounds.size.width / 2
             let buttonHeight: CGFloat = 55
             button.frame = CGRect(x: UIScreen.main.bounds.size.width - 93, y: UIScreen.main.bounds.size.height - 150, width: buttonWidth, height: buttonHeight)
-        button.layer.cornerRadius = 27.5
-            
+            button.layer.cornerRadius = 27.5
             button.addTarget(self, action: #selector(buttonPressed), for: .touchDown)
             button.addTarget(self, action: #selector(buttonReleased), for: .touchUpInside)
             button.addTarget(self, action: #selector(buttonReleased), for: .touchUpOutside)
-            
             return button
         }()
     
@@ -82,7 +49,6 @@ class FilterViewController: UIViewController, RangeUISliderDelegate {
         label.text = "Medien filtern"
         label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         label.textAlignment = .center
-        
         let width: CGFloat = 250
         let height: CGFloat = 30
         label.frame = CGRect(x: (300 - width) / 2, y: 10, width: width, height: height)
@@ -143,7 +109,6 @@ class FilterViewController: UIViewController, RangeUISliderDelegate {
     let calendarPicker1: UIDatePicker = {
         let calendar = UIDatePicker()
         calendar.datePickerMode = .date
-        
         if dateFilterSettings[1] == "" {
             calendar.date = Date()
         } else {
@@ -173,7 +138,6 @@ class FilterViewController: UIViewController, RangeUISliderDelegate {
     let calendarPicker2: UIDatePicker = {
         let calendar = UIDatePicker()
         calendar.datePickerMode = .date
-        
         if dateFilterSettings[2] == "" {
             calendar.date = Date()
         } else {
@@ -266,7 +230,6 @@ class FilterViewController: UIViewController, RangeUISliderDelegate {
         rangeSlider.rightKnobHeight = 20
         rangeSlider.rightKnobCorners = 10
         rangeSlider.isUserInteractionEnabled = true
-                
         return rangeSlider
     }()
     
@@ -383,6 +346,7 @@ class FilterViewController: UIViewController, RangeUISliderDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .systemBackground.withAlphaComponent(0.5)
         
         setFilterSettings()
@@ -470,18 +434,20 @@ class FilterViewController: UIViewController, RangeUISliderDelegate {
         customView.addSubview(gripLabel)
         customView.addSubview(gripTextField)
         customView.addSubview(gripSegmentedControl)
-        
     }
+    
     @objc func buttonPressed(sender: UIButton) {
         UIView.animate(withDuration: 0.1) {
             sender.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         }
     }
+    
     @objc func buttonReleased(sender: UIButton) {
         UIView.animate(withDuration: 0.1) {
             sender.transform = .identity
         }
     }
+    
     @objc func closeFilter() {
         dismiss(animated: false, completion: nil)
         NotificationCenter.default.post(name: Notification.Name("SelectedPhotosUpdated"), object: self.mediaModel.getMedia())
@@ -514,14 +480,11 @@ class FilterViewController: UIViewController, RangeUISliderDelegate {
     }
 
     @objc func segmentedControlValueChanged(sender: UISegmentedControl) {
-        // Verarbeite die ausgewählte Option
         let selectedIndex = sender.selectedSegmentIndex
         let selectedOption = sender.titleForSegment(at: selectedIndex)
-        
         if sender == mediaSegmentedControl {
             filterSettings[0] = String(sender.selectedSegmentIndex)
         }
-
         if sender == gripSegmentedControl {
             filterSettings[6] = String(sender.selectedSegmentIndex)
         }
@@ -536,23 +499,18 @@ class FilterViewController: UIViewController, RangeUISliderDelegate {
         handSegmentedControl.selectedSegmentIndex = Int(filterSettings[7])!
     }
     
-    func rangeChangeFinished(event: RangeUISliderChangeFinishedEvent) {
-        //print("\(event.minValueSelected) -  \(event.maxValueSelected) - identifier: \(event.slider.identifier)")
-    }
+    func rangeChangeFinished(event: RangeUISliderChangeFinishedEvent) {}
+    
     func rangeIsChanging(event: RangeUISliderChangeEvent) {
         bpmFilterSettings[1] = String(Int(event.minValueSelected))
         bpmFilterSettings[2] = String(Int(event.maxValueSelected))
         bpmTextField1.text = bpmFilterSettings[1]
         bpmTextField2.text = bpmFilterSettings[2]
-
-        print("\(event.minValueSelected) -  \(event.maxValueSelected) - identifier: \(event.slider.identifier)")
     }
 }
 
 extension FilterViewController: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         if textField == bpmTextField1 {
             bpmFilterSettings[1] = String(textField.text!)
             rangeSlider.defaultValueLeftKnob = CGFloat(Int(bpmFilterSettings[1])!)

@@ -31,7 +31,5 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         nav2.navigationBar.prefersLargeTitles = true
 
         setViewControllers([nav1, nav2], animated: true)
-        
     }
-    
 }

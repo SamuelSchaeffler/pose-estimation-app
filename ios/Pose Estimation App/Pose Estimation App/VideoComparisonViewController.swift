@@ -20,10 +20,8 @@ class VideoComparisonViewController: UIViewController {
     var video2Landmarks3: [[SCNVector3]] = []
     var video1Timestamps: [Int] = []
     var video2Timestamps: [Int] = []
-    
     var filteredVideo1Landmarks3: [[SCNVector3]] = []
     var filteredVideo2Landmarks3: [[SCNVector3]] = []
-    
     var player1: AVPlayer!
     var player2: AVPlayer!
     var currentTimeMillis1: Int = 0
@@ -36,7 +34,6 @@ class VideoComparisonViewController: UIViewController {
     var duration2: Float64?
     var video1Loaded = false
     var video2Loaded = false
-
     var landmarksView1: LandmarksView!
     var landmarksView2: LandmarksView!
     var landmarkFrame1: CGRect?
@@ -53,10 +50,20 @@ class VideoComparisonViewController: UIViewController {
     var videoWidth2: Int?
     var videoHeight1: Int?
     var videoHeight2: Int?
-    
     let scene1 = SCNScene()
     let scene2 = SCNScene()
-    var sceneViewOpacityView: UIView = {
+    var buttonStates: [Bool] = [false, false, true, false, false, false, false, false]
+    var landmarkColors: [UIColor] = [.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray]
+    var selectedLandmarksCounter = 0
+    var selectedLandmarkPoints: [Int] = []
+    var currentLandmarkIndex1: Int = 0
+    var currentLandmarkIndex2: Int = 0
+    var tapGesture1: UITapGestureRecognizer!
+    var tapGesture2: UITapGestureRecognizer!
+    var sceneView1 = SCNView()
+    var sceneView2 = SCNView()
+    
+    let sceneViewOpacityView: UIView = {
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.height, height: UIScreen.main.bounds.size.width)
         view.backgroundColor = .systemBackground
@@ -64,27 +71,14 @@ class VideoComparisonViewController: UIViewController {
         return view
     }()
     
-    var buttonStates: [Bool] = [false, false, true, false, false, false, false, false]
-    var landmarkColors: [UIColor] = [.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray,.darkGray]
-    var selectedLandmarksCounter = 0
-    var selectedLandmarkPoints: [Int] = []
-    var currentLandmarkIndex1: Int = 0
-    var currentLandmarkIndex2: Int = 0
-
-    
-    var tapGesture1: UITapGestureRecognizer!
-    var tapGesture2: UITapGestureRecognizer!
-    
-    var sceneView1 = SCNView()
-    var sceneView2 = SCNView()
-    
-    var playerView: UIView = {
+    let playerView: UIView = {
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.height, height: UIScreen.main.bounds.size.width)
         view.isHidden = true
         return view
     }()
-    var closeButton: UIButton = {
+    
+    let closeButton: UIButton = {
         let button = UIButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
         let image = UIImage(systemName: "xmark", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
@@ -97,7 +91,8 @@ class VideoComparisonViewController: UIViewController {
         button.frame = CGRect(x: 10, y: 10, width: buttonWidth, height: buttonHeight)
         return button
     }()
-    var playButton: UIButton = {
+    
+    let playButton: UIButton = {
         let button = UIButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold)
         let image = UIImage(systemName: "play.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
@@ -110,7 +105,8 @@ class VideoComparisonViewController: UIViewController {
         button.frame = CGRect(x: (UIScreen.main.bounds.size.height - buttonWidth) / 2, y: (UIScreen.main.bounds.size.width - buttonHeight) / 2, width: buttonWidth, height: buttonHeight)
         return button
     }()
-    var selectLandmarksButton: UIButton = {
+    
+    let selectLandmarksButton: UIButton = {
         let button = UIButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold)
         let image = UIImage(systemName: "dot.circle.and.hand.point.up.left.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
@@ -123,7 +119,8 @@ class VideoComparisonViewController: UIViewController {
         button.frame = CGRect(x: (40), y: (UIScreen.main.bounds.size.width - 95), width: buttonWidth, height: buttonHeight)
         return button
     }()
-    var slider1: UISlider = {
+    
+    let slider1: UISlider = {
         let frame = CGRect(x: 40, y: UIScreen.main.bounds.size.width - 60, width: (UIScreen.main.bounds.size.height / 2) - 80, height: 24)
         let slider = CustomSlider(frame: frame)
         slider.customTrackHeight = 13
@@ -134,7 +131,8 @@ class VideoComparisonViewController: UIViewController {
         slider.addTarget(self, action: #selector(slider1ValueChanged), for: .valueChanged)
         return slider
     }()
-    var slider2: UISlider = {
+    
+    let slider2: UISlider = {
         let frame = CGRect(x: (UIScreen.main.bounds.size.height / 2) + 40, y: UIScreen.main.bounds.size.width - 60, width: (UIScreen.main.bounds.size.height / 2) - 80, height: 24)
         let slider = CustomSlider(frame: frame)
         slider.customTrackHeight = 13
@@ -146,28 +144,31 @@ class VideoComparisonViewController: UIViewController {
         return slider
     }()
     
-    var currentLabel1: UILabel = {
+    let currentLabel1: UILabel = {
         let label = UILabel()
         label.frame = CGRect(x: 45, y: UIScreen.main.bounds.size.width - 40, width: 50, height: 24)
         label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         label.textAlignment = .left
         return label
     }()
-    var remainingLabel1: UILabel = {
+    
+    let remainingLabel1: UILabel = {
         let label = UILabel()
         label.frame = CGRect(x: (UIScreen.main.bounds.size.height / 2) - 95, y: UIScreen.main.bounds.size.width - 40, width: 50, height: 24)
         label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         label.textAlignment = .right
         return label
     }()
-    var currentLabel2: UILabel = {
+    
+    let currentLabel2: UILabel = {
         let label = UILabel()
         label.frame = CGRect(x: (UIScreen.main.bounds.size.height / 2) + 45, y: UIScreen.main.bounds.size.width - 40, width: 50, height: 24)
         label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         label.textAlignment = .left
         return label
     }()
-    var remainingLabel2: UILabel = {
+    
+    let remainingLabel2: UILabel = {
         let label = UILabel()
         label.frame = CGRect(x: UIScreen.main.bounds.size.height - 95, y: UIScreen.main.bounds.size.width - 40, width: 50, height: 24)
         label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
@@ -175,7 +176,7 @@ class VideoComparisonViewController: UIViewController {
         return label
     }()
     
-    var connectSlidersButton: UIButton = {
+    let connectSlidersButton: UIButton = {
         let button = UIButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold)
         let image = UIImage(systemName: "lock.open.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
@@ -189,8 +190,7 @@ class VideoComparisonViewController: UIViewController {
         return button
     }()
 
-    
-    var showPlayerButton: UIButton = {
+    let showPlayerButton: UIButton = {
         let button = UIButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 38, weight: .bold)
         let image = UIImage(systemName: "video.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
@@ -204,7 +204,7 @@ class VideoComparisonViewController: UIViewController {
         return button
     }()
     
-    var openChartButton: UIButton = {
+    let openChartButton: UIButton = {
         let button = UIButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 38, weight: .bold)
         let image = UIImage(systemName: "chart.line.uptrend.xyaxis.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
@@ -218,7 +218,8 @@ class VideoComparisonViewController: UIViewController {
         button.isHidden = true
         return button
     }()
-    var selectAxisButton: UIButton = {
+    
+    let selectAxisButton: UIButton = {
         let button = UIButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 38, weight: .bold)
         let image = UIImage(systemName: "x.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
@@ -232,7 +233,8 @@ class VideoComparisonViewController: UIViewController {
         button.isHidden = true
         return button
     }()
-    var zAxisButton: UIButton = {
+    
+    let zAxisButton: UIButton = {
         let button = UIButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 35, weight: .bold)
         let image = UIImage(systemName: "z.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white.withAlphaComponent(0.8), renderingMode: .alwaysOriginal)
@@ -246,7 +248,8 @@ class VideoComparisonViewController: UIViewController {
         button.isHidden = true
         return button
     }()
-    var yAxisButton: UIButton = {
+    
+    let yAxisButton: UIButton = {
         let button = UIButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 35, weight: .bold)
         let image = UIImage(systemName: "y.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white.withAlphaComponent(0.8), renderingMode: .alwaysOriginal)
@@ -260,7 +263,8 @@ class VideoComparisonViewController: UIViewController {
         button.isHidden = true
         return button
     }()
-    var xAxisButton: UIButton = {
+    
+    let xAxisButton: UIButton = {
         let button = UIButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 35, weight: .bold)
         let image = UIImage(systemName: "x.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.systemGreen.withAlphaComponent(0.8), renderingMode: .alwaysOriginal)
@@ -280,14 +284,15 @@ class VideoComparisonViewController: UIViewController {
         view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.height, height: UIScreen.main.bounds.size.width)
         return view
     }()
-    var chart: UIView = {
+    
+    let chart: UIView = {
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.height, height: UIScreen.main.bounds.size.width)
         view.isHidden = true
         return view
     }()
     
-    var chartOpacitySlider: UISlider = {
+    let chartOpacitySlider: UISlider = {
         let frame = CGRect(x: (UIScreen.main.bounds.size.height - 135), y: (UIScreen.main.bounds.size.width - 275), width: 150, height: 10)
         let slider = CustomSlider(frame: frame)
         slider.customTrackHeight = 13
@@ -304,7 +309,7 @@ class VideoComparisonViewController: UIViewController {
         return slider
     }()
 
-    var openAngleChartButton: UIButton = {
+    let openAngleChartButton: UIButton = {
         let button = UIButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 38, weight: .bold)
         let image = UIImage(named: "angle.button")
@@ -321,7 +326,9 @@ class VideoComparisonViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .systemBackground
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.orientationLock = .landscape
         
@@ -354,9 +361,7 @@ class VideoComparisonViewController: UIViewController {
             self?.updateLandmarks1(for: time)
             let currentTime = CMTimeGetSeconds(time)
             self?.slider1.value = Float(currentTime)
-            
             self!.setTimeLables(time: time, player: 1)
-            
             self?.updateChartView()
         }
         let landmarkInterval2 = CMTime(seconds: 0.01, preferredTimescale: CMTimeScale(NSEC_PER_MSEC))
@@ -364,9 +369,7 @@ class VideoComparisonViewController: UIViewController {
             self?.updateLandmarks2(for: time)
             let currentTime = CMTimeGetSeconds(time)
             self?.slider2.value = Float(currentTime)
-            
             self!.setTimeLables(time: time, player: 2)
-            
             self?.updateChartView()
         }
         
@@ -386,11 +389,9 @@ class VideoComparisonViewController: UIViewController {
         cameraNode1.camera?.fieldOfView = 60
         cameraNode1.camera?.usesOrthographicProjection = true
         cameraNode1.camera?.orthographicScale = 100
-        
         scene1.rootNode.addChildNode(cameraNode1)
         sceneView1.pointOfView = cameraNode1
         sceneView1.pointOfView?.camera?.automaticallyAdjustsZRange = true
-        
         let frame2 = CGRect(x: (Int(UIScreen.main.bounds.size.height) / 2), y: 0, width: (Int(UIScreen.main.bounds.size.height) / 2), height: Int(UIScreen.main.bounds.size.width))
         sceneView2 = SCNView(frame: frame2)
         sceneView2.backgroundColor = UIColor.clear
@@ -404,22 +405,18 @@ class VideoComparisonViewController: UIViewController {
         cameraNode2.camera?.fieldOfView = 60
         cameraNode2.camera?.usesOrthographicProjection = true
         cameraNode2.camera?.orthographicScale = 100
-        
         scene2.rootNode.addChildNode(cameraNode2)
         sceneView2.pointOfView = cameraNode2
         sceneView2.pointOfView?.camera?.automaticallyAdjustsZRange = true
         
         addCoordinateSystem(toScene: scene1)
         addCoordinateSystem(toScene: scene2)
-        
         addPoints(coordinates: video1Landmarks3[0], toScene: scene1, color: landmarkColors)
         addPoints(coordinates: video2Landmarks3[0], toScene: scene2, color: landmarkColors)
         
         view.addSubview(sceneView1)
         view.addSubview(sceneView2)
-        //view.addSubview(sceneViewOpacityView)
         view.addSubview(chart)
-        
         view.addSubview(closeButton)
         view.addSubview(playButton)
         view.addSubview(slider1)
@@ -439,7 +436,6 @@ class VideoComparisonViewController: UIViewController {
         view.addSubview(chartOpacitySlider)
         view.addSubview(openAngleChartButton)
 
-        
         tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         sceneView1.addGestureRecognizer(tapGesture1)
@@ -449,20 +445,31 @@ class VideoComparisonViewController: UIViewController {
 
         comparisonVideo1PointMarks = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         comparisonVideo2PointMarks = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        
-        angleDataList = [[], [], [], [], []]
+        comparisonAngleDataList1 = [[], [], [], [], []]
+        comparisonAngleDataList2 = [[], [], [], [], []]
         angleChartColors = [.clear, .clear, .clear, .clear, .clear]
         
-        
-//        filteredVideo1Landmarks3 = applyKalmanFilter(to: video1Landmarks3, q: 0.1, r: 0.8, initialP: 1.0)
-//        video1Landmarks3 = filteredVideo1Landmarks3
-        
-//        filteredVideo2Landmarks3 = applyKalmanFilter3D(to: video2Landmarks3, q: 0.5, r: 0.1, initialP: 1.0)
-//        video2Landmarks3 = filteredVideo2Landmarks3
-        
+        if landmarkFilterStates[0] {
+            filteredVideo1Landmarks3 = movingAverage(landmarks: video1Landmarks3)
+            video1Landmarks3 = filteredVideo1Landmarks3
+        }
+        if landmarkFilterStates[1] {
+            if useFPSSampleTimePT1 {
+                sampleTimePT1 = 1 / (getFPS(video: 1))
+            }
+            filteredVideo1Landmarks3 = applyPT1Filter(landmarks: video1Landmarks3)
+            video1Landmarks3 = filteredVideo1Landmarks3
+        }
+        if landmarkFilterStates[2] {
+            filteredVideo1Landmarks3 = applyKalmanFilter(landmarks: video1Landmarks3)
+            video1Landmarks3 = filteredVideo1Landmarks3
+        }
+        if landmarkFilterStates[3] {
+            filteredVideo1Landmarks3 = shiftLandmarks(landmarks: video1Landmarks3)
+            video1Landmarks3 = filteredVideo1Landmarks3
+        }
         
         calculateAngles()
-        
     }
     
     @objc func closePlayer() {
@@ -470,6 +477,7 @@ class VideoComparisonViewController: UIViewController {
         appDelegate.orientationLock = .portrait
         self.dismiss(animated: false)
     }
+    
     @objc func togglePlayPause() {
         if player1.timeControlStatus == .paused {
             player1.play()
@@ -481,27 +489,15 @@ class VideoComparisonViewController: UIViewController {
             playButton.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
         }
     }
+    
     @objc func video1DidEnd(notification: Notification) {
-        //player1.pause()
         player1.seek(to: CMTime.zero)
         player1.play()
-//        video1Ended = true
-//        if video2Ended {
-//            playButton.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
-//            video1Ended = false
-//            video2Ended = false
-//        }
     }
+    
     @objc func video2DidEnd(notification: Notification) {
-        //player2.pause()
         player2.seek(to: CMTime.zero)
         player2.play()
-//        video2Ended = true
-//        if video1Ended {
-//            playButton.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40, weight: .bold))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
-//            video1Ended = false
-//            video2Ended = false
-//        }
     }
     
     @objc func openLanmarkSelection() {
@@ -509,7 +505,6 @@ class VideoComparisonViewController: UIViewController {
             let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 32, weight: .bold)
             let image = UIImage(systemName: "dot.circle.and.hand.point.up.left.fill", withConfiguration: symbolConfiguration)?.withTintColor(.green, renderingMode: .alwaysOriginal)
             selectLandmarksButton.setImage(image, for: .normal)
-            
             buttonStates[0] = true
             playButton.isHidden = true
             openChartButton.isHidden = true
@@ -527,7 +522,6 @@ class VideoComparisonViewController: UIViewController {
             let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 32, weight: .bold)
             let image = UIImage(systemName: "dot.circle.and.hand.point.up.left.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
             selectLandmarksButton.setImage(image, for: .normal)
-            
             buttonStates[0] = false
             playButton.isHidden = false
             openChartButton.isHidden = false
@@ -541,16 +535,14 @@ class VideoComparisonViewController: UIViewController {
             tapGesture1.isEnabled = false
             tapGesture2.isEnabled = false
             connectSlidersButton.isHidden = false
-            
             if selectedLandmarksCounter > 0 {
                 openChartButton.isHidden = false
             } else {
                 openChartButton.isHidden = true
             }
         }
-        
-        
     }
+    
     @objc func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         let scnView = gestureRecognize.view as! SCNView
         let location = gestureRecognize.location(in: scnView)
@@ -561,10 +553,6 @@ class VideoComparisonViewController: UIViewController {
             if node.geometry is SCNSphere {
                 let name = node.name
                 let index = Int(name!)!
-                
-                
-                
-                
                 if landmarkColors[index] == .darkGray {
                     selectedLandmarkPoints.append(index)
                     if index == 0 {
@@ -598,7 +586,6 @@ class VideoComparisonViewController: UIViewController {
                         landmarksView2.landmarks[index].color = .systemOrange
                     }
                     chartColors[selectedLandmarksCounter] = Color(landmarkColors[index])
-                    
                     if index == 0 {
                         fingerNumbers[selectedLandmarksCounter] = 0
                     } else if index == 4 || index == 8 || index == 12 || index == 16 || index == 20 {
@@ -610,11 +597,8 @@ class VideoComparisonViewController: UIViewController {
                     } else if index == 1 || index == 5 || index == 9 || index == 13 || index == 17 {
                         fingerNumbers[selectedLandmarksCounter] = 1
                     }
-                    
                     selectedLandmarksCounter += 1
-                    
                 } else {
-                    
                     if landmarkColors[index] == .systemRed {
                         angleChartColors[0] = .clear
                     } else if landmarkColors[index] == .systemYellow {
@@ -626,12 +610,10 @@ class VideoComparisonViewController: UIViewController {
                     } else if landmarkColors[index] == .systemOrange {
                         angleChartColors[4] = .clear
                     }
-                    
                     landmarksView1.landmarks[index].color = .darkGray
                     landmarksView2.landmarks[index].color = .darkGray
                     landmarkColors[index] = .darkGray
                     selectedLandmarksCounter -= 1
-                    
                     for (i, landmark) in selectedLandmarkPoints.enumerated() {
                         if landmark == index {
                             selectedLandmarkPoints.remove(at: i)
@@ -647,24 +629,24 @@ class VideoComparisonViewController: UIViewController {
             }
         }
     }
+    
     @objc func slider1ValueChanged() {
         let seconds = Double(slider1.value)
         let milliSeconds = seconds * 1000
         let targetTime = CMTime(value: CMTimeValue(milliSeconds), timescale: 1000)
         player1.seek(to: targetTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
-        
         if buttonStates[7] == true {
             let value = seconds / duration1!
             let time = CMTime(value: CMTimeValue((value * duration2!) * 1000), timescale: 1000)
             player2.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
         }
     }
+    
     @objc func slider2ValueChanged() {
         let seconds = Double(slider2.value)
         let milliSeconds = seconds * 1000
         let targetTime = CMTime(value: CMTimeValue(milliSeconds), timescale: 1000)
         player2.seek(to: targetTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
-        
         if buttonStates[7] == true {
             let value = seconds / duration2!
             let time = CMTime(value: CMTimeValue((value * duration1!) * 1000), timescale: 1000)
@@ -678,28 +660,20 @@ class VideoComparisonViewController: UIViewController {
             let image = UIImage(systemName: "chart.line.uptrend.xyaxis.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal)
             openChartButton.setImage(image, for: .normal)
             buttonStates[1] = true
-            
             playerView.layer.opacity = 1 - (chartOpacitySlider.value / 100)
             landmarksView1.layer.opacity = 1 - (chartOpacitySlider.value / 100)
             landmarksView2.layer.opacity = 1 - (chartOpacitySlider.value / 100)
             sceneView1.layer.opacity = 1 - (chartOpacitySlider.value / 100)
             sceneView2.layer.opacity = 1 - (chartOpacitySlider.value / 100)
-
             selectLandmarksButton.isHidden = true
-            
             showPlayerButton.isHidden = true
-            
             selectAxisButton.isHidden = false
-            
             chart.isHidden = false
             chartOpacitySlider.isHidden = false
             sceneViewOpacityView.isHidden = false
             openAngleChartButton.isHidden = false
-
-            
             comparisonVideo1PointMarkTime = currentTimeMillis1
             comparisonVideo2PointMarkTime = currentTimeMillis2
-            
             for i in 0..<selectedLandmarksCounter {
                 if buttonStates[2] {
                     comparisonVideo1PointMarks[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].x)
@@ -718,33 +692,26 @@ class VideoComparisonViewController: UIViewController {
             let image = UIImage(systemName: "chart.line.uptrend.xyaxis.circle.fill", withConfiguration: symbolConfiguration)?.withTintColor(.white, renderingMode: .alwaysOriginal)
             openChartButton.setImage(image, for: .normal)
             buttonStates[1] = false
-            
             playerView.layer.opacity = 1
             landmarksView1.layer.opacity = 1
             landmarksView2.layer.opacity = 1
             sceneView1.layer.opacity = 1
             sceneView2.layer.opacity = 1
-            
             if buttonStates[6] == false {
                 selectLandmarksButton.isHidden = false
             }
-            
             showPlayerButton.isHidden = false
-            
             selectAxisButton.isHidden = true
-            
             xAxisButton.isHidden = true
             yAxisButton.isHidden = true
             zAxisButton.isHidden = true
-            
             chart.isHidden = true
             chartOpacitySlider.isHidden = true
             sceneViewOpacityView.isHidden = true
-
             openAngleChartButton.isHidden = true
-            
         }
     }
+    
     @objc func xAxisSelected() {
         xAxisButton.setImage(UIImage(systemName: "x.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold))?.withTintColor(.systemGreen.withAlphaComponent(0.8), renderingMode: .alwaysOriginal), for: .normal)
         yAxisButton.setImage(UIImage(systemName: "y.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold))?.withTintColor(.white.withAlphaComponent(0.8), renderingMode: .alwaysOriginal), for: .normal)
@@ -752,19 +719,16 @@ class VideoComparisonViewController: UIViewController {
         buttonStates[2] = true
         buttonStates[3] = false
         buttonStates[4] = false
-        
         comparisonVideo1PointMarkTime = currentTimeMillis1
         comparisonVideo2PointMarkTime = currentTimeMillis2
-        
         for i in 0..<selectedLandmarksCounter {
             comparisonVideo1PointMarks[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].x)
             comparisonVideo2PointMarks[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].x)
         }
-        
         updateSelectAxisButton()
-        
         updateChartView()
     }
+    
     @objc func yAxisSelected() {
         xAxisButton.setImage(UIImage(systemName: "x.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold))?.withTintColor(.white.withAlphaComponent(0.8), renderingMode: .alwaysOriginal), for: .normal)
         yAxisButton.setImage(UIImage(systemName: "y.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold))?.withTintColor(.systemGreen.withAlphaComponent(0.8), renderingMode: .alwaysOriginal), for: .normal)
@@ -772,19 +736,16 @@ class VideoComparisonViewController: UIViewController {
         buttonStates[2] = false
         buttonStates[3] = true
         buttonStates[4] = false
-        
         comparisonVideo1PointMarkTime = currentTimeMillis1
         comparisonVideo2PointMarkTime = currentTimeMillis2
-        
         for i in 0..<selectedLandmarksCounter {
             comparisonVideo1PointMarks[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].y)
             comparisonVideo2PointMarks[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].y)
         }
-        
         updateSelectAxisButton()
-        
         updateChartView()
     }
+    
     @objc func zAxisSelected() {
         xAxisButton.setImage(UIImage(systemName: "x.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold))?.withTintColor(.white.withAlphaComponent(0.8), renderingMode: .alwaysOriginal), for: .normal)
         yAxisButton.setImage(UIImage(systemName: "y.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 35, weight: .bold))?.withTintColor(.white.withAlphaComponent(0.8), renderingMode: .alwaysOriginal), for: .normal)
@@ -792,17 +753,13 @@ class VideoComparisonViewController: UIViewController {
         buttonStates[2] = false
         buttonStates[3] = false
         buttonStates[4] = true
-        
         comparisonVideo1PointMarkTime = currentTimeMillis1
         comparisonVideo2PointMarkTime = currentTimeMillis2
-        
         for i in 0..<selectedLandmarksCounter {
             comparisonVideo1PointMarks[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].z)
             comparisonVideo2PointMarks[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].z)
         }
-        
         updateSelectAxisButton()
-        
         updateChartView()
     }
     
@@ -864,27 +821,20 @@ class VideoComparisonViewController: UIViewController {
             xAxisButton.isHidden = true
             yAxisButton.isHidden = true
             zAxisButton.isHidden = true
-            //chart.isHidden = true
             openChartButton.isHidden = true
             selectAxisButton.isHidden = true
-            
             buttonStates[5].toggle()
-            
             for i in 0..<5 {
                 comparisonAnglePointMarks1[i] = comparisonAngleDataList1[i][currentLandmarkIndex1].angles
                 comparisonAnglePointMarks2[i] = comparisonAngleDataList2[i][currentLandmarkIndex2].angles
             }
-            
             updateChartView()
         } else {
             let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 40, weight: .bold)
             let image = UIImage(named: "angle.button")
             openAngleChartButton.setImage(image, for: .normal)
-            
-            //chart.isHidden = false
             openChartButton.isHidden = false
             selectAxisButton.isHidden = false
-            
             buttonStates[5].toggle()
             updateChartView()
         }
@@ -894,7 +844,6 @@ class VideoComparisonViewController: UIViewController {
         xAxisButton.isHidden.toggle()
         yAxisButton.isHidden.toggle()
         zAxisButton.isHidden.toggle()
-        
         updateSelectAxisButton()
     }
     
@@ -934,11 +883,9 @@ class VideoComparisonViewController: UIViewController {
             comparisonLandmarkDataList1 = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
             comparisonLandmarkDataList2 = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
         } else {
-
             var coordinates1: [[Float]] = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
             var coordinates2: [[Float]] = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
             if buttonStates[2] == true {
-                //x
                 for i in 0..<selectedLandmarksCounter {
                     for subArray in video1Landmarks3 {
                         let point = subArray[selectedLandmarkPoints[i]]
@@ -950,7 +897,6 @@ class VideoComparisonViewController: UIViewController {
                     }
                 }
             } else if buttonStates[3] == true {
-                //y
                 for i in 0..<selectedLandmarksCounter {
                     for subArray in video1Landmarks3 {
                         let point = subArray[selectedLandmarkPoints[i]]
@@ -962,7 +908,6 @@ class VideoComparisonViewController: UIViewController {
                     }
                 }
             } else if buttonStates[4] == true {
-                //z
                 for i in 0..<selectedLandmarksCounter {
                     for subArray in video1Landmarks3 {
                         let point = subArray[selectedLandmarkPoints[i]]
@@ -981,11 +926,11 @@ class VideoComparisonViewController: UIViewController {
                 var timeIndex1 = 0
                 var timeIndex2 = 0
                 for point in coordinates1[i] {
-                    comparisonLandmarkDataList1[i].append(chartComparisonLandmarkData1(landmarks: point, timestamps: video1Timestamps[timeIndex1]))
+                    comparisonLandmarkDataList1[i].append(chartLandmarkData(landmarks: point, timestamps: video1Timestamps[timeIndex1]))
                     timeIndex1 = timeIndex1 + 1
                 }
                 for point in coordinates2[i] {
-                    comparisonLandmarkDataList2[i].append(chartComparisonLandmarkData2(landmarks: point, timestamps: video2Timestamps[timeIndex2]))
+                    comparisonLandmarkDataList2[i].append(chartLandmarkData(landmarks: point, timestamps: video2Timestamps[timeIndex2]))
                     timeIndex2 = timeIndex2 + 1
                 }
             }
@@ -1019,7 +964,6 @@ class VideoComparisonViewController: UIViewController {
             addCoordinateSystem(toScene: scene1)
             addPoints(coordinates: video1Landmarks3[index], toScene: scene1, color: landmarkColors)
             currentLandmarkIndex1 = index
-            
             for i in 0..<selectedLandmarksCounter {
                 if buttonStates[2] {
                     comparisonVideo1PointMarks[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].x)
@@ -1029,11 +973,9 @@ class VideoComparisonViewController: UIViewController {
                     comparisonVideo1PointMarks[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].z)
                 }
             }
-            
             for i in 0..<5 {
                 comparisonAnglePointMarks1[i] = comparisonAngleDataList1[i][index].angles
             }
-            
             if firstFrame1 == true {
                 landmarks1 = []
                 for point in pointCoordinates {
@@ -1053,7 +995,6 @@ class VideoComparisonViewController: UIViewController {
                 landmarksView1.landmarks = landmarks1
             }
             landmarksView1.setNeedsDisplay()
-            
         } else {
             if landmarksView1.landmarks.isEmpty == false {
                 landmarkMemory1 = landmarksView1.landmarks
@@ -1062,6 +1003,7 @@ class VideoComparisonViewController: UIViewController {
             landmarksView1.setNeedsDisplay()
         }
     }
+    
     func updateLandmarks2(for time: CMTime) {
         currentTimeMillis2 = Int(CMTimeGetSeconds(time) * 1000)
         comparisonVideo2PointMarkTime = currentTimeMillis2
@@ -1074,7 +1016,6 @@ class VideoComparisonViewController: UIViewController {
             addCoordinateSystem(toScene: scene2)
             addPoints(coordinates: video2Landmarks3[index], toScene: scene2, color: landmarkColors)
             currentLandmarkIndex2 = index
-            
             for i in 0..<selectedLandmarksCounter {
                 if buttonStates[2] {
                     comparisonVideo2PointMarks[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].x)
@@ -1084,11 +1025,9 @@ class VideoComparisonViewController: UIViewController {
                     comparisonVideo2PointMarks[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].z)
                 }
             }
-            
             for i in 0..<5 {
                 comparisonAnglePointMarks2[i] = comparisonAngleDataList2[i][index].angles
             }
-            
             if firstFrame2 == true {
                 landmarks2 = []
                 for point in pointCoordinates {
@@ -1126,14 +1065,12 @@ class VideoComparisonViewController: UIViewController {
         xNode.position = SCNVector3(length/2, 0, 0)
         xNode.eulerAngles.z = Float.pi / 2
         scene.rootNode.addChildNode(xNode)
-        
         // Y-Achse (grün)
         let yCylinder = SCNCylinder(radius: radius, height: CGFloat(length))
         yCylinder.firstMaterial?.diffuse.contents = UIColor.green
         let yNode = SCNNode(geometry: yCylinder)
         yNode.position = SCNVector3(0, length/2, 0)
         scene.rootNode.addChildNode(yNode)
-        
         // Z-Achse (blau)
         let zCylinder = SCNCylinder(radius: radius, height: CGFloat(length))
         zCylinder.firstMaterial?.diffuse.contents = UIColor.blue
@@ -1142,6 +1079,7 @@ class VideoComparisonViewController: UIViewController {
         zNode.eulerAngles.x = Float.pi / 2
         scene.rootNode.addChildNode(zNode)
     }
+    
     func addPoints(coordinates: [SCNVector3], toScene scene: SCNScene, color: [UIColor]) {
         for (index, coordinate) in coordinates.enumerated() {
             let sphere = SCNSphere(radius: 2.5)
@@ -1155,6 +1093,7 @@ class VideoComparisonViewController: UIViewController {
         }
         connectPoints(coordinates: coordinates, toScene: scene, color: .gray)
     }
+    
     func connectPoints(coordinates: [SCNVector3], toScene scene: SCNScene, color: UIColor) {
         var add = 0
         for _ in 0..<5 {
@@ -1169,22 +1108,18 @@ class VideoComparisonViewController: UIViewController {
             add = add + 4
         }
     }
+    
     func lineFrom(vector vector1: SCNVector3, toVector vector2: SCNVector3,  toScene scene: SCNScene, color: UIColor) -> SCNNode {
         let distance = vector1.distance(to: vector2)
         let midPoint = vector1.midPoint(to: vector2)
-
         let cylinder = SCNCylinder(radius: 0.5, height: CGFloat(distance))
         cylinder.firstMaterial?.diffuse.contents = color
-
         let node = SCNNode()
         node.position = midPoint
         node.look(at: vector2, up: scene.rootNode.worldUp, localFront: SCNNode.localFront)
-
         let cylinderNode = SCNNode(geometry: cylinder)
         cylinderNode.eulerAngles.x = Float.pi / 2
-
         node.addChildNode(cylinderNode)
-
         return node
     }
     
@@ -1245,7 +1180,6 @@ class VideoComparisonViewController: UIViewController {
             let angle3: Float = Float(angleBetweenVectors1(landmark[0], landmark[9], landmark[10]))
             let angle4: Float = Float(angleBetweenVectors1(landmark[0], landmark[13], landmark[14]))
             let angle5: Float = Float(angleBetweenVectors1(landmark[0], landmark[17], landmark[18]))
-                
             comparisonAngleDataList1[0].append(chartAngleData(angles: angle1, timestamps: video1Timestamps[index]))
             comparisonAngleDataList1[1].append(chartAngleData(angles: angle2, timestamps: video1Timestamps[index]))
             comparisonAngleDataList1[2].append(chartAngleData(angles: angle3, timestamps: video1Timestamps[index]))
@@ -1258,67 +1192,25 @@ class VideoComparisonViewController: UIViewController {
             let angle3: Float = Float(angleBetweenVectors1(landmark[0], landmark[9], landmark[10]))
             let angle4: Float = Float(angleBetweenVectors1(landmark[0], landmark[13], landmark[14]))
             let angle5: Float = Float(angleBetweenVectors1(landmark[0], landmark[17], landmark[18]))
-
             comparisonAngleDataList2[0].append(chartAngleData(angles: angle1, timestamps: video2Timestamps[index]))
             comparisonAngleDataList2[1].append(chartAngleData(angles: angle2, timestamps: video2Timestamps[index]))
             comparisonAngleDataList2[2].append(chartAngleData(angles: angle3, timestamps: video2Timestamps[index]))
             comparisonAngleDataList2[3].append(chartAngleData(angles: angle4, timestamps: video2Timestamps[index]))
             comparisonAngleDataList2[4].append(chartAngleData(angles: angle5, timestamps: video2Timestamps[index]))
         }
-
     }
     
-    func setLandmarkFrames() {
-        let asset1 = AVAsset(url: video1URL!)
-        let asset2 = AVAsset(url: video2URL!)
-        let videoTrack1 = asset1.tracks(withMediaType: AVMediaType.video).first!
-        let videoTrack2 = asset2.tracks(withMediaType: AVMediaType.video).first!
-        let naturalSize1 = videoTrack1.naturalSize
-        let naturalSize2 = videoTrack2.naturalSize
-        let videoOrientation1 = videoTrack1.preferredTransform
-        let videoOrientation2 = videoTrack2.preferredTransform
-        let videoAngle1 = atan2(videoOrientation1.b, videoOrientation1.a) * (180 / .pi)
-        let videoAngle2 = atan2(videoOrientation2.b, videoOrientation2.a) * (180 / .pi)
-        
-        if abs(videoAngle1) == 90 {
-            // Hochformat
-            let factor = naturalSize1.width / 375
-            let videoWidth = Int(naturalSize1.height / factor) / 2
-            let videoHeight = Int(naturalSize1.width / factor) / 2
-            landmarkFrame1 = CGRect(x: ((Int(UIScreen.main.bounds.size.height / 2) - videoWidth) / 2), y: 0, width: videoWidth, height: videoHeight)
-        } else if abs(videoAngle1) == 0 {
-            // Querformat 1
-            let factor = naturalSize1.height / 375
-            let videoWidth = Int(naturalSize1.width / factor) / 2
-            let videoHeight = Int(naturalSize1.height / factor) / 2
-            landmarkFrame1 = CGRect(x: ((Int(UIScreen.main.bounds.size.height / 2) - videoWidth) / 2), y: 0, width: videoWidth, height: videoHeight)
-        } else if abs(videoAngle1) == 180 {
-            // Querformat 2
-            let factor = naturalSize1.height / 375
-            let videoWidth = Int(naturalSize1.width / factor) / 2
-            let videoHeight = Int(naturalSize1.height / factor) / 2
-            landmarkFrame1 = CGRect(x: ((Int(UIScreen.main.bounds.size.height / 2) - videoWidth) / 2), y: 0, width: videoWidth, height: videoHeight)
+    func getFPS(video: Int) -> Float {
+        var url: URL?
+        if video == 1 {
+            url = video1URL!
+        } else {
+            url = video2URL!
         }
-        
-        if abs(videoAngle2) == 90 {
-            // Hochformat
-            let factor = naturalSize1.width / 375
-            let videoWidth = Int(naturalSize1.height / factor) / 2
-            let videoHeight = Int(naturalSize1.width / factor) / 2
-            landmarkFrame2 = CGRect(x: Int(UIScreen.main.bounds.size.height / 2) + ((Int(UIScreen.main.bounds.size.height / 2) - videoWidth) / 2), y: 0, width: videoWidth, height: videoHeight)
-        } else if abs(videoAngle2) == 0 {
-            // Querformat 1
-            let factor = naturalSize1.height / 375
-            let videoWidth = Int(naturalSize1.width / factor) / 2
-            let videoHeight = Int(naturalSize1.height / factor) / 2
-            landmarkFrame2 = CGRect(x: Int(UIScreen.main.bounds.size.height / 2) + ((Int(UIScreen.main.bounds.size.height / 2) - videoWidth) / 2), y: 0, width: videoWidth, height: videoHeight)
-        } else if abs(videoAngle2) == 180 {
-            // Querformat 2
-            let factor = naturalSize1.height / 375
-            let videoWidth = Int(naturalSize1.width / factor) / 2
-            let videoHeight = Int(naturalSize1.height / factor) / 2
-            landmarkFrame2 = CGRect(x: Int(UIScreen.main.bounds.size.height / 2) + ((Int(UIScreen.main.bounds.size.height / 2) - videoWidth) / 2), y: 0, width: videoWidth, height: videoHeight)
-        }
+        let asset = AVAsset(url: url!)
+        let videoTrack = asset.tracks(withMediaType: AVMediaType.video).first!
+        let fps = videoTrack.nominalFrameRate
+        return fps
     }
     
     func calculateVideoFrame(in view: CGRect, videoURL: URL, videoN: Int) -> CGRect {
@@ -1328,11 +1220,9 @@ class VideoComparisonViewController: UIViewController {
             return .zero
         }
         let videoSize = track.naturalSize
-        
         let videoOrientation = track.preferredTransform
         let videoAngle = atan2(videoOrientation.b, videoOrientation.a) * (180 / .pi)
         var videoAspectRatio = videoSize.width / videoSize.height
-        
         let factor = videoSize.width / 375
         var videoWidth = Int()
         var videoHeight = Int()
@@ -1344,12 +1234,9 @@ class VideoComparisonViewController: UIViewController {
             videoWidth = Int(videoSize.width / factor)
             videoHeight = Int(videoSize.height / factor)
         }
-         
         let viewSize = view.size
         let viewAspectRatio = viewSize.width / viewSize.height
-
         var addToX = 0
-        
         if videoN == 2 {
             addToX = (Int(UIScreen.main.bounds.size.height) / 2)
             videoAngle2 = videoAngle
@@ -1361,12 +1248,10 @@ class VideoComparisonViewController: UIViewController {
             videoHeight1 = videoHeight
         }
         if videoAspectRatio > viewAspectRatio {
-            // Video ist breiter als der View
             let scaledHeight = viewSize.width / videoAspectRatio
             let yOffset = (viewSize.height - scaledHeight) / 2
             return CGRect(x: CGFloat(addToX), y: yOffset, width: viewSize.width, height: scaledHeight)
         } else {
-            // Video ist höher als der View
             let scaledWidth = viewSize.height * videoAspectRatio
             let xOffset = (viewSize.width - scaledWidth) / 2
             return CGRect(x: xOffset + CGFloat(addToX), y: 0, width: scaledWidth, height: viewSize.height)
@@ -1386,7 +1271,6 @@ class VideoComparisonViewController: UIViewController {
             let minus = CGFloat(378 - Float(height))
             return points.map { CGPoint(x: ($0.y / scale), y: (395 - ($0.x / scale)) - (minus)) }
         }
-        
     }
     
     struct Landmark {
@@ -1394,72 +1278,62 @@ class VideoComparisonViewController: UIViewController {
         var color: UIColor
         var selected: Bool
     }
+    
     class LandmarksView: UIView {
         
         var landmarks: [Landmark] = []
         var touchIsActive = false
-        
         var selectedCounter = 0
         var landmarkPoints: [Int] = []
         
         override init(frame: CGRect) {
             super.init(frame: frame)
         }
+        
         required init?(coder: NSCoder) {
             super.init(coder: coder)
         }
         
         override func draw(_ rect: CGRect) {
             guard !landmarks.isEmpty else { return }
-            
             let context = UIGraphicsGetCurrentContext()
             context?.setStrokeColor(UIColor.gray.cgColor)
             context?.setLineWidth(2.0)
-            
             let points = landmarks.map { $0.point }
-            
             context?.move(to: points[0])
             context?.addLine(to: points[1])
             context?.addLine(to: points[2])
             context?.addLine(to: points[3])
             context?.addLine(to: points[4])
-            
             context?.move(to: points[0])
             context?.addLine(to: points[5])
             context?.addLine(to: points[6])
             context?.addLine(to: points[7])
             context?.addLine(to: points[8])
-            
             context?.move(to: points[0])
             context?.addLine(to: points[9])
             context?.addLine(to: points[10])
             context?.addLine(to: points[11])
             context?.addLine(to: points[12])
-            
             context?.move(to: points[0])
             context?.addLine(to: points[13])
             context?.addLine(to: points[14])
             context?.addLine(to: points[15])
             context?.addLine(to: points[16])
-            
             context?.move(to: points[0])
             context?.addLine(to: points[17])
             context?.addLine(to: points[18])
             context?.addLine(to: points[19])
             context?.addLine(to: points[20])
-            
             context?.strokePath()
-            
             for (index, landmark) in landmarks.enumerated() {
                 let circleRect = CGRect(x: landmark.point.x - 5, y: landmark.point.y - 5, width: 10, height: 10)
                 context?.setFillColor(landmark.color.cgColor)
                 context?.fillEllipse(in: circleRect)
-                
                 let textAttributes: [NSAttributedString.Key: Any] = [
                     .font: UIFont.systemFont(ofSize: 8),
                     .foregroundColor: UIColor.black
                 ]
-                
                 var text = "0" as NSString
                 if index == 4 || index == 8 || index == 12 || index == 16 || index == 20 {
                     text = "4"
@@ -1470,7 +1344,6 @@ class VideoComparisonViewController: UIViewController {
                 } else if index == 1 || index == 5 || index == 9 || index == 13 || index == 17 {
                     text = "1"
                 }
-                
                 let textSize = text.size(withAttributes: textAttributes)
                 let textRect = CGRect(x: landmark.point.x - textSize.width / 2, y: landmark.point.y - textSize.height / 2, width: textSize.width, height: textSize.height)
                 text.draw(in: textRect, withAttributes: textAttributes)

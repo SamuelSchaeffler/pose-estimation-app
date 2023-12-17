@@ -17,11 +17,9 @@ class HandTrackingViewController: UIViewController {
     var mediaURL: URL?
     var uiImage: UIImage?
     let handLandmarker = MediaPipeHandLandmarker()
-
-    
     var result: HandLandmarkerResult?
     
-    lazy var closeButton: UIButton = {
+    let closeButton: UIButton = {
         let button = UIButton()
         button.adjustsImageWhenHighlighted = false
         button.setTitle("zurück", for: .normal)
@@ -33,12 +31,9 @@ class HandTrackingViewController: UIViewController {
         let buttonHeight: CGFloat = 30
         button.frame = CGRect(x: 20, y: 50, width: buttonWidth, height: buttonHeight)
         button.layer.cornerRadius = 15
-        
         button.addTarget(self, action: #selector(buttonPressed), for: .touchDown)
         button.addTarget(self, action: #selector(buttonReleased), for: .touchUpInside)
         button.addTarget(self, action: #selector(buttonReleased), for: .touchUpOutside)
-            
-        
         return button
     }()
     
@@ -48,7 +43,6 @@ class HandTrackingViewController: UIViewController {
         title.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         title.textAlignment = .center
         title.frame = CGRect(x: 0, y: 80, width: view.frame.width, height: 40)
-        
         return title
     }()
     
@@ -61,7 +55,7 @@ class HandTrackingViewController: UIViewController {
         return imageView
     }()
     
-    var trackingView: UIImageView = {
+    let trackingView: UIImageView = {
         let trackingView = UIImageView()
         trackingView.contentMode = .scaleAspectFit
         trackingView.clipsToBounds = true
@@ -124,7 +118,9 @@ class HandTrackingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .systemBackground
+        
         NotificationCenter.default.addObserver(self, selector: #selector(updateObjectID(_:)), name: Notification.Name("UpdateObjectID"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updatePhoto(_:)), name: Notification.Name("UpdateTrackingPhoto"), object: nil)
         
@@ -138,6 +134,7 @@ class HandTrackingViewController: UIViewController {
         view.addSubview(photoTitle)
         view.addSubview(closeButton)
     }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -147,6 +144,7 @@ class HandTrackingViewController: UIViewController {
             sender.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         }
     }
+    
     @objc func buttonReleased(sender: UIButton) {
         UIView.animate(withDuration: 0.1) {
             sender.transform = .identity
@@ -179,18 +177,13 @@ class HandTrackingViewController: UIViewController {
             let image = UIImage(contentsOfFile: url.path)
             trackingView.image = nil
             photoTitle.text = String(url.lastPathComponent)
-            
             self.imageView.image = image
             result = handLandmarker.detectHands(image: image!)
-            
             handLabel2.text = String(describing: result!.handedness.count)
-                
             let textLinks = NSMutableAttributedString(string: "Links")
             let textRechts = NSMutableAttributedString(string: "Rechts")
-            textLinks.addAttribute(.foregroundColor, value: UIColor.blue, range: NSMakeRange(0, 5))
-            textRechts.addAttribute(.foregroundColor, value: UIColor.red, range: NSMakeRange(0, 6))
-
-
+            textLinks.addAttribute(.foregroundColor, value: UIColor.systemBlue, range: NSMakeRange(0, 5))
+            textRechts.addAttribute(.foregroundColor, value: UIColor.systemRed, range: NSMakeRange(0, 6))
             if result!.handedness.count == 1 {
                 let hand = result!.handedness[0]
                 handLabel4.attributedText = (hand[0].categoryName == "Right") ? textRechts : textLinks
@@ -198,19 +191,15 @@ class HandTrackingViewController: UIViewController {
             } else if result!.handedness.count == 2 {
                 let hand1 = result!.handedness[0]
                 let hand2 = result!.handedness[1]
-                
                 let combinedText = NSMutableAttributedString()
                 combinedText.append((hand1[0].categoryName == "Right") ? textRechts : textLinks)
                 combinedText.append(NSMutableAttributedString(string: " & "))
                 combinedText.append((hand2[0].categoryName == "Right") ? textRechts : textLinks)
                 handLabel4.attributedText = combinedText
-                
                 trackingView.image = handLandmarker.drawBoundingBoxes()
             } else {
                 handLabel4.text = ""
             }
-                
-            
         }
     }
 }

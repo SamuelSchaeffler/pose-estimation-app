@@ -30,7 +30,7 @@ class FullscreenPhotoViewController: UIViewController, UIScrollViewDelegate {
         return fullscreenImageView
     }()
 
-    lazy var closeButton: UIButton = {
+    let closeButton: UIButton = {
         let button = UIButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .bold)
         let image = UIImage(systemName: "xmark", withConfiguration: symbolConfiguration)?.withTintColor(.label, renderingMode: .alwaysOriginal)
@@ -40,17 +40,15 @@ class FullscreenPhotoViewController: UIViewController, UIScrollViewDelegate {
         let buttonWidth: CGFloat = 50
         let buttonHeight: CGFloat = 50
         button.frame = CGRect(x: 15, y: 25, width: buttonWidth, height: buttonHeight)
-        
         button.addTarget(self, action: #selector(buttonPressed), for: .touchDown)
         button.addTarget(self, action: #selector(buttonReleased), for: .touchUpInside)
         button.addTarget(self, action: #selector(buttonReleased), for: .touchUpOutside)
-            
-        
         return button
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .systemBackground
 
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI(_:)), name: Notification.Name("UpdateFullscreenPhoto"), object: nil)
@@ -74,22 +72,26 @@ class FullscreenPhotoViewController: UIViewController, UIScrollViewDelegate {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
     @objc func buttonPressed(sender: UIButton) {
             UIView.animate(withDuration: 0.1) {
                 sender.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
             }
         }
+    
     @objc func buttonReleased(sender: UIButton) {
         UIView.animate(withDuration: 0.1) {
             sender.transform = .identity
         }
     }
+    
     @objc func updateUI(_ notification: Notification) {
         if let image = notification.object as? UIImage {
             fullscreenImageView.image = image
             self.image = image
         }
     }
+    
     @objc func closeFullscreen() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.orientationLock = .portrait
@@ -100,6 +102,7 @@ class FullscreenPhotoViewController: UIViewController, UIScrollViewDelegate {
         super.viewWillTransition(to: size, with: coordinator)
         scrollView.setZoomScale(1.0, animated: true)
     }
+    
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return fullscreenImageView
     }
