@@ -9,6 +9,8 @@ import UIKit
 
 class LandmarkFilterViewController: UIViewController {
     
+    let filter = Filter.shared
+    
     let pickerData = ["1/10s", "1/20s", "1/30s", "1/40s", "1/50s", "1/60s"]
     
     let closeButton: UIButton = {
@@ -37,13 +39,13 @@ class LandmarkFilterViewController: UIViewController {
         return label
     }()
     
-    let movingAverageToggle: UISwitch = {
+    lazy var movingAverageToggle: UISwitch = {
         let toggle = UISwitch()
         let width: CGFloat = 150
         let height: CGFloat = 30
         toggle.layer.frame = CGRect(x: 285, y: 100, width: width, height: height)
         toggle.addTarget(self, action: #selector(movingAverageToggleChanged(_:)), for: .valueChanged)
-        toggle.isOn = landmarkFilterStates[0]
+        toggle.isOn = filter.landmarkFilterStates[0]
         return toggle
     }()
     
@@ -73,11 +75,11 @@ class LandmarkFilterViewController: UIViewController {
         return textField
     }()
     
-    let  movingAverageOffView: UIView = {
+    lazy var  movingAverageOffView: UIView = {
         let view = UIView()
         view.layer.frame = CGRect(x: 30, y: 80, width: 240, height: 100)
         view.backgroundColor = .systemBackground.withAlphaComponent(0.5)
-        view.isHidden = landmarkFilterStates[0]
+        view.isHidden = filter.landmarkFilterStates[0]
         return view
     }()
     
@@ -92,13 +94,13 @@ class LandmarkFilterViewController: UIViewController {
         return label
     }()
     
-    let pt1FilterToggle: UISwitch = {
+    lazy var pt1FilterToggle: UISwitch = {
         let toggle = UISwitch()
         let width: CGFloat = 150
         let height: CGFloat = 30
         toggle.layer.frame = CGRect(x: 285, y: 200, width: width, height: height)
         toggle.addTarget(self, action: #selector(pt1FilterToggleChanged(_:)), for: .valueChanged)
-        toggle.isOn = landmarkFilterStates[1]
+        toggle.isOn = filter.landmarkFilterStates[1]
         return toggle
     }()
     
@@ -148,11 +150,11 @@ class LandmarkFilterViewController: UIViewController {
         return textField
     }()
     
-    let  pt1FilterOffView: UIView = {
+    lazy var  pt1FilterOffView: UIView = {
         let view = UIView()
         view.layer.frame = CGRect(x: 30, y: 190, width: 262, height: 200)
         view.backgroundColor = .systemBackground.withAlphaComponent(0.5)
-        view.isHidden = landmarkFilterStates[1]
+        view.isHidden = filter.landmarkFilterStates[1]
         return view
     }()
     
@@ -196,13 +198,13 @@ class LandmarkFilterViewController: UIViewController {
         return label
     }()
     
-    let kalmanFilterToggle: UISwitch = {
+    lazy var kalmanFilterToggle: UISwitch = {
         let toggle = UISwitch()
         let width: CGFloat = 150
         let height: CGFloat = 30
         toggle.layer.frame = CGRect(x: 285, y: 340, width: width, height: height)
         toggle.addTarget(self, action: #selector(kalmanFilterToggleChanged(_:)), for: .valueChanged)
-        toggle.isOn = landmarkFilterStates[2]
+        toggle.isOn = filter.landmarkFilterStates[2]
         return toggle
     }()
     
@@ -284,11 +286,11 @@ class LandmarkFilterViewController: UIViewController {
         return textField
     }()
     
-    let kalmanFilterOffView: UIView = {
+    lazy var kalmanFilterOffView: UIView = {
         let view = UIView()
         view.layer.frame = CGRect(x: 30, y: 330, width: 240, height: 180)
         view.backgroundColor = .systemBackground.withAlphaComponent(0.5)
-        view.isHidden = landmarkFilterStates[2]
+        view.isHidden = filter.landmarkFilterStates[2]
         return view
     }()
     
@@ -303,13 +305,13 @@ class LandmarkFilterViewController: UIViewController {
         return label
     }()
     
-    let shiftLandmarksToggle: UISwitch = {
+    lazy var shiftLandmarksToggle: UISwitch = {
         let toggle = UISwitch()
         let width: CGFloat = 150
         let height: CGFloat = 30
         toggle.layer.frame = CGRect(x: 285, y: 520, width: width, height: height)
         toggle.addTarget(self, action: #selector(shiftLandmarksToggleChanged(_:)), for: .valueChanged)
-        toggle.isOn = landmarkFilterStates[3]
+        toggle.isOn = filter.landmarkFilterStates[3]
         return toggle
     }()
     
@@ -339,11 +341,11 @@ class LandmarkFilterViewController: UIViewController {
         return textField
     }()
     
-    let shiftLandmarksOffView: UIView = {
+    lazy var shiftLandmarksOffView: UIView = {
         let view = UIView()
         view.layer.frame = CGRect(x: 30, y: 510, width: 240, height: 90)
         view.backgroundColor = .systemBackground.withAlphaComponent(0.5)
-        view.isHidden = landmarkFilterStates[2]
+        view.isHidden = filter.landmarkFilterStates[2]
         return view
     }()
 
@@ -399,47 +401,47 @@ class LandmarkFilterViewController: UIViewController {
     
     @objc func movingAverageToggleChanged(_ sender: UISwitch) {
         movingAverageOffView.isHidden = sender.isOn
-        landmarkFilterStates[0] = sender.isOn
+        filter.landmarkFilterStates[0] = sender.isOn
     }
     
     @objc func pt1FilterToggleChanged(_ sender: UISwitch) {
         pt1FilterOffView.isHidden = sender.isOn
-        landmarkFilterStates[1] = sender.isOn
+        filter.landmarkFilterStates[1] = sender.isOn
     }
     
     @objc func kalmanFilterToggleChanged(_ sender: UISwitch) {
         kalmanFilterOffView.isHidden = sender.isOn
-        landmarkFilterStates[2] = sender.isOn
+        filter.landmarkFilterStates[2] = sender.isOn
     }
     
     @objc func shiftLandmarksToggleChanged(_ sender: UISwitch) {
         shiftLandmarksOffView.isHidden = sender.isOn
-        landmarkFilterStates[3] = sender.isOn
+        filter.landmarkFilterStates[3] = sender.isOn
     }
     
     @objc func checkboxTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         pt1FilterCheckBoxOffView.isHidden.toggle()
-        useFPSSampleTimePT1.toggle()
+        filter.useFPSSampleTimePT1.toggle()
     }
 }
 extension LandmarkFilterViewController: UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == movingAverageTextField {
-            windowSizeMA = Int(textField.text!) ?? 0
+            filter.windowSizeMA = Int(textField.text!) ?? 0
         } else if textField == pt1FilterTextField1 {
-            omegaCPT1 = Float(textField.text!) ?? 0
+            filter.omegaCPT1 = Float(textField.text!) ?? 0
         } else if textField == pt1FilterTextField2 {
-            sampleTimePT1 = Float(textField.text!) ?? 0
+            filter.sampleTimePT1 = Float(textField.text!) ?? 0
         } else if textField == kalmanFilterTextField1 {
-            qKalman = Float(textField.text!) ?? 0
+            filter.qKalman = Float(textField.text!) ?? 0
         } else if textField == kalmanFilterTextField2 {
-            rKalman = Float(textField.text!) ?? 0
+            filter.rKalman = Float(textField.text!) ?? 0
         } else if textField == kalmanFilterTextField3 {
-            initialPKalman = Float(textField.text!) ?? 0
+            filter.initialPKalman = Float(textField.text!) ?? 0
         } else if textField == shiftLandmarksTextField1 {
-           landmarkShiftAmount = Int(textField.text!) ?? 0
+            filter.landmarkShiftAmount = Int(textField.text!) ?? 0
        }
         textField.resignFirstResponder()
         return true
@@ -460,7 +462,7 @@ extension LandmarkFilterViewController: UITextFieldDelegate, UIPickerViewDataSou
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let data: [Float] = [(1 / 10), (1 / 20), (1 / 30), (1 / 40), (1 / 50), (1 / 60)]
         print("Ausgewählte Option: \(pickerData[row])")
-        sampleTimePT1 = Float(data[row])
+        filter.sampleTimePT1 = Float(data[row])
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {

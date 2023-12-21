@@ -5,10 +5,7 @@
 //  Created by Samuel Schäffler on 26.09.23.
 //
 
-import Foundation
 import CoreData
-import UIKit
-import MediaPipeTasksVision
 
 @objc(Trash)
 class Trash: NSManagedObject {

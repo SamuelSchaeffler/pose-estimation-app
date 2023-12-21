@@ -120,7 +120,7 @@ class PhotoPickerViewController: UIViewController, PHPickerViewControllerDelegat
                         do {
                             try fileManager.moveItem(at: temporaryURL, to: destinationURL)
                         } catch {
-                            print("Fehler beim Speichern des Mediums: \(error.localizedDescription)")
+                            print("Fehler beim Speichern des Fotos: \(error.localizedDescription)")
                         }
                         self.mediaModel.saveMedia(url: destinationURL, array: self.readMetadataFromPhotoAtPath(destinationURL.absoluteString))
                         group.leave()
@@ -137,7 +137,7 @@ class PhotoPickerViewController: UIViewController, PHPickerViewControllerDelegat
                         do {
                             try fileManager.moveItem(at: temporaryURL, to: destinationURL)
                         } catch {
-                            print("Fehler beim Speichern des Mediums: \(error.localizedDescription)")
+                            print("Fehler beim Speichern des Videos: \(error.localizedDescription)")
                         }
                         self.mediaModel.saveMedia(url: destinationURL, array: self.readMetadataFromVideoAtPath(destinationURL.absoluteString))
                         group.leave()
@@ -152,3 +152,4 @@ class PhotoPickerViewController: UIViewController, PHPickerViewControllerDelegat
         }
         }
     }
+

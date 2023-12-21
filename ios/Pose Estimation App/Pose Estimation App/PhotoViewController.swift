@@ -18,7 +18,7 @@ class PhotoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var trashModel = TrashModel()
     
     var fullscreenPhotoVC = FullscreenPhotoViewController()
-    var handTrackingVC = HandTrackingViewController()
+    var handTrackingVC = PhotoAnalysisViewController()
     
     var MetadataArray1 = ["Aufnahmedatum:","Zeit:", "Auflösung:", "Kamerahersteller:", "BPM:", "Rudiment:","Interpret:","Hand:","Grip:","Grip Matched:"]
     var Metadata: [String] = []

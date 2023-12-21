@@ -5,16 +5,10 @@
 //  Created by Samuel Schäffler on 24.09.23.
 //
 
-import Foundation
-import UIKit
 import CoreData
-import MediaPipeTasksVision
 
 class MediaModel: ObservableObject {
     
-    var image: UIImage?
-    var video: UIImage?
-    var url: String?
     private var context = CoreDataManager.shared.persistentContainer.viewContext
     
     func saveMedia(url: URL, array: [String]) {
@@ -43,15 +37,15 @@ class MediaModel: ObservableObject {
     
     func getMedia() -> [URL] {
         var urlArray: [URL] = []
-        var filter = filterSettings
-        var dateFilter = dateFilterSettings
-        var bpmFilter = bpmFilterSettings
+        let filter = filterSettings
+        let dateFilter = dateFilterSettings
+        let bpmFilter = bpmFilterSettings
         let fetchRequest = Media.fetchRequest()
         var mediaPredicate = NSPredicate(value: true)
         var datePredicate = NSPredicate(value: true)
         var bpmPredicate = NSPredicate(value: true)
         var interpretPredicate = NSPredicate(value: true)
-        var gripPredicate = NSPredicate(value: true)
+        let gripPredicate = NSPredicate(value: true)
         var gripMatchedPredicate = NSPredicate(value: true)
         var handPredicate = NSPredicate(value: true)
         if filter[0] == "2" {
@@ -103,16 +97,16 @@ class MediaModel: ObservableObject {
     }
     
     func getObjectIDs() -> [NSManagedObjectID] {
-        var filter = filterSettings
-        var dateFilter = dateFilterSettings
-        var bpmFilter = bpmFilterSettings
+        let filter = filterSettings
+        let dateFilter = dateFilterSettings
+        let bpmFilter = bpmFilterSettings
         let entityName = "Media"
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         var mediaPredicate = NSPredicate(value: true)
         var datePredicate = NSPredicate(value: true)
         var bpmPredicate = NSPredicate(value: true)
         var interpretPredicate = NSPredicate(value: true)
-        var gripPredicate = NSPredicate(value: true)
+        let gripPredicate = NSPredicate(value: true)
         var gripMatchedPredicate = NSPredicate(value: true)
         var handPredicate = NSPredicate(value: true)
         if filter[0] == "2" {

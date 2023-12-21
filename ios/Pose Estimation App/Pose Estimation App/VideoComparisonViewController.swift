@@ -63,6 +63,10 @@ class VideoComparisonViewController: UIViewController {
     var sceneView1 = SCNView()
     var sceneView2 = SCNView()
     
+    let filter = Filter.shared
+    let vectorFunctions = VectorFunctions()
+    let chartData = comparisonLandmarkData.shared
+    
     let sceneViewOpacityView: UIView = {
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.height, height: UIScreen.main.bounds.size.width)
@@ -443,29 +447,29 @@ class VideoComparisonViewController: UIViewController {
         tapGesture1.isEnabled = false
         tapGesture2.isEnabled = false
 
-        comparisonVideo1PointMarks = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        comparisonVideo2PointMarks = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        comparisonAngleDataList1 = [[], [], [], [], []]
-        comparisonAngleDataList2 = [[], [], [], [], []]
-        angleChartColors = [.clear, .clear, .clear, .clear, .clear]
+        chartData.videoPointMarks1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        chartData.videoPointMarks2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        chartData.angleDataList1 = [[], [], [], [], []]
+        chartData.angleDataList2 = [[], [], [], [], []]
+        chartData.angleChartColors = [.clear, .clear, .clear, .clear, .clear]
         
-        if landmarkFilterStates[0] {
-            filteredVideo1Landmarks3 = movingAverage(landmarks: video1Landmarks3)
+        if filter.landmarkFilterStates[0] {
+            filteredVideo1Landmarks3 = filter.movingAverage(landmarks: video1Landmarks3)
             video1Landmarks3 = filteredVideo1Landmarks3
         }
-        if landmarkFilterStates[1] {
-            if useFPSSampleTimePT1 {
-                sampleTimePT1 = 1 / (getFPS(video: 1))
+        if filter.landmarkFilterStates[1] {
+            if filter.useFPSSampleTimePT1 {
+                filter.sampleTimePT1 = 1 / (getFPS(video: 1))
             }
-            filteredVideo1Landmarks3 = applyPT1Filter(landmarks: video1Landmarks3)
+            filteredVideo1Landmarks3 = filter.applyPT1Filter(landmarks: video1Landmarks3)
             video1Landmarks3 = filteredVideo1Landmarks3
         }
-        if landmarkFilterStates[2] {
-            filteredVideo1Landmarks3 = applyKalmanFilter(landmarks: video1Landmarks3)
+        if filter.landmarkFilterStates[2] {
+            filteredVideo1Landmarks3 = filter.applyKalmanFilter(landmarks: video1Landmarks3)
             video1Landmarks3 = filteredVideo1Landmarks3
         }
-        if landmarkFilterStates[3] {
-            filteredVideo1Landmarks3 = shiftLandmarks(landmarks: video1Landmarks3)
+        if filter.landmarkFilterStates[3] {
+            filteredVideo1Landmarks3 = filter.shiftLandmarks(landmarks: video1Landmarks3)
             video1Landmarks3 = filteredVideo1Landmarks3
         }
         
@@ -561,54 +565,54 @@ class VideoComparisonViewController: UIViewController {
                         landmarksView2.landmarks[index].color = .systemBlue
                     } else if index >= 1 && index <= 4 {
                         landmarkColors[index] = .systemRed
-                        angleChartColors[0] = .systemRed
+                        chartData.angleChartColors[0] = .systemRed
                         landmarksView1.landmarks[index].color = .systemRed
                         landmarksView2.landmarks[index].color = .systemRed
                     } else if index >= 5 && index <= 8 {
                         landmarkColors[index] = .systemYellow
-                        angleChartColors[1] = .systemYellow
+                        chartData.angleChartColors[1] = .systemYellow
                         landmarksView1.landmarks[index].color = .systemYellow
                         landmarksView2.landmarks[index].color = .systemYellow
                     } else if index >= 9 && index <= 12 {
                         landmarkColors[index] = .magenta
-                        angleChartColors[2] = .magenta
+                        chartData.angleChartColors[2] = .magenta
                         landmarksView1.landmarks[index].color = .magenta
                         landmarksView2.landmarks[index].color = .magenta
                     } else if index >= 13 && index <= 16 {
                         landmarkColors[index] = .systemGreen
-                        angleChartColors[3] = .systemGreen
+                        chartData.angleChartColors[3] = .systemGreen
                         landmarksView1.landmarks[index].color = .systemGreen
                         landmarksView2.landmarks[index].color = .systemGreen
                     } else if index >= 17 && index <= 20 {
                         landmarkColors[index] = .systemOrange
-                        angleChartColors[4] = .systemOrange
+                        chartData.angleChartColors[4] = .systemOrange
                         landmarksView1.landmarks[index].color = .systemOrange
                         landmarksView2.landmarks[index].color = .systemOrange
                     }
-                    chartColors[selectedLandmarksCounter] = Color(landmarkColors[index])
+                    chartData.chartColors[selectedLandmarksCounter] = Color(landmarkColors[index])
                     if index == 0 {
-                        fingerNumbers[selectedLandmarksCounter] = 0
+                        chartData.fingerNumbers[selectedLandmarksCounter] = 0
                     } else if index == 4 || index == 8 || index == 12 || index == 16 || index == 20 {
-                        fingerNumbers[selectedLandmarksCounter] = 4
+                        chartData.fingerNumbers[selectedLandmarksCounter] = 4
                     } else if index == 3 || index == 7 || index == 11 || index == 15 || index == 19 {
-                        fingerNumbers[selectedLandmarksCounter] = 3
+                        chartData.fingerNumbers[selectedLandmarksCounter] = 3
                     } else if index == 2 || index == 6 || index == 10 || index == 14 || index == 18 {
-                        fingerNumbers[selectedLandmarksCounter] = 2
+                        chartData.fingerNumbers[selectedLandmarksCounter] = 2
                     } else if index == 1 || index == 5 || index == 9 || index == 13 || index == 17 {
-                        fingerNumbers[selectedLandmarksCounter] = 1
+                        chartData.fingerNumbers[selectedLandmarksCounter] = 1
                     }
                     selectedLandmarksCounter += 1
                 } else {
                     if landmarkColors[index] == .systemRed {
-                        angleChartColors[0] = .clear
+                        chartData.angleChartColors[0] = .clear
                     } else if landmarkColors[index] == .systemYellow {
-                        angleChartColors[1] = .clear
+                        chartData.angleChartColors[1] = .clear
                     } else if landmarkColors[index] == .magenta {
-                        angleChartColors[2] = .clear
+                        chartData.angleChartColors[2] = .clear
                     } else if landmarkColors[index] == .systemGreen {
-                        angleChartColors[3] = .clear
+                        chartData.angleChartColors[3] = .clear
                     } else if landmarkColors[index] == .systemOrange {
-                        angleChartColors[4] = .clear
+                        chartData.angleChartColors[4] = .clear
                     }
                     landmarksView1.landmarks[index].color = .darkGray
                     landmarksView2.landmarks[index].color = .darkGray
@@ -617,10 +621,10 @@ class VideoComparisonViewController: UIViewController {
                     for (i, landmark) in selectedLandmarkPoints.enumerated() {
                         if landmark == index {
                             selectedLandmarkPoints.remove(at: i)
-                            chartColors.remove(at: i)
-                            chartColors.append(.clear)
-                            fingerNumbers.remove(at: i)
-                            fingerNumbers.append(0)
+                            chartData.chartColors.remove(at: i)
+                            chartData.chartColors.append(.clear)
+                            chartData.fingerNumbers.remove(at: i)
+                            chartData.fingerNumbers.append(0)
                         }
                     }
                 }
@@ -672,18 +676,18 @@ class VideoComparisonViewController: UIViewController {
             chartOpacitySlider.isHidden = false
             sceneViewOpacityView.isHidden = false
             openAngleChartButton.isHidden = false
-            comparisonVideo1PointMarkTime = currentTimeMillis1
-            comparisonVideo2PointMarkTime = currentTimeMillis2
+            chartData.videoPointMarkTime1 = currentTimeMillis1
+            chartData.videoPointMarkTime2 = currentTimeMillis2
             for i in 0..<selectedLandmarksCounter {
                 if buttonStates[2] {
-                    comparisonVideo1PointMarks[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].x)
-                    comparisonVideo2PointMarks[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].x)
+                    chartData.videoPointMarks1[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].x)
+                    chartData.videoPointMarks2[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].x)
                 } else if buttonStates[3] {
-                    comparisonVideo1PointMarks[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].y)
-                    comparisonVideo2PointMarks[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].y)
+                    chartData.videoPointMarks1[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].y)
+                    chartData.videoPointMarks2[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].y)
                 } else if buttonStates[4]{
-                    comparisonVideo1PointMarks[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].z)
-                    comparisonVideo2PointMarks[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].z)
+                    chartData.videoPointMarks1[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].z)
+                    chartData.videoPointMarks2[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].z)
                 }
             }
             updateChartView()
@@ -719,11 +723,11 @@ class VideoComparisonViewController: UIViewController {
         buttonStates[2] = true
         buttonStates[3] = false
         buttonStates[4] = false
-        comparisonVideo1PointMarkTime = currentTimeMillis1
-        comparisonVideo2PointMarkTime = currentTimeMillis2
+        chartData.videoPointMarkTime1 = currentTimeMillis1
+        chartData.videoPointMarkTime2 = currentTimeMillis2
         for i in 0..<selectedLandmarksCounter {
-            comparisonVideo1PointMarks[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].x)
-            comparisonVideo2PointMarks[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].x)
+            chartData.videoPointMarks1[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].x)
+            chartData.videoPointMarks2[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].x)
         }
         updateSelectAxisButton()
         updateChartView()
@@ -736,11 +740,11 @@ class VideoComparisonViewController: UIViewController {
         buttonStates[2] = false
         buttonStates[3] = true
         buttonStates[4] = false
-        comparisonVideo1PointMarkTime = currentTimeMillis1
-        comparisonVideo2PointMarkTime = currentTimeMillis2
+        chartData.videoPointMarkTime1 = currentTimeMillis1
+        chartData.videoPointMarkTime2 = currentTimeMillis2
         for i in 0..<selectedLandmarksCounter {
-            comparisonVideo1PointMarks[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].y)
-            comparisonVideo2PointMarks[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].y)
+            chartData.videoPointMarks1[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].y)
+            chartData.videoPointMarks2[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].y)
         }
         updateSelectAxisButton()
         updateChartView()
@@ -753,11 +757,11 @@ class VideoComparisonViewController: UIViewController {
         buttonStates[2] = false
         buttonStates[3] = false
         buttonStates[4] = true
-        comparisonVideo1PointMarkTime = currentTimeMillis1
-        comparisonVideo2PointMarkTime = currentTimeMillis2
+        chartData.videoPointMarkTime1 = currentTimeMillis1
+        chartData.videoPointMarkTime2 = currentTimeMillis2
         for i in 0..<selectedLandmarksCounter {
-            comparisonVideo1PointMarks[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].z)
-            comparisonVideo2PointMarks[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].z)
+            chartData.videoPointMarks1[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].z)
+            chartData.videoPointMarks2[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].z)
         }
         updateSelectAxisButton()
         updateChartView()
@@ -825,8 +829,8 @@ class VideoComparisonViewController: UIViewController {
             selectAxisButton.isHidden = true
             buttonStates[5].toggle()
             for i in 0..<5 {
-                comparisonAnglePointMarks1[i] = comparisonAngleDataList1[i][currentLandmarkIndex1].angles
-                comparisonAnglePointMarks2[i] = comparisonAngleDataList2[i][currentLandmarkIndex2].angles
+                chartData.anglePointMarks1[i] = chartData.angleDataList1[i][currentLandmarkIndex1].angles
+                chartData.anglePointMarks2[i] = chartData.angleDataList2[i][currentLandmarkIndex2].angles
             }
             updateChartView()
         } else {
@@ -880,8 +884,8 @@ class VideoComparisonViewController: UIViewController {
     
     func updateChartView() {
         if selectedLandmarksCounter == 0 {
-            comparisonLandmarkDataList1 = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
-            comparisonLandmarkDataList2 = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+            chartData.landmarkDataList1 = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+            chartData.landmarkDataList2 = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
         } else {
             var coordinates1: [[Float]] = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
             var coordinates2: [[Float]] = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
@@ -919,18 +923,18 @@ class VideoComparisonViewController: UIViewController {
                     }
                 }
             }
-            comparisonLandmarkDataList1 = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
-            comparisonLandmarkDataList2 = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+            chartData.landmarkDataList1 = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+            chartData.landmarkDataList2 = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
             
             for i in 0..<selectedLandmarksCounter {
                 var timeIndex1 = 0
                 var timeIndex2 = 0
                 for point in coordinates1[i] {
-                    comparisonLandmarkDataList1[i].append(chartLandmarkData(landmarks: point, timestamps: video1Timestamps[timeIndex1]))
+                    chartData.landmarkDataList1[i].append(chartLandmarkData(landmarks: point, timestamps: video1Timestamps[timeIndex1]))
                     timeIndex1 = timeIndex1 + 1
                 }
                 for point in coordinates2[i] {
-                    comparisonLandmarkDataList2[i].append(chartLandmarkData(landmarks: point, timestamps: video2Timestamps[timeIndex2]))
+                    chartData.landmarkDataList2[i].append(chartLandmarkData(landmarks: point, timestamps: video2Timestamps[timeIndex2]))
                     timeIndex2 = timeIndex2 + 1
                 }
             }
@@ -954,7 +958,7 @@ class VideoComparisonViewController: UIViewController {
 
     func updateLandmarks1(for time: CMTime) {
         currentTimeMillis1 = Int(CMTimeGetSeconds(time) * 1000)
-        comparisonVideo1PointMarkTime = currentTimeMillis1
+        chartData.videoPointMarkTime1 = currentTimeMillis1
         if let index = video1Timestamps.firstIndex(where: { ($0 >= currentTimeMillis1) && ($0 < (currentTimeMillis1 + 100))}) {
             let pixelCoordinates = video1Landmarks![index]
             let pointCoordinates = convertPixelsToPoints(points: pixelCoordinates, angle: videoAngle1, width: videoWidth1!, height: videoHeight1!)
@@ -966,15 +970,15 @@ class VideoComparisonViewController: UIViewController {
             currentLandmarkIndex1 = index
             for i in 0..<selectedLandmarksCounter {
                 if buttonStates[2] {
-                    comparisonVideo1PointMarks[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].x)
+                    chartData.videoPointMarks1[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].x)
                 } else if buttonStates[3] {
-                    comparisonVideo1PointMarks[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].y)
+                    chartData.videoPointMarks1[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].y)
                 } else if buttonStates[4]{
-                    comparisonVideo1PointMarks[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].z)
+                    chartData.videoPointMarks1[i] = (video1Landmarks3[currentLandmarkIndex1][selectedLandmarkPoints[i]].z)
                 }
             }
             for i in 0..<5 {
-                comparisonAnglePointMarks1[i] = comparisonAngleDataList1[i][index].angles
+                chartData.anglePointMarks1[i] = chartData.angleDataList1[i][index].angles
             }
             if firstFrame1 == true {
                 landmarks1 = []
@@ -1006,7 +1010,7 @@ class VideoComparisonViewController: UIViewController {
     
     func updateLandmarks2(for time: CMTime) {
         currentTimeMillis2 = Int(CMTimeGetSeconds(time) * 1000)
-        comparisonVideo2PointMarkTime = currentTimeMillis2
+        chartData.videoPointMarkTime2 = currentTimeMillis2
         if let index = video2Timestamps.firstIndex(where: { ($0 >= currentTimeMillis2) && ($0 < (currentTimeMillis2 + 100))}) {
             let pixelCoordinates = video2Landmarks![index]
             let pointCoordinates = convertPixelsToPoints(points: pixelCoordinates, angle: videoAngle2, width: videoWidth2!, height: videoHeight2!)
@@ -1018,15 +1022,15 @@ class VideoComparisonViewController: UIViewController {
             currentLandmarkIndex2 = index
             for i in 0..<selectedLandmarksCounter {
                 if buttonStates[2] {
-                    comparisonVideo2PointMarks[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].x)
+                    chartData.videoPointMarks2[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].x)
                 } else if buttonStates[3] {
-                    comparisonVideo2PointMarks[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].y)
+                    chartData.videoPointMarks2[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].y)
                 } else if buttonStates[4]{
-                    comparisonVideo2PointMarks[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].z)
+                    chartData.videoPointMarks2[i] = (video2Landmarks3[currentLandmarkIndex2][selectedLandmarkPoints[i]].z)
                 }
             }
             for i in 0..<5 {
-                comparisonAnglePointMarks2[i] = comparisonAngleDataList2[i][index].angles
+                chartData.anglePointMarks2[i] = chartData.angleDataList2[i][index].angles
             }
             if firstFrame2 == true {
                 landmarks2 = []
@@ -1175,28 +1179,28 @@ class VideoComparisonViewController: UIViewController {
     
     func calculateAngles() {
         for (index, landmark) in video1Landmarks3.enumerated() {
-            let angle1: Float = Float(angleBetweenVectors1(landmark[0], landmark[1], landmark[2]))
-            let angle2: Float = Float(angleBetweenVectors1(landmark[0], landmark[5], landmark[6]))
-            let angle3: Float = Float(angleBetweenVectors1(landmark[0], landmark[9], landmark[10]))
-            let angle4: Float = Float(angleBetweenVectors1(landmark[0], landmark[13], landmark[14]))
-            let angle5: Float = Float(angleBetweenVectors1(landmark[0], landmark[17], landmark[18]))
-            comparisonAngleDataList1[0].append(chartAngleData(angles: angle1, timestamps: video1Timestamps[index]))
-            comparisonAngleDataList1[1].append(chartAngleData(angles: angle2, timestamps: video1Timestamps[index]))
-            comparisonAngleDataList1[2].append(chartAngleData(angles: angle3, timestamps: video1Timestamps[index]))
-            comparisonAngleDataList1[3].append(chartAngleData(angles: angle4, timestamps: video1Timestamps[index]))
-            comparisonAngleDataList1[4].append(chartAngleData(angles: angle5, timestamps: video1Timestamps[index]))
+            let angle1: Float = Float(vectorFunctions.angleBetweenVectors(landmark[0], landmark[1], landmark[2]))
+            let angle2: Float = Float(vectorFunctions.angleBetweenVectors(landmark[0], landmark[5], landmark[6]))
+            let angle3: Float = Float(vectorFunctions.angleBetweenVectors(landmark[0], landmark[9], landmark[10]))
+            let angle4: Float = Float(vectorFunctions.angleBetweenVectors(landmark[0], landmark[13], landmark[14]))
+            let angle5: Float = Float(vectorFunctions.angleBetweenVectors(landmark[0], landmark[17], landmark[18]))
+            chartData.angleDataList1[0].append(chartAngleData(angles: angle1, timestamps: video1Timestamps[index]))
+            chartData.angleDataList1[1].append(chartAngleData(angles: angle2, timestamps: video1Timestamps[index]))
+            chartData.angleDataList1[2].append(chartAngleData(angles: angle3, timestamps: video1Timestamps[index]))
+            chartData.angleDataList1[3].append(chartAngleData(angles: angle4, timestamps: video1Timestamps[index]))
+            chartData.angleDataList1[4].append(chartAngleData(angles: angle5, timestamps: video1Timestamps[index]))
         }
         for (index, landmark) in video2Landmarks3.enumerated() {
-            let angle1: Float = Float(angleBetweenVectors1(landmark[0], landmark[1], landmark[2]))
-            let angle2: Float = Float(angleBetweenVectors1(landmark[0], landmark[5], landmark[6]))
-            let angle3: Float = Float(angleBetweenVectors1(landmark[0], landmark[9], landmark[10]))
-            let angle4: Float = Float(angleBetweenVectors1(landmark[0], landmark[13], landmark[14]))
-            let angle5: Float = Float(angleBetweenVectors1(landmark[0], landmark[17], landmark[18]))
-            comparisonAngleDataList2[0].append(chartAngleData(angles: angle1, timestamps: video2Timestamps[index]))
-            comparisonAngleDataList2[1].append(chartAngleData(angles: angle2, timestamps: video2Timestamps[index]))
-            comparisonAngleDataList2[2].append(chartAngleData(angles: angle3, timestamps: video2Timestamps[index]))
-            comparisonAngleDataList2[3].append(chartAngleData(angles: angle4, timestamps: video2Timestamps[index]))
-            comparisonAngleDataList2[4].append(chartAngleData(angles: angle5, timestamps: video2Timestamps[index]))
+            let angle1: Float = Float(vectorFunctions.angleBetweenVectors(landmark[0], landmark[1], landmark[2]))
+            let angle2: Float = Float(vectorFunctions.angleBetweenVectors(landmark[0], landmark[5], landmark[6]))
+            let angle3: Float = Float(vectorFunctions.angleBetweenVectors(landmark[0], landmark[9], landmark[10]))
+            let angle4: Float = Float(vectorFunctions.angleBetweenVectors(landmark[0], landmark[13], landmark[14]))
+            let angle5: Float = Float(vectorFunctions.angleBetweenVectors(landmark[0], landmark[17], landmark[18]))
+            chartData.angleDataList2[0].append(chartAngleData(angles: angle1, timestamps: video2Timestamps[index]))
+            chartData.angleDataList2[1].append(chartAngleData(angles: angle2, timestamps: video2Timestamps[index]))
+            chartData.angleDataList2[2].append(chartAngleData(angles: angle3, timestamps: video2Timestamps[index]))
+            chartData.angleDataList2[3].append(chartAngleData(angles: angle4, timestamps: video2Timestamps[index]))
+            chartData.angleDataList2[4].append(chartAngleData(angles: angle5, timestamps: video2Timestamps[index]))
         }
     }
     

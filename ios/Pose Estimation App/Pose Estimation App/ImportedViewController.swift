@@ -16,7 +16,8 @@ class ImportedViewController: UIViewController {
     var objectIDs = [NSManagedObjectID]()
     var photoVC = PhotoViewController()
     var videoVC = VideoViewController()
-    var handTrackingVC = HandTrackingViewController()
+    var handTrackingVC = PhotoAnalysisViewController()
+    let vectorFunctions = VectorFunctions()
     
     var selectionStatus = [Bool]()
     var selectedCount = 0
@@ -171,9 +172,9 @@ class ImportedViewController: UIViewController {
     }
     
     @objc func openGallery() {
-        let customPopupVC = PhotoPickerViewController()
-        customPopupVC.modalPresentationStyle = .fullScreen
-        self.present(customPopupVC, animated: false, completion: nil)
+        let photoPickerVC = PhotoPickerViewController()
+        photoPickerVC.modalPresentationStyle = .fullScreen
+        self.present(photoPickerVC, animated: false, completion: nil)
     }
     
     @objc func openComparison() {
@@ -223,13 +224,13 @@ class ImportedViewController: UIViewController {
                 DispatchQueue.main.async { [self] in
                     let string1 = mediaModel.getVideoLandmarks(objectID: objectIDs[selectedIndices[0]])
                     let string2 = mediaModel.getVideoLandmarks(objectID: objectIDs[selectedIndices[1]])
-                    let data1 = stringToVideoLandmarks(string1)!
-                    let data2 = stringToVideoLandmarks(string2)!
+                    let data1 = vectorFunctions.stringToVideoLandmarks(string1)!
+                    let data2 = vectorFunctions.stringToVideoLandmarks(string2)!
 
                     vVC.video1URL = mediaURL[selectedIndices[0]]
                     vVC.video2URL = mediaURL[selectedIndices[1]]
-                    vVC.video1Landmarks = scnVector3ArrayToCGPointArray(data1.0)
-                    vVC.video2Landmarks = scnVector3ArrayToCGPointArray(data2.0)
+                    vVC.video1Landmarks = vectorFunctions.scnVector3ArrayToCGPointArray(data1.0)
+                    vVC.video2Landmarks = vectorFunctions.scnVector3ArrayToCGPointArray(data2.0)
                     vVC.video1Landmarks3 = data1.1
                     vVC.video2Landmarks3 = data2.1
                     vVC.video1Timestamps = data1.2

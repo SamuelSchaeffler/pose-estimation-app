@@ -39,7 +39,7 @@ class PhotoComparisonViewController: UIViewController {
 
     let handAngleText: UILabel = {
         var text = UILabel()
-        text.textColor = .black
+        text.textColor = .label
         text.textAlignment = .center
         text.frame = CGRect(x: 50, y: Int(UIScreen.main.bounds.size.height) - 50, width: Int(UIScreen.main.bounds.size.width) - 100, height: 25)
         return text
@@ -51,7 +51,7 @@ class PhotoComparisonViewController: UIViewController {
         view.backgroundColor = .systemBackground
 
         let sceneView = SCNView(frame: self.view.bounds)
-        sceneView.backgroundColor = UIColor.white
+        sceneView.backgroundColor = UIColor.systemBackground
         let scene = SCNScene()
         sceneView.scene = scene
         sceneView.allowsCameraControl = true

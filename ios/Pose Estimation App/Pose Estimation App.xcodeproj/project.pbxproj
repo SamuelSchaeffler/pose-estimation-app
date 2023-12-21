@@ -24,8 +24,9 @@
 		3B3B6C042AC1AEB40073055F /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */; };
 		3B3B6C062AC1B0700073055F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3B6C052AC1B0700073055F /* VideoViewController.swift */; };
 		3B62442E2B1B4C2000E7B795 /* VideoComparisonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B62442D2B1B4C2000E7B795 /* VideoComparisonViewController.swift */; };
+		3B651F9E2B30BC4D005BF715 /* UML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B651F9D2B30BC4D005BF715 /* UML.swift */; };
 		3B6820852B2B577E00AA161C /* LandmarkFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6820842B2B577D00AA161C /* LandmarkFilterViewController.swift */; };
-		3B87238C2AF64D4F00F6AA03 /* AnalysisVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B87238B2AF64D4F00F6AA03 /* AnalysisVideoPlayerViewController.swift */; };
+		3B87238C2AF64D4F00F6AA03 /* VideoAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B87238B2AF64D4F00F6AA03 /* VideoAnalysisViewController.swift */; };
 		3B8F935D2AC04B1F0076CC25 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F935B2AC04B1F0076CC25 /* DataModel.xcdatamodeld */; };
 		3B8F935F2AC076790076CC25 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F935E2AC076790076CC25 /* Media.swift */; };
 		3B8F93612AC077AA0076CC25 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F93602AC077AA0076CC25 /* CoreDataManager.swift */; };
@@ -37,9 +38,9 @@
 		3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */; };
 		3BB990442ACEB6E600F324C2 /* FullscreenPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB990432ACEB6E600F324C2 /* FullscreenPhotoViewController.swift */; };
 		3BCD89E12ACAB6260014CECC /* hand_landmarker.task in Resources */ = {isa = PBXBuildFile; fileRef = 3BCD89DC2ACAB6260014CECC /* hand_landmarker.task */; };
-		3BCD89E32ACAC5820014CECC /* HandTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD89E22ACAC5820014CECC /* HandTrackingViewController.swift */; };
+		3BCD89E32ACAC5820014CECC /* PhotoAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD89E22ACAC5820014CECC /* PhotoAnalysisViewController.swift */; };
 		3BD5F4CA2B286E0D009BB712 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD5F4C92B286E0D009BB712 /* Filters.swift */; };
-		3BFA8E642AF10E8700092043 /* VectorMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFA8E632AF10E8700092043 /* VectorMethods.swift */; };
+		3BFA8E642AF10E8700092043 /* VectorFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFA8E632AF10E8700092043 /* VectorFunctions.swift */; };
 		4BB6A1C81BA4DC71D8D48002 /* Pods_Pose_Estimation_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */; };
 /* End PBXBuildFile section */
 
@@ -109,8 +110,9 @@
 		3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		3B3B6C052AC1B0700073055F /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		3B62442D2B1B4C2000E7B795 /* VideoComparisonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoComparisonViewController.swift; sourceTree = "<group>"; };
+		3B651F9D2B30BC4D005BF715 /* UML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UML.swift; sourceTree = "<group>"; };
 		3B6820842B2B577D00AA161C /* LandmarkFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkFilterViewController.swift; sourceTree = "<group>"; };
-		3B87238B2AF64D4F00F6AA03 /* AnalysisVideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisVideoPlayerViewController.swift; sourceTree = "<group>"; };
+		3B87238B2AF64D4F00F6AA03 /* VideoAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAnalysisViewController.swift; sourceTree = "<group>"; };
 		3B8F935C2AC04B1F0076CC25 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		3B8F935E2AC076790076CC25 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		3B8F93602AC077AA0076CC25 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -122,9 +124,9 @@
 		3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashModel.swift; sourceTree = "<group>"; };
 		3BB990432ACEB6E600F324C2 /* FullscreenPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenPhotoViewController.swift; sourceTree = "<group>"; };
 		3BCD89DC2ACAB6260014CECC /* hand_landmarker.task */ = {isa = PBXFileReference; lastKnownFileType = file; path = hand_landmarker.task; sourceTree = "<group>"; };
-		3BCD89E22ACAC5820014CECC /* HandTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandTrackingViewController.swift; sourceTree = "<group>"; };
+		3BCD89E22ACAC5820014CECC /* PhotoAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAnalysisViewController.swift; sourceTree = "<group>"; };
 		3BD5F4C92B286E0D009BB712 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
-		3BFA8E632AF10E8700092043 /* VectorMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorMethods.swift; sourceTree = "<group>"; };
+		3BFA8E632AF10E8700092043 /* VectorFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorFunctions.swift; sourceTree = "<group>"; };
 		84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pose_Estimation_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02EC64B86A1C6034C61CE96 /* Pods-Pose Estimation App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pose Estimation App.debug.xcconfig"; path = "Target Support Files/Pods-Pose Estimation App/Pods-Pose Estimation App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -176,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				3B2B07AB2ABDE08D00E57528 /* Info.plist */,
-				3BAA2FF12B2E025E003FE05B /* MediaPipe */,
 				3B2B07B52ABEF67F00E57528 /* Models */,
 				3B2B07B32ABEF65600E57528 /* Controllers */,
 				3B2B07B22ABEF64B00E57528 /* Views */,
@@ -208,17 +209,17 @@
 			isa = PBXGroup;
 			children = (
 				3B2B07B72ABEF94100E57528 /* TabBarViewController.swift */,
-				3B2B07A12ABDE08C00E57528 /* FilterViewController.swift */,
 				3B2B07BF2ABF6CB100E57528 /* ImportedViewController.swift */,
+				3B2B07A12ABDE08C00E57528 /* FilterViewController.swift */,
 				3B2B07BB2ABEFA4900E57528 /* MiscViewController.swift */,
 				3B2B07BD2ABF256600E57528 /* PhotoPickerViewController.swift */,
 				3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */,
 				3B3B6C052AC1B0700073055F /* VideoViewController.swift */,
 				3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */,
-				3BCD89E22ACAC5820014CECC /* HandTrackingViewController.swift */,
+				3BCD89E22ACAC5820014CECC /* PhotoAnalysisViewController.swift */,
 				3BB990432ACEB6E600F324C2 /* FullscreenPhotoViewController.swift */,
+				3B87238B2AF64D4F00F6AA03 /* VideoAnalysisViewController.swift */,
 				3B25FCD12AD4175800179213 /* PhotoComparisonViewController.swift */,
-				3B87238B2AF64D4F00F6AA03 /* AnalysisVideoPlayerViewController.swift */,
 				3B62442D2B1B4C2000E7B795 /* VideoComparisonViewController.swift */,
 				3B6820842B2B577D00AA161C /* LandmarkFilterViewController.swift */,
 			);
@@ -229,8 +230,10 @@
 			isa = PBXGroup;
 			children = (
 				3BAA2FF22B2E03B4003FE05B /* Database */,
+				3BAA2FF12B2E025E003FE05B /* MediaPipe */,
 				3BD5F4C92B286E0D009BB712 /* Filters.swift */,
-				3BFA8E632AF10E8700092043 /* VectorMethods.swift */,
+				3BFA8E632AF10E8700092043 /* VectorFunctions.swift */,
+				3B651F9D2B30BC4D005BF715 /* UML.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -424,16 +427,17 @@
 				3BB827272AC2D32000BE7AC0 /* TrashViewController.swift in Sources */,
 				3B1335862AF272A60092ED64 /* LandmarkChart.swift in Sources */,
 				3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */,
-				3B87238C2AF64D4F00F6AA03 /* AnalysisVideoPlayerViewController.swift in Sources */,
+				3B651F9E2B30BC4D005BF715 /* UML.swift in Sources */,
+				3B87238C2AF64D4F00F6AA03 /* VideoAnalysisViewController.swift in Sources */,
 				3B8F935F2AC076790076CC25 /* Media.swift in Sources */,
 				3BB990442ACEB6E600F324C2 /* FullscreenPhotoViewController.swift in Sources */,
 				3B62442E2B1B4C2000E7B795 /* VideoComparisonViewController.swift in Sources */,
-				3BCD89E32ACAC5820014CECC /* HandTrackingViewController.swift in Sources */,
+				3BCD89E32ACAC5820014CECC /* PhotoAnalysisViewController.swift in Sources */,
 				3BD5F4CA2B286E0D009BB712 /* Filters.swift in Sources */,
 				3BB8272B2AC2E80000BE7AC0 /* Trash.swift in Sources */,
 				3B2B07A22ABDE08C00E57528 /* FilterViewController.swift in Sources */,
 				3B3B6C062AC1B0700073055F /* VideoViewController.swift in Sources */,
-				3BFA8E642AF10E8700092043 /* VectorMethods.swift in Sources */,
+				3BFA8E642AF10E8700092043 /* VectorFunctions.swift in Sources */,
 				3B2B079E2ABDE08C00E57528 /* AppDelegate.swift in Sources */,
 				3B8F93612AC077AA0076CC25 /* CoreDataManager.swift in Sources */,
 				3B2B07A02ABDE08C00E57528 /* SceneDelegate.swift in Sources */,

@@ -5,15 +5,10 @@
 //  Created by Samuel Schäffler on 26.09.23.
 //
 
-import Foundation
-import UIKit
 import CoreData
 
 class TrashModel: ObservableObject {
     
-    var image: UIImage?
-    var video: UIImage?
-    var url: String?
     private var context = CoreDataManager.shared.persistentContainer.viewContext
     
     func moveObjectFromMediaToTrash(objectID: NSManagedObjectID) {

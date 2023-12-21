@@ -183,18 +183,19 @@ class MediaPipeHandLandmarker {
         let imageSize = image.size
         let coordinates = result.worldLandmarks[0]
         var points: [SCNVector3] = []
+        let factor: CGFloat = 7000
         if imageSize.height > imageSize.width {
             for i in 0..<21 {
-                let xPoint = 7000 - CGFloat(coordinates[i].y) * 7000
-                let yPoint = CGFloat(coordinates[i].x) * 7000
-                let zPoint = CGFloat(coordinates[i].z) * 7000
+                let xPoint = factor - CGFloat(coordinates[i].y) * factor
+                let yPoint = CGFloat(coordinates[i].x) * factor
+                let zPoint = CGFloat(coordinates[i].z) * factor
                 points.append(SCNVector3(x: Float(xPoint), y: Float(yPoint), z: Float(zPoint)))
             }
         } else {
             for i in 0..<21 {
-                let xPoint = CGFloat(coordinates[i].x) * 7000
-                let yPoint = CGFloat(coordinates[i].y) * 7000
-                let zPoint = CGFloat(coordinates[i].z) * 7000
+                let xPoint = CGFloat(coordinates[i].x) * factor
+                let yPoint = CGFloat(coordinates[i].y) * factor
+                let zPoint = CGFloat(coordinates[i].z) * factor
                 points.append(SCNVector3(x: Float(xPoint), y: Float(yPoint), z: Float(zPoint)))
             }
         }
@@ -214,14 +215,15 @@ class MediaPipeHandLandmarkerVideo {
     var videoWorldLandmarks: [[SCNVector3]] = []
     var videoTimestamps: [Int] = []
     var videoAngle: CGFloat = 0
+    let vectorFunctions = VectorFunctions()
     
     init() {
         options = HandLandmarkerOptions()
         options.runningMode = .video
-        options.numHands = 2
-        options.minHandDetectionConfidence = 0.4
-        options.minHandPresenceConfidence = 0.4
-        options.minTrackingConfidence = 0.9
+        options.numHands = 1
+        options.minHandDetectionConfidence = 0.5
+        options.minHandPresenceConfidence = 0.5
+        options.minTrackingConfidence = 0.5
         if let modelPath = Bundle.main.path(forResource: "hand_landmarker", ofType: "task") {
             options.baseOptions.modelAssetPath = modelPath
         }
@@ -272,7 +274,7 @@ class MediaPipeHandLandmarkerVideo {
                 } else {
                     reader.cancelReading()
                     NotificationCenter.default.post(name: Notification.Name("updateProgress"), object: 0)
-                    let videoLandmarksString = videoLandmarksToString(landmarks: videoLandmarks, worldLandmarks: videoWorldLandmarks, timestamps: videoTimestamps)
+                    let videoLandmarksString = vectorFunctions.videoLandmarksToString(landmarks: videoLandmarks, worldLandmarks: videoWorldLandmarks, timestamps: videoTimestamps)
                     mediaModel.saveVideoLandmarks(objectID: objectID, data: videoLandmarksString!)
                     videoLandmarks = []
                     videoWorldLandmarks = []

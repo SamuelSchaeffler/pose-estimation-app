@@ -5,10 +5,7 @@
 //  Created by Samuel Schäffler on 24.09.23.
 //
 
-import Foundation
 import CoreData
-import UIKit
-import MediaPipeTasksVision
 
 @objc(Media)
 class Media: NSManagedObject {

@@ -26,6 +26,8 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var videoWorldLandmarks: [[SCNVector3]] = []
     var videoTimestamps: [Int] = []
     
+    let vectorFunctions = VectorFunctions()
+    
     let videoViewContainer: UIView = {
         let container = UIView()
         container.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height / 2.5)
@@ -196,13 +198,13 @@ class VideoViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         DispatchQueue.main.async { [self] in
             let string = mediaModel.getVideoLandmarks(objectID: objectID!)
-            let data = stringToVideoLandmarks(string)!
+            let data = vectorFunctions.stringToVideoLandmarks(string)!
             videoLandmarks = data.0
             videoWorldLandmarks = data.1
             videoTimestamps = data.2
-            let playerVC = AnalysisVideoPlayerViewController()
+            let playerVC = VideoAnalysisViewController()
             playerVC.videoURL = url
-            playerVC.videoLandmarks = scnVector3ArrayToCGPointArray(videoLandmarks)
+            playerVC.videoLandmarks = vectorFunctions.scnVector3ArrayToCGPointArray(videoLandmarks)
             playerVC.videoLandmarks3 = videoWorldLandmarks
             playerVC.videoTimestamps = videoTimestamps
             playerVC.modalPresentationStyle = .fullScreen

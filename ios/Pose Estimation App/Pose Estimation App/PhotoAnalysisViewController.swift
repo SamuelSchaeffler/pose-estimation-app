@@ -1,5 +1,5 @@
 //
-//  HandTrackingViewController.swift
+//  PhotoAnalysisViewController.swift
 //  Pose Estimation App
 //
 //  Created by Samuel Schäffler on 02.10.23.
@@ -10,7 +10,7 @@ import CoreData
 import MediaPipeTasksVision
 
 
-class HandTrackingViewController: UIViewController {
+class PhotoAnalysisViewController: UIViewController {
 
     var mediaModel = MediaModel()
     var objectID: NSManagedObjectID?
