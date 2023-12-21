@@ -1,20 +1,24 @@
 PODS:
-  - MediaPipeTasksCommon (0.10.7)
-  - MediaPipeTasksVision (0.10.7):
-    - MediaPipeTasksCommon (= 0.10.7)
+  - MediaPipeTasksCommon (0.10.9)
+  - MediaPipeTasksVision (0.10.9):
+    - MediaPipeTasksCommon (= 0.10.9)
+  - RangeUISlider (4.0.1)
 
 DEPENDENCIES:
   - MediaPipeTasksVision
+  - RangeUISlider
 
 SPEC REPOS:
   trunk:
     - MediaPipeTasksCommon
     - MediaPipeTasksVision
+    - RangeUISlider
 
 SPEC CHECKSUMS:
-  MediaPipeTasksCommon: 5a8cb401e79e3ce733d3a78e4e5a3cc903a7c4fe
-  MediaPipeTasksVision: 339c42a58ccae03804d8348410fce1930457b341
+  MediaPipeTasksCommon: c97fece495f7d4d454230d7894052aa73830244c
+  MediaPipeTasksVision: a0a929c7818c142078e93bc271720100f53e3c3d
+  RangeUISlider: 52e6e0b9b1a7d62e5a1cf0ec68dbb420e1c5f8b5
 
-PODFILE CHECKSUM: 707e09768aa8bda003187f487fe87ebdfc289f7a
+PODFILE CHECKSUM: 5ba32e88b92e36f1e0846dbdf4532de3cab9f24d
 
 COCOAPODS: 1.13.0

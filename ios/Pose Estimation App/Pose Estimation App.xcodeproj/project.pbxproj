@@ -19,8 +19,6 @@
 		3B2B07BC2ABEFA4900E57528 /* MiscViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B07BB2ABEFA4900E57528 /* MiscViewController.swift */; };
 		3B2B07BE2ABF256600E57528 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B07BD2ABF256600E57528 /* PhotoPickerViewController.swift */; };
 		3B2B07C02ABF6CB100E57528 /* ImportedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B07BF2ABF6CB100E57528 /* ImportedViewController.swift */; };
-		3B32E1F62AEFC8BF00344718 /* RangeUISlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B32E1EF2AEFC8B700344718 /* RangeUISlider.framework */; };
-		3B32E1F72AEFC8BF00344718 /* RangeUISlider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B32E1EF2AEFC8B700344718 /* RangeUISlider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3B3B6C042AC1AEB40073055F /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */; };
 		3B3B6C062AC1B0700073055F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3B6C052AC1B0700073055F /* VideoViewController.swift */; };
 		3B62442E2B1B4C2000E7B795 /* VideoComparisonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B62442D2B1B4C2000E7B795 /* VideoComparisonViewController.swift */; };
@@ -31,8 +29,6 @@
 		3B8F935F2AC076790076CC25 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F935E2AC076790076CC25 /* Media.swift */; };
 		3B8F93612AC077AA0076CC25 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F93602AC077AA0076CC25 /* CoreDataManager.swift */; };
 		3B8F93632AC08AA40076CC25 /* MediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F93622AC08AA40076CC25 /* MediaModel.swift */; };
-		3B9A11B12ACB15F0007CDA19 /* RangeUISlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9A11B02ACB15F0007CDA19 /* RangeUISlider.framework */; };
-		3B9A11B22ACB15F0007CDA19 /* RangeUISlider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9A11B02ACB15F0007CDA19 /* RangeUISlider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3BB827272AC2D32000BE7AC0 /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */; };
 		3BB8272B2AC2E80000BE7AC0 /* Trash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB8272A2AC2E80000BE7AC0 /* Trash.swift */; };
 		3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */; };
@@ -40,55 +36,9 @@
 		3BCD89E12ACAB6260014CECC /* hand_landmarker.task in Resources */ = {isa = PBXBuildFile; fileRef = 3BCD89DC2ACAB6260014CECC /* hand_landmarker.task */; };
 		3BCD89E32ACAC5820014CECC /* PhotoAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD89E22ACAC5820014CECC /* PhotoAnalysisViewController.swift */; };
 		3BD5F4CA2B286E0D009BB712 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD5F4C92B286E0D009BB712 /* Filters.swift */; };
+		3BE05EA32B346163000702BD /* Pods_Pose_Estimation_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */; };
 		3BFA8E642AF10E8700092043 /* VectorFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFA8E632AF10E8700092043 /* VectorFunctions.swift */; };
-		4BB6A1C81BA4DC71D8D48002 /* Pods_Pose_Estimation_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3B32E1EE2AEFC8B700344718 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3B32E1E72AEFC8B700344718 /* RangeUISlider.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45E215241E8E812E00F0B8B9;
-			remoteInfo = RangeUISlider;
-		};
-		3B32E1F02AEFC8B700344718 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3B32E1E72AEFC8B700344718 /* RangeUISlider.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 459CBEF4259B79D000FCA5AB;
-			remoteInfo = RangeUISliderTests;
-		};
-		3B32E1F22AEFC8B700344718 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3B32E1E72AEFC8B700344718 /* RangeUISlider.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45F064832599E3CC007B25A7;
-			remoteInfo = RangeUISliderUITests;
-		};
-		3B32E1F42AEFC8B700344718 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3B32E1E72AEFC8B700344718 /* RangeUISlider.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45F064952599E511007B25A7;
-			remoteInfo = RangeUISliderDemo;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		3B9A11AF2ACB159B007CDA19 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				3B9A11B22ACB15F0007CDA19 /* RangeUISlider.framework in Embed Frameworks */,
-				3B32E1F72AEFC8BF00344718 /* RangeUISlider.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3ADE4A892AF646F03D9892D9 /* Pods-Pose Estimation App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pose Estimation App.release.xcconfig"; path = "Target Support Files/Pods-Pose Estimation App/Pods-Pose Estimation App.release.xcconfig"; sourceTree = "<group>"; };
@@ -106,7 +56,6 @@
 		3B2B07BB2ABEFA4900E57528 /* MiscViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscViewController.swift; sourceTree = "<group>"; };
 		3B2B07BD2ABF256600E57528 /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
 		3B2B07BF2ABF6CB100E57528 /* ImportedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedViewController.swift; sourceTree = "<group>"; };
-		3B32E1E72AEFC8B700344718 /* RangeUISlider.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RangeUISlider.xcodeproj; path = "RangeUISlider-master/RangeUISlider.xcodeproj"; sourceTree = "<group>"; };
 		3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		3B3B6C052AC1B0700073055F /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		3B62442D2B1B4C2000E7B795 /* VideoComparisonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoComparisonViewController.swift; sourceTree = "<group>"; };
@@ -117,8 +66,6 @@
 		3B8F935E2AC076790076CC25 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		3B8F93602AC077AA0076CC25 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		3B8F93622AC08AA40076CC25 /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
-		3B9A11B02ACB15F0007CDA19 /* RangeUISlider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RangeUISlider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B9FB4442AF00F31007FF3B2 /* GPUImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GPUImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BB827262AC2D32000BE7AC0 /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
 		3BB8272A2AC2E80000BE7AC0 /* Trash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trash.swift; sourceTree = "<group>"; };
 		3BB8272C2AC2E8E500BE7AC0 /* TrashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashModel.swift; sourceTree = "<group>"; };
@@ -126,6 +73,7 @@
 		3BCD89DC2ACAB6260014CECC /* hand_landmarker.task */ = {isa = PBXFileReference; lastKnownFileType = file; path = hand_landmarker.task; sourceTree = "<group>"; };
 		3BCD89E22ACAC5820014CECC /* PhotoAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAnalysisViewController.swift; sourceTree = "<group>"; };
 		3BD5F4C92B286E0D009BB712 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
+		3BE05EA02B346131000702BD /* RangeUISlider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RangeUISlider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BFA8E632AF10E8700092043 /* VectorFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorFunctions.swift; sourceTree = "<group>"; };
 		84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pose_Estimation_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02EC64B86A1C6034C61CE96 /* Pods-Pose Estimation App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pose Estimation App.debug.xcconfig"; path = "Target Support Files/Pods-Pose Estimation App/Pods-Pose Estimation App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -136,9 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4BB6A1C81BA4DC71D8D48002 /* Pods_Pose_Estimation_App.framework in Frameworks */,
-				3B32E1F62AEFC8BF00344718 /* RangeUISlider.framework in Frameworks */,
-				3B9A11B12ACB15F0007CDA19 /* RangeUISlider.framework in Frameworks */,
+				3BE05EA32B346163000702BD /* Pods_Pose_Estimation_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,8 +94,7 @@
 		3B15188B2AC9670C001C0A2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3B9FB4442AF00F31007FF3B2 /* GPUImage.framework */,
-				3B9A11B02ACB15F0007CDA19 /* RangeUISlider.framework */,
+				3BE05EA02B346131000702BD /* RangeUISlider.framework */,
 				84802BA3C0A47DE2BFA1E331 /* Pods_Pose_Estimation_App.framework */,
 			);
 			name = Frameworks;
@@ -158,7 +103,6 @@
 		3B2B07912ABDE08C00E57528 = {
 			isa = PBXGroup;
 			children = (
-				3B32E1E72AEFC8B700344718 /* RangeUISlider.xcodeproj */,
 				3B2B079C2ABDE08C00E57528 /* Pose Estimation App */,
 				3B2B079B2ABDE08C00E57528 /* Products */,
 				3B15188B2AC9670C001C0A2A /* Frameworks */,
@@ -238,17 +182,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		3B32E1E82AEFC8B700344718 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3B32E1EF2AEFC8B700344718 /* RangeUISlider.framework */,
-				3B32E1F12AEFC8B700344718 /* RangeUISliderTests.xctest */,
-				3B32E1F32AEFC8B700344718 /* RangeUISliderUITests.xctest */,
-				3B32E1F52AEFC8B700344718 /* RangeUISliderDemo.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		3BAA2FF12B2E025E003FE05B /* MediaPipe */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,7 +224,7 @@
 				3B2B07962ABDE08C00E57528 /* Sources */,
 				3B2B07972ABDE08C00E57528 /* Frameworks */,
 				3B2B07982ABDE08C00E57528 /* Resources */,
-				3B9A11AF2ACB159B007CDA19 /* Embed Frameworks */,
+				3C4654CF413E6F4D2C122FC5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -329,49 +262,12 @@
 			mainGroup = 3B2B07912ABDE08C00E57528;
 			productRefGroup = 3B2B079B2ABDE08C00E57528 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 3B32E1E82AEFC8B700344718 /* Products */;
-					ProjectRef = 3B32E1E72AEFC8B700344718 /* RangeUISlider.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				3B2B07992ABDE08C00E57528 /* Pose Estimation App */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		3B32E1EF2AEFC8B700344718 /* RangeUISlider.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RangeUISlider.framework;
-			remoteRef = 3B32E1EE2AEFC8B700344718 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3B32E1F12AEFC8B700344718 /* RangeUISliderTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = RangeUISliderTests.xctest;
-			remoteRef = 3B32E1F02AEFC8B700344718 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3B32E1F32AEFC8B700344718 /* RangeUISliderUITests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = RangeUISliderUITests.xctest;
-			remoteRef = 3B32E1F22AEFC8B700344718 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3B32E1F52AEFC8B700344718 /* RangeUISliderDemo.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = RangeUISliderDemo.app;
-			remoteRef = 3B32E1F42AEFC8B700344718 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3B2B07982ABDE08C00E57528 /* Resources */ = {
@@ -387,6 +283,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3C4654CF413E6F4D2C122FC5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pose Estimation App/Pods-Pose Estimation App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pose Estimation App/Pods-Pose Estimation App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pose Estimation App/Pods-Pose Estimation App-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F53B52DDD5617688D87FD237 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -594,6 +507,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4QK396GH3A;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Pose Estimation App/Info.plist";
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Die Anwendung benötigt Medienzugriff";
@@ -635,6 +549,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4QK396GH3A;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Pose Estimation App/Info.plist";
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Die Anwendung benötigt Medienzugriff";
