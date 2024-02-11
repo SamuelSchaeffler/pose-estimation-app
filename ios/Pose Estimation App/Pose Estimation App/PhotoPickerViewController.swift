@@ -8,7 +8,6 @@
 import UIKit
 import PhotosUI
 import AVFoundation
-import Foundation
 
 class PhotoPickerViewController: UIViewController, PHPickerViewControllerDelegate {
         

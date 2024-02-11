@@ -6,7 +6,6 @@
 //
 
 import SceneKit
-import Foundation
 
 class VectorFunctions {
     

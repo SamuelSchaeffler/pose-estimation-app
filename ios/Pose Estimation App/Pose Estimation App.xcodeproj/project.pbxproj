@@ -22,7 +22,6 @@
 		3B3B6C042AC1AEB40073055F /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */; };
 		3B3B6C062AC1B0700073055F /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3B6C052AC1B0700073055F /* VideoViewController.swift */; };
 		3B62442E2B1B4C2000E7B795 /* VideoComparisonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B62442D2B1B4C2000E7B795 /* VideoComparisonViewController.swift */; };
-		3B651F9E2B30BC4D005BF715 /* UML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B651F9D2B30BC4D005BF715 /* UML.swift */; };
 		3B6820852B2B577E00AA161C /* LandmarkFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6820842B2B577D00AA161C /* LandmarkFilterViewController.swift */; };
 		3B87238C2AF64D4F00F6AA03 /* VideoAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B87238B2AF64D4F00F6AA03 /* VideoAnalysisViewController.swift */; };
 		3B8F935D2AC04B1F0076CC25 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F935B2AC04B1F0076CC25 /* DataModel.xcdatamodeld */; };
@@ -59,7 +58,6 @@
 		3B3B6C032AC1AEB40073055F /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		3B3B6C052AC1B0700073055F /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		3B62442D2B1B4C2000E7B795 /* VideoComparisonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoComparisonViewController.swift; sourceTree = "<group>"; };
-		3B651F9D2B30BC4D005BF715 /* UML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UML.swift; sourceTree = "<group>"; };
 		3B6820842B2B577D00AA161C /* LandmarkFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkFilterViewController.swift; sourceTree = "<group>"; };
 		3B87238B2AF64D4F00F6AA03 /* VideoAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAnalysisViewController.swift; sourceTree = "<group>"; };
 		3B8F935C2AC04B1F0076CC25 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -177,7 +175,6 @@
 				3BAA2FF12B2E025E003FE05B /* MediaPipe */,
 				3BD5F4C92B286E0D009BB712 /* Filters.swift */,
 				3BFA8E632AF10E8700092043 /* VectorFunctions.swift */,
-				3B651F9D2B30BC4D005BF715 /* UML.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -340,7 +337,6 @@
 				3BB827272AC2D32000BE7AC0 /* TrashViewController.swift in Sources */,
 				3B1335862AF272A60092ED64 /* LandmarkChart.swift in Sources */,
 				3BB8272D2AC2E8E500BE7AC0 /* TrashModel.swift in Sources */,
-				3B651F9E2B30BC4D005BF715 /* UML.swift in Sources */,
 				3B87238C2AF64D4F00F6AA03 /* VideoAnalysisViewController.swift in Sources */,
 				3B8F935F2AC076790076CC25 /* Media.swift in Sources */,
 				3BB990442ACEB6E600F324C2 /* FullscreenPhotoViewController.swift in Sources */,

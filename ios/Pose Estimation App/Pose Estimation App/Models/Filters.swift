@@ -5,7 +5,6 @@
 //  Created by Samuel Schäffler on 12.12.23.
 //
 
-import Foundation
 import SceneKit
 
 class Filter {
